@@ -2,6 +2,7 @@ import { cp, mkdir, readdir, rm, readFile, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
+import { injectImageFallback } from "./preview-image-fallback.mjs";
 
 // Helper: Promisify spawn
 function spawnAsync(command, args, options = {}) {
@@ -112,7 +113,7 @@ async function normalizeViteHtml(outputPath, outputDirectory, outputName) {
   html = html.replace(/<body([^>]*)>/i, `<body$1>${bodyChrome}`);
   html = html.replace(/<\/body>/i, `${reinjectScript}</body>`);
   
-  await writeFile(htmlPath, html, "utf-8");
+  await writeFile(htmlPath, injectImageFallback(html), "utf-8");
 }
 
 await mkdir(publicRoot, { recursive: true });
@@ -176,6 +177,13 @@ for (const project of projects) {
   
   // Copy to public
   await cp(outputPath, publicPath, { recursive: true });
+
+  // Next.js exports are already HTML, so apply the same image recovery behavior.
+  const exportedHtmlPath = join(publicPath, "index.html");
+  if (existsSync(exportedHtmlPath)) {
+    const exportedHtml = await readFile(exportedHtmlPath, "utf-8");
+    await writeFile(exportedHtmlPath, injectImageFallback(exportedHtml), "utf-8");
+  }
   builtCount += 1;
 }
 
