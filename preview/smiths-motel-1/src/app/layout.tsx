@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://images.pexels.com/photos/1062021/pexels-photo-1062021.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+        url: "/villa/15.jpg",
         width: 1200,
         height: 627,
         alt: "Evening light over the water in Nassau, The Bahamas",

@@ -35,14 +35,9 @@ export default function Hero() {
           muted
           loop
           playsInline
-          poster="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=85"
+          poster="/villa/27.jpg"
           aria-hidden="true"
-        >
-          <source
-            src="https://videos.pexels.com/video-files/37083114/15709742_3840_2160_60fps.mp4"
-            type="video/mp4"
-          />
-        </video>
+        ></video>
         <div className="absolute inset-0 bg-gradient-to-t from-abyss via-abyss/25 to-abyss/55" />
         <div className="absolute inset-0 bg-gradient-to-r from-abyss/60 via-transparent to-transparent" />
       </div>

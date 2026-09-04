@@ -53,29 +53,29 @@ export function availabilityMailto(d: InquiryDetails): string {
 
 export const IMAGES = {
   heroMain:
-    "https://images.pexels.com/photos/1062021/pexels-photo-1062021.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=1200",
+    "/villa/1.jpg",
   heroSmall:
-    "https://images.pexels.com/photos/37089767/pexels-photo-37089767.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=700&h=900",
+    "/villa/2.jpg",
   about:
-    "https://images.pexels.com/photos/24196291/pexels-photo-24196291.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=900&h=1150",
+    "/villa/3.jpg",
   stay:
-    "https://images.pexels.com/photos/33710239/pexels-photo-33710239.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1000&h=1250",
+    "/villa/4.jpg",
   explorePort:
-    "https://images.pexels.com/photos/13589819/pexels-photo-13589819.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1000&h=700",
+    "/villa/5.jpg",
   exploreFishFry:
-    "https://images.pexels.com/photos/5007331/pexels-photo-5007331.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1000&h=700",
+    "/villa/6.jpg",
   exploreBeach:
-    "https://images.pexels.com/photos/10490913/pexels-photo-10490913.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1000&h=700",
+    "/villa/7.jpg",
   galleryAerial:
-    "https://images.pexels.com/photos/4784391/pexels-photo-4784391.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1400&h=1400",
+    "/villa/8.jpg",
   galleryIsland:
-    "https://images.pexels.com/photos/27649542/pexels-photo-27649542.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1000&h=700",
+    "/villa/9.jpg",
   galleryLighthouse:
-    "https://images.pexels.com/photos/843643/pexels-photo-843643.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1000&h=700",
+    "/villa/10.jpg",
   galleryBeach:
-    "https://images.pexels.com/photos/37089767/pexels-photo-37089767.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=800&h=1150",
+    "/villa/11.jpg",
   galleryPalmWall:
-    "https://images.pexels.com/photos/6793893/pexels-photo-6793893.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1000&h=700",
+    "/villa/12.jpg",
   galleryWhiteWall:
-    "https://images.pexels.com/photos/20737552/pexels-photo-20737552.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=800&h=1000",
+    "/villa/13.jpg",
 } as const;

@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://images.pexels.com/photos/1456292/pexels-photo-1456292.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        url: "/villa/1.jpg",
         width: 1200,
         height: 630,
         alt: "Turquoise shallows and sandbanks of The Abacos from above",

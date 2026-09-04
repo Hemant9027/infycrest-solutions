@@ -5,9 +5,7 @@
  */
 
 const px = (id: number, w: number, h?: number): string =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=${w}${
-    h ? `&h=${h}` : ""
-  }`;
+  `/villa/${(id % 28) + 1}.jpg`;
 
 export interface Img {
   src: string;

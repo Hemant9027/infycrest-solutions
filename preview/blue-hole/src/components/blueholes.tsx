@@ -31,7 +31,7 @@ export default function BlueHoles() {
           {/* Image */}
           <Reveal className="relative">
             <ParallaxImage
-              src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=1600&q=85"
+              src="/villa/25.jpg"
               alt="Stunning aerial view of a perfect circular deep blue hole surrounded by turquoise and jade-colored shallows"
               className="aspect-[4/5] rounded-[2rem] shadow-[0_50px_90px_-40px_rgba(6,38,46,0.45)] md:aspect-square"
               sizes="(min-width: 1024px) 50vw, 100vw"

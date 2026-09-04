@@ -6,7 +6,7 @@ const ACTIVITIES = [
   {
     icon: Fish,
     tag: "Guides arranged",
-    src: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=1600&q=85",
+    src: "/villa/21.jpg",
     alt: "Fly fisherman casting on glassy turquoise flats at golden hour",
     title: "Fly-Fishing",
     blurb:
@@ -15,7 +15,7 @@ const ACTIVITIES = [
   {
     icon: Waves,
     tag: "By arrangement",
-    src: "https://images.unsplash.com/photo-1564349863905-5e1b8bdf5b8d?auto=format&fit=crop&w=1600&q=85",
+    src: "/villa/22.jpg",
     alt: "Modern kayaks gliding through pristine clear water and natural mangrove channels with white sand bottom",
     title: "Kayaking",
     blurb:
@@ -24,7 +24,7 @@ const ACTIVITIES = [
   {
     icon: Shell,
     tag: "Just offshore",
-    src: "https://images.unsplash.com/photo-1512621776951-a57141f2eebe?auto=format&fit=crop&w=1600&q=85",
+    src: "/villa/23.jpg",
     alt: "Snorkeler floating above coral and tropical fish",
     title: "Snorkeling & the Reef",
     blurb:

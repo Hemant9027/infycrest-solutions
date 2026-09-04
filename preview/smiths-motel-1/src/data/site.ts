@@ -22,7 +22,7 @@ export const NAV_LINKS = [
 ] as const;
 
 function px(id: number, w = 1200, h = 800) {
-  return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=${w}&h=${h}`;
+  return `/villa/${(id % 28) + 1}.jpg`;
 }
 
 export const HERO_IMAGE = px(1062021, 2000, 1300); // evening pier, Nassau

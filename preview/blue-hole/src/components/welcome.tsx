@@ -91,7 +91,7 @@ export default function Welcome() {
             <Reveal delay={120} className="relative ml-auto max-w-md">
               <div className="relative aspect-[3/4] overflow-hidden rounded-b-[1.75rem] rounded-t-full border-[10px] border-foam shadow-[0_40px_80px_-30px_rgba(6,38,46,0.35)]">
                 <Image
-                  src="https://images.unsplash.com/photo-1551632786-1f5b66f6d2f1?auto=format&fit=crop&w=1600&q=85"
+                  src="/villa/28.jpg"
                   alt="Serene sandy footpath winding through lush tropical coconut palm grove leading to pristine turquoise beach"
                   fill
                   sizes="(min-width: 1024px) 38vw, 90vw"
@@ -126,7 +126,7 @@ export default function Welcome() {
               className="absolute -bottom-8 left-0 hidden w-52 rotate-[-6deg] rounded-2xl border-8 border-white object-cover shadow-xl sm:block md:w-60"
             >
               <Image
-                src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=1600&q=85"
+                src="/villa/1.jpg"
                 alt="Breathtaking golden sunset reflecting off calm turquoise ocean water viewed from secluded private beach"
                 width={480}
                 height={360}

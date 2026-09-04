@@ -97,7 +97,7 @@ export function GuestExperience() {
               <div className="relative overflow-hidden rounded-[2rem] shadow-[0_50px_100px_-40px_rgba(0,0,0,0.8)]">
                 <div className="relative aspect-[4/5] sm:aspect-[5/5]">
                   <Image
-                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85"
+                    src="/villa/26.jpg"
                     alt="Serene wooden pier extending over calm turquoise Caribbean waters at magical golden hour dusk"
                     fill
                     sizes="(min-width: 1024px) 40vw, 92vw"

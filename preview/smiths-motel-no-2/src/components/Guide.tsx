@@ -16,7 +16,7 @@ const SPOTS = [
     tint: "bg-lagoon-soft text-lagoon-deep",
     title: "The beaches",
     text: "Powder-soft sand and water that barely looks real — the reason 'just one more day' exists.",
-    img: "https://images.pexels.com/photos/4784391/pexels-photo-4784391.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+    img: "/villa/19.jpg",
     alt: "Aerial view of a tropical beach with vivid turquoise water",
   },
   {
@@ -25,7 +25,7 @@ const SPOTS = [
     tint: "bg-coral-soft text-coral-deep",
     title: "Arawak Cay · the Fish Fry",
     text: "Conch salad made fresh in front of you, music drifting between the stalls. Come hungry, leave happy.",
-    img: "https://images.pexels.com/photos/19894531/pexels-photo-19894531.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    img: "/villa/20.jpg",
     alt: "Orange conch shells on bright Bahamian sand",
   },
   {
@@ -34,7 +34,7 @@ const SPOTS = [
     tint: "bg-sun-soft text-ink",
     title: "Downtown & Bay Street",
     text: "Pastel storefronts, cheerful chaos and the famous Straw Market — bring your bargaining smile.",
-    img: "https://images.pexels.com/photos/30257790/pexels-photo-30257790.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    img: "/villa/21.jpg",
     alt: "A vibrant street of colourful island storefronts",
   },
   {
@@ -43,7 +43,7 @@ const SPOTS = [
     tint: "bg-lagoon-soft text-lagoon-deep",
     title: "Junkanoo",
     text: "The Bahamas' heartbeat — drums, cowbells and dazzling costumes flooding the streets on festival nights.",
-    img: "https://images.pexels.com/photos/8147993/pexels-photo-8147993.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    img: "/villa/22.jpg",
     alt: "A colourful street parade with dancers in carnival costume",
   },
 ];
@@ -70,9 +70,9 @@ export default function Guide() {
             </Reveal>
             <Reveal delay={150}>
               <p className="mt-6 text-lg leading-relaxed text-ink/70">
-                Nassau is a bright tangle of history, colour and very easy
-                beach days. Here&rsquo;s where we&rsquo;d start — and when you
-                arrive, just ask. Local tips are our favourite amenity.
+                Nassau is a bright tangle of history, colour and very easy beach
+                days. Here&rsquo;s where we&rsquo;d start — and when you arrive,
+                just ask. Local tips are our favourite amenity.
               </p>
             </Reveal>
           </div>
@@ -120,8 +120,8 @@ export default function Guide() {
           <p className="mt-9 flex items-start gap-2.5 text-sm leading-relaxed text-ink/55">
             <Info className="mt-0.5 size-4 shrink-0 text-lagoon-deep" />
             All beloved Nassau classics. Getting around New Providence is easy —
-            taxis and the local &ldquo;jitney&rdquo; buses criss-cross the island
-            all day.
+            taxis and the local &ldquo;jitney&rdquo; buses criss-cross the
+            island all day.
           </p>
         </Reveal>
       </div>

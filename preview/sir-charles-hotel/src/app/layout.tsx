@@ -21,7 +21,12 @@ export const metadata: Metadata = {
   title: "Sir Charles Hotel — Stay in Nassau. Experience The Bahamas.",
   description:
     "An independent boutique hotel in Nassau, The Bahamas — classic Bahamian hospitality with a modern Caribbean sensibility. Reserve your stay at Sir Charles Hotel.",
-  keywords: ["Sir Charles Hotel", "Nassau hotel", "Bahamas boutique hotel", "independent hotel Nassau"],
+  keywords: [
+    "Sir Charles Hotel",
+    "Nassau hotel",
+    "Bahamas boutique hotel",
+    "independent hotel Nassau",
+  ],
   openGraph: {
     title: "Sir Charles Hotel — Nassau, The Bahamas",
     description:
@@ -29,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://images.pexels.com/photos/4784435/pexels-photo-4784435.jpeg?auto=compress&cs=tinysrgb&fit=crop&w=1600&h=900",
+        url: "/villa/14.jpg",
         width: 1600,
         height: 900,
         alt: "Turquoise shoreline and palms of Nassau, The Bahamas",
@@ -47,7 +52,9 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${manrope.variable}`}>
-      <body className="bg-ivory font-sans text-ink antialiased">{children}</body>
+      <body className="bg-ivory font-sans text-ink antialiased">
+        {children}
+      </body>
     </html>
   );
 }

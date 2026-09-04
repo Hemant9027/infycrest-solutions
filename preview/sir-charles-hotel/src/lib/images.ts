@@ -1,7 +1,7 @@
 export const HOTEL_EMAIL = "sircharleshotel@hotmail.com";
 
 const px = (id: number, params: string) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?${params}`;
+  `/villa/${(id % 28) + 1}.jpg`;
 
 /** Wide landscape crop */
 const wide = (id: number, w = 2000) =>

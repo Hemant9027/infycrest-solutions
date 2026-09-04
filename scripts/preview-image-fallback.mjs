@@ -4,53 +4,16 @@ import { join } from "node:path";
 const imageFallbackScript = String.raw`<script>
 (() => {
   const imageSources = {
-    dalMakhni: [
-      "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1600&q=85"
-    ],
-    indianFood: [
-      "https://images.unsplash.com/photo-1585937421612-70a008356fbe?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=1600&q=85"
-    ],
-    food: [
-      "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eebe?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=85"
-    ],
-    dental: [
-      "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1588776814546-daab30f310ce?auto=format&fit=crop&w=1600&q=85"
-    ],
-    room: [
-      "https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1611892440504-42a792e24d32?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=1600&q=85"
-    ],
-    beach: [
-      "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1473116763249-2faaef81ccda?auto=format&fit=crop&w=1600&q=85"
-    ],
-    garden: [
-      "https://images.unsplash.com/photo-1558904541-efa843a96f01?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1599685315640-9c821f4f6e0a?auto=format&fit=crop&w=1600&q=85"
-    ],
-    outdoors: [
-      "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=1600&q=85"
-    ],
-    exterior: [
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=85"
-    ],
-    default: [
-      "https://images.unsplash.com/photo-1540541338287-41700207dee6?auto=format&fit=crop&w=1600&q=85",
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=85"
-    ]
+    dalMakhni: ["/restaurant/1.jpg", "/restaurant/2.jpg"],
+    indianFood: ["/restaurant/3.jpg", "/restaurant/4.jpg", "/restaurant/5.jpg"],
+    food: ["/restaurant/6.jpg", "/restaurant/7.jpg", "/restaurant/8.jpg"],
+    dental: ["/villa/1.jpg", "/villa/2.jpg"],
+    room: ["/villa/3.jpg", "/villa/4.jpg", "/villa/5.jpg"],
+    beach: ["/villa/6.jpg", "/villa/7.jpg", "/villa/8.jpg"],
+    garden: ["/villa/9.jpg", "/villa/10.jpg", "/villa/11.jpg"],
+    outdoors: ["/villa/12.jpg", "/villa/13.jpg", "/villa/14.jpg"],
+    exterior: ["/villa/15.jpg", "/villa/16.jpg", "/villa/17.jpg"],
+    default: ["/villa/18.jpg", "/villa/19.jpg"]
   };
 
   const usedSources = new Set();

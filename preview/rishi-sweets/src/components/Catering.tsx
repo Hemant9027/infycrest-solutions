@@ -43,7 +43,10 @@ export default function Catering() {
   };
 
   return (
-    <section id="catering" className="relative scroll-mt-24 overflow-hidden py-24 md:py-32">
+    <section
+      id="catering"
+      className="relative scroll-mt-24 overflow-hidden py-24 md:py-32"
+    >
       <div
         aria-hidden
         className="absolute inset-x-0 top-0 h-1/2 bg-[radial-gradient(55%_60%_at_85%_10%,rgba(232,137,47,0.14),transparent_70%)]"
@@ -58,7 +61,8 @@ export default function Catering() {
               eyebrow="Catering & Events"
               title={
                 <>
-                  Planning a Large <span className="gold-grad-text italic">Celebration?</span>
+                  Planning a Large{" "}
+                  <span className="gold-grad-text italic">Celebration?</span>
                 </>
               }
               sub="From family gatherings to large events, enquire about catering and bulk food requirements — the sweets counter, kitchen and party hall are all under one roof."
@@ -96,13 +100,16 @@ export default function Catering() {
             <Reveal delay={0.3}>
               <div className="group relative mt-9 overflow-hidden rounded-[1.8rem] depth-shadow">
                 <img
-                  src="https://images.pexels.com/photos/37976941/pexels-photo-37976941.jpeg?auto=compress&cs=tinysrgb&dpr=1&h=650&w=940"
+                  src="/restaurant/8.jpg"
                   alt="Catering service at a celebration"
                   loading="lazy"
                   decoding="async"
                   className="aspect-[16/9] w-full object-cover transition-transform duration-[1.4s] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
                 />
-                <span aria-hidden className="absolute inset-0 bg-gradient-to-t from-maroon-950/70 to-transparent" />
+                <span
+                  aria-hidden
+                  className="absolute inset-0 bg-gradient-to-t from-maroon-950/70 to-transparent"
+                />
                 <p className="absolute bottom-4 left-5 text-[12px] font-bold tracking-[0.18em] text-ivory-100 uppercase">
                   Weddings · Functions · Corporate · Festivals
                 </p>
@@ -118,49 +125,118 @@ export default function Catering() {
                 className="relative overflow-hidden rounded-[2rem] border border-gold-500/25 bg-ivory-50 p-7 shadow-[0_40px_80px_-40px_rgba(51,8,15,0.45)] md:p-9"
                 aria-label="Catering enquiry form"
               >
-                <div aria-hidden className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-maroon-800 via-saffron-500 to-gold-400" />
-                <h3 className="font-display text-2xl font-semibold text-ink-900">Catering Enquiry</h3>
+                <div
+                  aria-hidden
+                  className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-maroon-800 via-saffron-500 to-gold-400"
+                />
+                <h3 className="font-display text-2xl font-semibold text-ink-900">
+                  Catering Enquiry
+                </h3>
                 <p className="mt-1.5 text-[12.5px] text-ink-500">
-                  Sends your enquiry straight to Rishi Sweets on WhatsApp. No data is stored on this
-                  site.
+                  Sends your enquiry straight to Rishi Sweets on WhatsApp. No
+                  data is stored on this site.
                 </p>
 
                 <div className="mt-6 grid gap-4 sm:grid-cols-2">
                   <label className="block">
-                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">Name *</span>
-                    <input required value={form.name} onChange={set("name")} placeholder="Your name" className={inputCls} autoComplete="name" />
+                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">
+                      Name *
+                    </span>
+                    <input
+                      required
+                      value={form.name}
+                      onChange={set("name")}
+                      placeholder="Your name"
+                      className={inputCls}
+                      autoComplete="name"
+                    />
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">Phone *</span>
-                    <input required type="tel" value={form.phone} onChange={set("phone")} placeholder="Your phone number" className={inputCls} autoComplete="tel" />
+                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">
+                      Phone *
+                    </span>
+                    <input
+                      required
+                      type="tel"
+                      value={form.phone}
+                      onChange={set("phone")}
+                      placeholder="Your phone number"
+                      className={inputCls}
+                      autoComplete="tel"
+                    />
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">Event date</span>
-                    <input type="date" value={form.date} onChange={set("date")} min={new Date().toISOString().split("T")[0]} className={inputCls} />
+                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">
+                      Event date
+                    </span>
+                    <input
+                      type="date"
+                      value={form.date}
+                      onChange={set("date")}
+                      min={new Date().toISOString().split("T")[0]}
+                      className={inputCls}
+                    />
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">Event type</span>
-                    <select value={form.type} onChange={set("type")} className={inputCls}>
+                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">
+                      Event type
+                    </span>
+                    <select
+                      value={form.type}
+                      onChange={set("type")}
+                      className={inputCls}
+                    >
                       {cateringEvents.map((e) => (
                         <option key={e}>{e}</option>
                       ))}
                     </select>
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">Guests</span>
-                    <input type="number" min={10} value={form.guests} onChange={set("guests")} placeholder="e.g. 250" className={inputCls} />
+                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">
+                      Guests
+                    </span>
+                    <input
+                      type="number"
+                      min={10}
+                      value={form.guests}
+                      onChange={set("guests")}
+                      placeholder="e.g. 250"
+                      className={inputCls}
+                    />
                   </label>
                   <label className="block">
-                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">Location</span>
-                    <input value={form.location} onChange={set("location")} placeholder="Venue / area" className={inputCls} />
+                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">
+                      Location
+                    </span>
+                    <input
+                      value={form.location}
+                      onChange={set("location")}
+                      placeholder="Venue / area"
+                      className={inputCls}
+                    />
                   </label>
                   <label className="block sm:col-span-2">
-                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">Food requirements</span>
-                    <input value={form.requirements} onChange={set("requirements")} placeholder="e.g. Veg menu, sweets counter, biryani, snacks…" className={inputCls} />
+                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">
+                      Food requirements
+                    </span>
+                    <input
+                      value={form.requirements}
+                      onChange={set("requirements")}
+                      placeholder="e.g. Veg menu, sweets counter, biryani, snacks…"
+                      className={inputCls}
+                    />
                   </label>
                   <label className="block sm:col-span-2">
-                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">Message</span>
-                    <textarea rows={3} value={form.message} onChange={set("message")} placeholder="Anything else we should know?" className={inputCls + " resize-none"} />
+                    <span className="mb-1.5 block text-[11px] font-bold tracking-[0.14em] text-ink-700 uppercase">
+                      Message
+                    </span>
+                    <textarea
+                      rows={3}
+                      value={form.message}
+                      onChange={set("message")}
+                      placeholder="Anything else we should know?"
+                      className={inputCls + " resize-none"}
+                    />
                   </label>
                 </div>
 
@@ -173,7 +249,13 @@ export default function Catering() {
                   {sent ? "Opening WhatsApp…" : "Enquire About Catering"}
                 </button>
                 <p className="mt-3 text-center text-[11px] text-ink-500">
-                  Prefer to talk? Call <a href={`tel:${site.phone.replace(/\s/g, "")}`} className="font-bold text-maroon-700 underline decoration-gold-400 underline-offset-2">{site.phone}</a>
+                  Prefer to talk? Call{" "}
+                  <a
+                    href={`tel:${site.phone.replace(/\s/g, "")}`}
+                    className="font-bold text-maroon-700 underline decoration-gold-400 underline-offset-2"
+                  >
+                    {site.phone}
+                  </a>
                 </p>
               </form>
             </Tilt>

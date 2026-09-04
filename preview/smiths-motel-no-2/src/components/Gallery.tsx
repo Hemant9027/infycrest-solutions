@@ -13,7 +13,7 @@ const SHOTS = [
     caption: "Fresh & simple",
   },
   {
-    src: "https://images.pexels.com/photos/1062021/pexels-photo-1062021.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+    src: "/villa/16.jpg",
     alt: "Twilight over a beach pier in Nassau, The Bahamas",
     caption: "Nassau afterglow",
   },
@@ -23,7 +23,7 @@ const SHOTS = [
     caption: "Doorway days",
   },
   {
-    src: "https://images.pexels.com/photos/15019120/pexels-photo-15019120.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    src: "/villa/17.jpg",
     alt: "A conch shell on weathered wooden planks",
     caption: "The mighty conch",
   },
@@ -33,7 +33,7 @@ const SHOTS = [
     caption: "Slow mornings",
   },
   {
-    src: "https://images.pexels.com/photos/30826594/pexels-photo-30826594.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+    src: "/villa/18.jpg",
     alt: "Aerial view of turquoise Caribbean water",
     caption: "Our kind of blue",
   },

@@ -1,8 +1,8 @@
 const px = (id: number, w = 1600) =>
-  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=${w}`;
+  `/villa/${(id % 28) + 1}.jpg`;
 
 export const HERO_VIDEO =
-  "https://videos.pexels.com/video-files/28842961/12493136_2880_2160_30fps.mp4";
+  "/villa/28.jpg";
 
 export const CONTACT = {
   host: "Judy Russell",
