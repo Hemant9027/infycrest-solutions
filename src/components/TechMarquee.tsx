@@ -1,38 +1,127 @@
+import type { IconType } from "react-icons";
+import {
+  SiAngular,
+  SiDocker,
+  SiFirebase,
+  SiFlutter,
+  SiLaravel,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPhp,
+  SiPostgresql,
+  SiPython,
+  SiReact,
+  SiSupabase,
+  SiTailwindcss,
+  SiThreedotjs,
+  SiTypescript,
+  SiVuedotjs,
+} from "react-icons/si";
+import { FaAws } from "react-icons/fa6";
 import { TECHNOLOGIES, type Technology } from "@/data/technologies";
 
-function TechBadge({ tech }: { tech: Technology }) {
+const TECH_ROW_A = TECHNOLOGIES.slice(0, Math.ceil(TECHNOLOGIES.length / 2));
+const TECH_ROW_B = TECHNOLOGIES.slice(Math.ceil(TECHNOLOGIES.length / 2));
+
+const TECH_ICONS: Record<string, IconType> = {
+  "Next.js": SiNextdotjs,
+  React: SiReact,
+  "Node.js": SiNodedotjs,
+  Python: SiPython,
+  "Tailwind CSS": SiTailwindcss,
+  PostgreSQL: SiPostgresql,
+  MongoDB: SiMongodb,
+  Flutter: SiFlutter,
+  TypeScript: SiTypescript,
+  Docker: SiDocker,
+  AWS: FaAws,
+  Firebase: SiFirebase,
+  "Vue.js": SiVuedotjs,
+  Angular: SiAngular,
+  PHP: SiPhp,
+  Laravel: SiLaravel,
+  MySQL: SiMysql,
+  Supabase: SiSupabase,
+  "Three.js": SiThreedotjs,
+};
+
+const TECH_COLORS: Record<string, string> = {
+  "Next.js": "#111111",
+  React: "#61dafb",
+  "Node.js": "#5fa04e",
+  Python: "#3776ab",
+  "Tailwind CSS": "#06b6d4",
+  PostgreSQL: "#4169e1",
+  MongoDB: "#47a248",
+  Flutter: "#54c5f8",
+  TypeScript: "#3178c6",
+  Docker: "#2496ed",
+  AWS: "#ff9900",
+  Firebase: "#ffca28",
+  "Vue.js": "#42b883",
+  Angular: "#dd0031",
+  PHP: "#777bb4",
+  Laravel: "#ff2d20",
+  MySQL: "#4479a1",
+  Supabase: "#3ecf8e",
+  "Three.js": "#111111",
+};
+
+function Pill({ tech }: { tech: Technology }) {
+  const Icon = TECH_ICONS[tech.name];
+
   return (
-    <span className="inline-flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-200 bg-white py-2.5 pl-2.5 pr-5 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
-      <span className="grid size-7 place-items-center rounded-lg bg-neutral-900 text-[10px] font-bold tracking-tight text-white">
-        {tech.mark}
+    <span className="mx-1.5 flex shrink-0 items-center gap-2.5 rounded-full border border-neutral-200 bg-white px-5 py-3 text-[13.5px] font-medium text-neutral-600 transition-colors duration-300 hover:border-neutral-900 hover:text-neutral-900">
+      <span className="grid size-6 place-items-center rounded-full bg-neutral-50 ring-2 ring-neutral-100">
+        {Icon ? (
+          <Icon
+            aria-hidden="true"
+            className="size-3.5"
+            color={TECH_COLORS[tech.name] ?? "#171717"}
+          />
+        ) : (
+          <span className="text-[8px] font-semibold text-neutral-900">
+            {tech.mark}
+          </span>
+        )}
       </span>
-      <span className="whitespace-nowrap text-sm font-medium text-neutral-600">
-        {tech.name}
-      </span>
+      {tech.name}
     </span>
+  );
+}
+
+function Row({
+  items,
+  reverse = false,
+}: {
+  items: Technology[];
+  reverse?: boolean;
+}) {
+  const doubled = [...items, ...items];
+  return (
+    <div className="mask-fade-x flex overflow-hidden">
+      <div
+        className={`flex w-max py-1 ${reverse ? "animate-marquee-reverse" : "animate-marquee"} group-hover:[animation-play-state:paused]`}
+      >
+        {doubled.map((tech, i) => (
+          <Pill key={`${tech.name}-${i}`} tech={tech} />
+        ))}
+      </div>
+    </div>
   );
 }
 
 export default function TechMarquee() {
   return (
-    <section
-      aria-label="Technologies we build with"
-      className="border-y border-neutral-100 bg-neutral-50/50 py-12 sm:py-14"
-    >
-      <p className="text-center text-[11px] font-semibold uppercase tracking-[0.24em] text-neutral-400">
-        The stack behind every launch
+    <section className="group border-y border-neutral-100 bg-neutral-50/60 py-14 sm:py-16">
+      <p className="mb-9 text-center font-mono text-[10.5px] font-medium uppercase tracking-[0.3em] text-neutral-400">
+        Technologies we build with
       </p>
-      <div className="marquee-mask group relative mt-8 overflow-hidden">
-        <div className="flex w-max animate-marquee gap-3 pr-3 group-hover:[animation-play-state:paused]">
-          {TECHNOLOGIES.map((tech) => (
-            <TechBadge key={tech.name} tech={tech} />
-          ))}
-          {TECHNOLOGIES.map((tech) => (
-            <span key={`dup-${tech.name}`} aria-hidden="true">
-              <TechBadge tech={tech} />
-            </span>
-          ))}
-        </div>
+      <div className="space-y-3">
+        <Row items={TECH_ROW_A} />
+        <Row items={TECH_ROW_B} reverse />
       </div>
     </section>
   );

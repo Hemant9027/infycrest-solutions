@@ -1,142 +1,189 @@
-import Link from "next/link";
-import { ArrowUpRight, Check } from "lucide-react";
-import { FEATURED_DEMO } from "@/data/demos";
-import BrowserFrame from "@/components/BrowserFrame";
-import Reveal from "@/components/Reveal";
-import SectionHeading from "@/components/SectionHeading";
-import SelectDemoButton from "@/components/SelectDemoButton";
+import {
+  ArrowDown,
+  ArrowUpRight,
+  IndianRupee,
+  LayoutDashboard,
+  ShieldCheck,
+  Zap,
+} from "lucide-react";
+import Reveal, { Eyebrow } from "./Reveal";
+import {
+  MockDashboard,
+  MockDark,
+  MockEditorial,
+  MockLanding,
+} from "./BrowserMockup";
+import { WA_LAUNCHKIT } from "@/config/site";
 
-const FACTS = [
-  { title: "Smart starter", text: "3 pages + admin panel" },
-  { title: "One sharp launch", text: "Zero clutter, all signal" },
-  { title: "Just a custom quote", text: "Scoped to your build" },
+const SHOWCASE = [
+  { caption: "Minimal / Corporate", node: <MockLanding className="h-full" /> },
+  { caption: "Editorial / Studio", node: <MockEditorial className="h-full" /> },
+  { caption: "Bold / Dark", node: <MockDark className="h-full" /> },
+];
+
+const LAUNCHKIT_POINTS = [
+  {
+    icon: Zap,
+    title: "Launch faster",
+    desc: "3 pages + admin panel, ready in days",
+  },
+  {
+    icon: IndianRupee,
+    title: "Just Custom quote",
+    desc: "Scoped to exactly what you need",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Zero clutter",
+    desc: "One sharp launch, nothing wasted",
+  },
 ];
 
 export default function FeaturedWork() {
-  const demo = FEATURED_DEMO;
-
   return (
-    <section id="demos" className="scroll-mt-24 py-16 sm:py-24">
-      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
-        <SectionHeading
-          eyebrow="InfyCrest / Featured"
-          title="Build a stronger first impression."
-          description="Premium digital experiences built around your brand, your audience and your goals."
-        />
+    <section id="demos" className="scroll-mt-28 py-20 sm:py-28">
+      <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
+        {/* Heading row */}
+        <div className="grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
+          <Reveal>
+            <Eyebrow>01 / Featured Work</Eyebrow>
+            <h2 className="mt-5 text-balance text-[clamp(2rem,4.6vw,3.6rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-neutral-900">
+              Build a stronger{" "}
+              <em className="font-display font-normal italic">
+                first impression.
+              </em>
+            </h2>
+          </Reveal>
+          <Reveal delay={140}>
+            <p className="max-w-md text-[15.5px] leading-relaxed text-neutral-500 lg:ml-auto">
+              Premium digital experiences built around your brand, your audience
+              and your goals — starting concepts you can touch before you
+              commit.
+            </p>
+            <div className="mt-4 flex items-center gap-2 text-[13px] font-medium text-neutral-400 lg:justify-end">
+              <span className="rounded-full border border-neutral-200 px-3 py-1">
+                Landing Page
+              </span>
+              <span className="text-neutral-300">—</span>
+              <span>Custom quote</span>
+            </div>
+          </Reveal>
+        </div>
 
-        <Reveal delay={120} className="mt-12 sm:mt-16">
-          <div className="rounded-[2rem] border border-neutral-200 bg-neutral-50/60 p-5 sm:p-10 lg:p-14">
-            <div className="grid items-center gap-10 lg:grid-cols-[1.02fr,0.98fr] lg:gap-14">
-              {/* Composed preview */}
-              <div className="relative pb-8 pr-3 sm:pr-8">
-                <BrowserFrame
-                  src={demo.thumbnail}
-                  alt={`${demo.name} website preview`}
-                  url={`infycrestsolutions.com${demo.previewUrl}`}
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 46vw"
-                  className="relative z-10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.25)]"
-                />
-                <div className="absolute -bottom-0 right-0 z-20 w-[46%] -rotate-2 transition-transform duration-500 hover:rotate-0 sm:w-[44%]">
-                  <BrowserFrame
-                    src="/previews/restaurant.jpg"
-                    alt="Restaurant website concept preview"
-                    url="infycrestsolutions.com/demo/restaurant"
-                    sizes="(max-width: 1024px) 44vw, 20vw"
-                    className="rounded-xl shadow-[0_20px_50px_-16px_rgba(0,0,0,0.3)]"
-                  />
-                </div>
-                <div className="absolute -left-2 top-10 z-0 w-[40%] rotate-3 opacity-90 sm:-left-4 sm:w-[38%]">
-                  <BrowserFrame
-                    src="/previews/dental-clinic.jpg"
-                    alt="Dental clinic website concept preview"
-                    url="infycrestsolutions.com/demo/dental-clinic"
-                    sizes="(max-width: 1024px) 38vw, 17vw"
-                    className="rounded-xl"
-                  />
-                </div>
-                <span className="absolute -top-3 left-6 z-30 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3.5 py-1.5 text-[11px] font-medium text-neutral-600 shadow-sm">
-                  <span className="relative flex size-1.5">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
-                    <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
+        {/* Preview cards */}
+        <div className="mt-14 grid gap-6 sm:mt-16 md:grid-cols-3 md:gap-5 lg:gap-6">
+          {SHOWCASE.map((item, i) => (
+            <Reveal
+              key={item.caption}
+              delay={i * 130}
+              className={i === 1 ? "md:translate-y-8" : ""}
+            >
+              <div className="group transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2">
+                {item.node}
+                <div className="mt-4 flex items-center justify-between px-1">
+                  <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-neutral-400">
+                    {String(i + 1).padStart(2, "0")} — {item.caption}
                   </span>
-                  Live demo
-                </span>
+                  <ArrowUpRight className="size-4 text-neutral-300 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-neutral-900" />
+                </div>
               </div>
+            </Reveal>
+          ))}
+        </div>
 
-              {/* Details */}
+        {/* LaunchKit spotlight */}
+        <Reveal delay={100} className="mt-24 sm:mt-32">
+          <div
+            id="products"
+            className="relative scroll-mt-28 overflow-hidden rounded-[2rem] bg-neutral-950 text-white sm:rounded-[2.5rem]"
+          >
+            {/* Texture */}
+            <div className="pointer-events-none absolute inset-0">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgb(255_255_255/0.08)_1px,transparent_0)] bg-[size:28px_28px] opacity-60 [mask-image:radial-gradient(80%_80%_at_70%_20%,black,transparent)]" />
+              <div className="absolute right-[-120px] top-[-160px] h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgb(255_255_255/0.09),transparent)] blur-2xl" />
+              <span className="absolute -bottom-10 left-0 hidden select-none whitespace-nowrap font-display text-[11rem] italic leading-none text-white/[0.045] lg:block">
+                LaunchKit — LaunchKit
+              </span>
+            </div>
+
+            <div className="relative grid items-center gap-10 p-8 sm:p-12 lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:p-16">
+              {/* Copy */}
               <div>
-                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-neutral-400">
-                  {demo.scope}
-                </p>
-                <h3 className="mt-3 text-3xl font-semibold tracking-tight text-neutral-900 sm:text-4xl">
-                  {demo.name}
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-300">
+                    3-Page Website / Admin Panel
+                  </span>
+                  <span className="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-emerald-300">
+                    Smart Starter
+                  </span>
+                </div>
+
+                <h3 className="mt-7 text-[clamp(2.6rem,5.5vw,4.5rem)] font-semibold leading-none tracking-[-0.03em]">
+                  Launch
+                  <em className="font-display font-normal italic">Kit</em>
                 </h3>
-                <p className="mt-4 text-[15px] leading-relaxed text-neutral-500 sm:text-base">
-                  {demo.description}
+
+                <p className="mt-5 max-w-md text-[15.5px] leading-relaxed text-neutral-400">
+                  A polished, conversion-ready website package for businesses
+                  that need a strong online launch without the wait.
                 </p>
 
-                <ul className="mt-6 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
-                  {demo.includes.map((item) => (
-                    <li
-                      key={item}
-                      className="flex items-start gap-2.5 text-sm text-neutral-600"
-                    >
-                      <Check
-                        className="mt-0.5 size-4 shrink-0 text-neutral-900"
-                        strokeWidth={2.6}
-                      />
-                      {item}
+                <ul className="mt-8 space-y-4">
+                  {LAUNCHKIT_POINTS.map((point) => (
+                    <li key={point.title} className="flex items-start gap-3.5">
+                      <span className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
+                        <point.icon className="size-4 text-neutral-200" />
+                      </span>
+                      <div>
+                        <p className="text-[14.5px] font-semibold text-white">
+                          {point.title}
+                        </p>
+                        <p className="text-[13px] text-neutral-500">
+                          {point.desc}
+                        </p>
+                      </div>
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-7 flex flex-wrap gap-2">
-                  {demo.technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs font-medium text-neutral-500"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+                <p className="mt-8 font-display text-lg italic text-neutral-500">
+                  “One sharp launch. Zero clutter.”
+                </p>
 
-                <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-neutral-200 pt-7">
-                  <div>
-                    <p className="text-2xl font-semibold tracking-tight text-neutral-900">
-                      {demo.priceLabel}
-                    </p>
-                    <p className="mt-0.5 text-xs text-neutral-400">
-                      {demo.priceNote}
-                    </p>
+                <div className="mt-9 flex flex-wrap items-center gap-3">
+                  <a
+                    href={WA_LAUNCHKIT}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group flex h-12 items-center gap-2 rounded-full bg-white px-7 text-[14.5px] font-semibold text-neutral-900 transition-all duration-300 hover:bg-neutral-200 hover:shadow-[0_16px_44px_-14px_rgb(255_255_255/0.4)]"
+                  >
+                    Get LaunchKit
+                    <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                  <a
+                    href="#categories"
+                    className="group flex h-12 items-center gap-2 rounded-full border border-white/15 px-7 text-[14.5px] font-semibold text-neutral-200 transition-colors duration-300 hover:border-white/40 hover:text-white"
+                  >
+                    Browse collection
+                    <ArrowDown className="size-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Visual */}
+              <div className="relative lg:pl-6">
+                <div className="relative rotate-1 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:rotate-0">
+                  <MockDashboard className="shadow-[0_50px_120px_-40px_rgb(0_0_0/0.8)]" />
+                  <div className="absolute -left-4 -top-4 flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900/90 px-3.5 py-2 text-[12px] font-medium text-neutral-200 shadow-xl backdrop-blur-md sm:-left-6">
+                    <LayoutDashboard className="size-3.5 text-emerald-400" />
+                    Admin panel included
                   </div>
-                  <div className="flex flex-wrap gap-3">
-                    <Link
-                      href={demo.previewUrl}
-                      className="inline-flex items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white transition-all hover:bg-black hover:shadow-[0_12px_26px_rgba(0,0,0,0.18)]"
-                    >
-                      Live Preview
-                      <ArrowUpRight className="size-4" strokeWidth={2.4} />
-                    </Link>
-                    <SelectDemoButton
-                      demo={demo}
-                      className="px-6 py-3 text-sm"
-                    />
+                  <div className="absolute -bottom-4 right-6 flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900/90 px-3.5 py-2 text-[12px] font-medium text-neutral-200 shadow-xl backdrop-blur-md">
+                    <span className="size-1.5 animate-pulse rounded-full bg-emerald-400" />
+                    Live preview ready
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="mt-10 grid gap-6 border-t border-neutral-200 pt-8 sm:grid-cols-3 sm:gap-8">
-              {FACTS.map((fact) => (
-                <div key={fact.title} className="border-l-2 border-neutral-900 pl-4">
-                  <p className="text-sm font-semibold tracking-tight text-neutral-900">
-                    {fact.title}
-                  </p>
-                  <p className="mt-1 text-sm text-neutral-500">{fact.text}</p>
-                </div>
-              ))}
             </div>
           </div>
         </Reveal>

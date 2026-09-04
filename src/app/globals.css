@@ -3,10 +3,14 @@
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
 
   --animate-marquee: marquee 48s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 48s linear infinite;
   --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-fade-in: fade-in 0.7s ease-out both;
+  --animate-float: hero-float 6s ease-in-out infinite;
+  --animate-float-slow: hero-float 8s ease-in-out infinite;
 
   @keyframes marquee {
     from {
@@ -14,6 +18,15 @@
     }
     to {
       transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
     }
   }
 
@@ -34,6 +47,16 @@
     }
     to {
       opacity: 1;
+    }
+  }
+
+  @keyframes hero-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(var(--float-rotate, 0deg));
+    }
+    50% {
+      transform: translateY(-5px) rotate(var(--float-rotate, 0deg));
     }
   }
 }
@@ -96,24 +119,69 @@ body {
   );
 }
 
-/* Quiet dotted texture used behind the hero */
-.hero-dots {
-  background-image: radial-gradient(
-    circle,
-    rgba(23, 23, 23, 0.08) 1px,
-    transparent 1px
-  );
-  background-size: 28px 28px;
-  -webkit-mask-image: radial-gradient(
-    ellipse 70% 60% at 50% 40%,
-    black 30%,
-    transparent 75%
-  );
-  mask-image: radial-gradient(
-    ellipse 70% 60% at 50% 40%,
-    black 30%,
-    transparent 75%
-  );
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.hero-script {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.06em;
+}
+
+.hero-pill {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border: 1px solid #e5e5e5;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 0.65rem 0.9rem;
+  color: #737373;
+  font-size: 0.7rem;
+  line-height: 1;
+  box-shadow: 0 8px 24px rgba(23, 23, 23, 0.04);
+  animation: hero-float 6s ease-in-out infinite;
+}
+
+.hero-pill-left-top {
+  top: 15rem;
+  left: 2.5%;
+  transform: rotate(-5deg);
+}
+
+.hero-pill-right-top {
+  top: 20rem;
+  right: 4%;
+  transform: rotate(4deg);
+  animation-delay: -1.5s;
+}
+
+.hero-pill-left-bottom {
+  top: 34rem;
+  left: 8%;
+  transform: rotate(3deg);
+  animation-delay: -3s;
+}
+
+.hero-pill-right-bottom {
+  top: 37rem;
+  right: 7%;
+  transform: rotate(-4deg);
+  animation-delay: -4.5s;
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -5px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

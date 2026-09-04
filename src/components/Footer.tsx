@@ -1,203 +1,125 @@
-import Link from "next/link";
-import { Mail, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MessageCircle, Phone } from "lucide-react";
+import Logo from "@/components/Logo";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 import {
   QUICK_LINKS,
   RESOURCE_LINKS,
   SITE,
   SOCIAL_LINKS,
   whatsappUrl,
-  type ExternalLink,
 } from "@/config/site";
-import Logo from "@/components/Logo";
-import { cn } from "@/lib/utils";
 
-type IconProps = { className?: string; strokeWidth?: number };
-
-function SocialSvg({ className, children, strokeWidth = 1.8 }: IconProps & { children: React.ReactNode }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={strokeWidth}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className={className}
-    >
-      {children}
-    </svg>
-  );
-}
-
-function FacebookIcon({ className }: IconProps) {
-  return (
-    <SocialSvg className={className}>
-      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-    </SocialSvg>
-  );
-}
-
-function InstagramIcon({ className }: IconProps) {
-  return (
-    <SocialSvg className={className}>
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </SocialSvg>
-  );
-}
-
-function YoutubeIcon({ className }: IconProps) {
-  return (
-    <SocialSvg className={className}>
-      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-      <path d="m10 15 5-3-5-3z" />
-    </SocialSvg>
-  );
-}
-
-const SOCIAL_ICONS: Record<string, (props: IconProps) => React.ReactNode> = {
-  Facebook: FacebookIcon,
-  Instagram: InstagramIcon,
-  YouTube: YoutubeIcon,
+const SOCIAL_URLS: Record<string, string> = {
+  Facebook: "https://facebook.com/infycrestsolutions",
+  Instagram: "https://instagram.com/infycrestsolutions",
+  YouTube: "https://youtube.com/@infycrestsolutions",
 };
 
-function ColumnTitle({ children }: { children: string }) {
-  return (
-    <h3 className="text-[11px] font-semibold uppercase tracking-[0.22em] text-neutral-400">
-      {children}
-    </h3>
-  );
-}
-
-/**
- * Renders a resource/social link. When no real URL is configured yet,
- * the item renders as a non-interactive placeholder instead of a fake link.
- */
-function SmartLink({
-  link,
-  className,
+function FooterLink({
+  href,
+  children,
 }: {
-  link: ExternalLink;
-  className?: string;
+  href: string;
+  children: React.ReactNode;
 }) {
-  if (link.url) {
-    const isExternal = link.url.startsWith("http");
-    return (
-      <Link
-        href={link.url}
-        {...(isExternal
-          ? { target: "_blank", rel: "noopener noreferrer" }
-          : {})}
-        className={cn(
-          "text-sm text-neutral-500 transition-colors hover:text-neutral-900",
-          className
-        )}
-      >
-        {link.label}
-      </Link>
-    );
-  }
   return (
-    <span
-      title="Link coming soon"
-      aria-disabled="true"
-      className={cn(
-        "cursor-not-allowed text-sm text-neutral-300",
-        className
-      )}
+    <a
+      href={href}
+      className="text-sm text-neutral-400 transition-colors hover:text-white"
     >
-      {link.label}
-    </span>
+      {children}
+    </a>
   );
 }
 
 export default function Footer() {
   return (
-    <footer className="border-t border-neutral-100 bg-white">
-      <div className="mx-auto max-w-[1200px] px-5 pb-10 pt-14 sm:px-8 sm:pt-16">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr,1fr,1fr,1.3fr]">
-          {/* Brand */}
+    <footer className="bg-neutral-950 text-neutral-400">
+      <div className="mx-auto w-full max-w-7xl px-5 pb-10 pt-16 sm:px-8 sm:pt-20">
+        <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr_1fr_1.2fr]">
           <div>
-            <Link href="/" aria-label="InfyCrest Solutions — home">
+            <a
+              href="#top"
+              aria-label="InfyCrest Solutions home"
+              className="inline-flex rounded-lg bg-white p-1"
+            >
               <Logo />
-            </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-neutral-500">
-              Digital experiences for ambitious businesses — websites, software,
-              automation and SaaS, designed to look exceptional.
+            </a>
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-neutral-500">
+              Websites, automations and software designed to make your business
+              look exceptional, built fast and launched with care.
             </p>
-            <div className="mt-6 flex gap-3">
-              {SOCIAL_LINKS.map((social) => {
-                const Icon = SOCIAL_ICONS[social.label];
-                if (!social.url) {
-                  return (
-                    <span
-                      key={social.label}
-                      title={`${social.label} — coming soon`}
-                      aria-disabled="true"
-                      aria-label={`${social.label} (coming soon)`}
-                      className="grid size-9 cursor-not-allowed place-items-center rounded-full border border-neutral-200 text-neutral-300"
-                    >
-                      {Icon && <Icon className="size-4" strokeWidth={1.8} />}
-                    </span>
-                  );
-                }
-                return (
-                  <a
-                    key={social.label}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="grid size-9 place-items-center rounded-full border border-neutral-200 text-neutral-500 transition-colors hover:border-neutral-900 hover:text-neutral-900"
-                  >
-                    {Icon && <Icon className="size-4" strokeWidth={1.8} />}
-                  </a>
-                );
-              })}
+            <div className="mt-6 flex gap-2.5">
+              {SOCIAL_LINKS.map((social) => (
+                <a
+                  key={social.label}
+                  href={SOCIAL_URLS[social.label] ?? "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="grid size-10 place-items-center rounded-full border border-white/10 text-xs font-semibold text-neutral-400 transition-all hover:border-white hover:bg-white hover:text-neutral-900"
+                >
+                  {social.label.slice(0, 1)}
+                </a>
+              ))}
             </div>
           </div>
 
-          {/* Quick navigation */}
-          <nav aria-label="Footer">
-            <ColumnTitle>Quick Navigation</ColumnTitle>
+          <div>
+            <p className="font-mono text-[10.5px] font-medium uppercase tracking-[0.24em] text-neutral-600">
+              Explore
+            </p>
             <ul className="mt-5 space-y-3">
               {QUICK_LINKS.map((link) => (
-                <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-neutral-500 transition-colors hover:text-neutral-900"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Resources */}
-          <div>
-            <ColumnTitle>Resources</ColumnTitle>
-            <ul className="mt-5 space-y-3">
-              {RESOURCE_LINKS.map((link) => (
-                <li key={link.label}>
-                  <SmartLink link={link} />
+                <li key={link.href}>
+                  <FooterLink href={link.href}>{link.label}</FooterLink>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <ColumnTitle>Contact</ColumnTitle>
-            <ul className="mt-5 space-y-3.5">
+            <p className="font-mono text-[10.5px] font-medium uppercase tracking-[0.24em] text-neutral-600">
+              Resources
+            </p>
+            <ul className="mt-5 space-y-3">
+              {RESOURCE_LINKS.map((link) => (
+                <li key={link.label}>
+                  {link.url ? (
+                    <a
+                      href={link.url}
+                      target={
+                        link.url.startsWith("http") ? "_blank" : undefined
+                      }
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1.5 text-sm text-neutral-400 transition-colors hover:text-white"
+                    >
+                      {link.label}
+                      {link.url.startsWith("http") && (
+                        <ArrowUpRight className="size-3.5" />
+                      )}
+                    </a>
+                  ) : (
+                    <span className="text-sm text-neutral-600">
+                      {link.label}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="font-mono text-[10.5px] font-medium uppercase tracking-[0.24em] text-neutral-600">
+              Contact
+            </p>
+            <ul className="mt-5 space-y-3.5 text-sm">
               <li>
                 <a
                   href={SITE.phoneHref}
-                  className="group flex items-center gap-3 text-sm text-neutral-500 transition-colors hover:text-neutral-900"
+                  className="group flex items-center gap-2.5 text-neutral-400 transition-colors hover:text-white"
                 >
-                  <Phone className="size-4 text-neutral-400 transition-colors group-hover:text-neutral-900" strokeWidth={2} />
+                  <Phone className="size-4 text-neutral-600 group-hover:text-white" />
                   {SITE.phoneDisplay}
                 </a>
               </li>
@@ -206,30 +128,38 @@ export default function Footer() {
                   href={whatsappUrl()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-3 text-sm text-neutral-500 transition-colors hover:text-neutral-900"
+                  className="group flex items-center gap-2.5 text-neutral-400 transition-colors hover:text-white"
                 >
-                  <MessageCircle className="size-4 text-neutral-400 transition-colors group-hover:text-neutral-900" strokeWidth={2} />
-                  Chat with us
+                  <MessageCircle className="size-4 text-[#25d366]" />
+                  WhatsApp - chat with us
                 </a>
               </li>
               <li>
                 <a
                   href={SITE.emailHref}
-                  className="group flex items-center gap-3 text-sm text-neutral-500 transition-colors hover:text-neutral-900"
+                  className="group flex items-center gap-2.5 break-all text-neutral-400 transition-colors hover:text-white"
                 >
-                  <Mail className="size-4 text-neutral-400 transition-colors group-hover:text-neutral-900" strokeWidth={2} />
+                  <Mail className="size-4 shrink-0 text-neutral-600 group-hover:text-white" />
                   {SITE.email}
                 </a>
               </li>
             </ul>
+            <p className="mt-5 text-xs text-neutral-600">
+              Mon-Sat - 10:00-20:00 IST - Remote-first, across India
+            </p>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-neutral-100 pt-7 text-xs text-neutral-400 sm:flex-row">
-          <p>© {SITE.year} {SITE.name}. All rights reserved.</p>
-          <p className="tracking-tight">
-            Websites · Software · Automation · SaaS
+        <div className="mt-14 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-7 sm:flex-row">
+          <p className="text-[13px] text-neutral-500">
+            (c) {SITE.year} InfyCrest Solutions. All rights reserved.
           </p>
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:justify-end">
+            <CookieSettingsButton />
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.24em] text-neutral-600">
+              Websites - Automation - SaaS
+            </p>
+          </div>
         </div>
       </div>
     </footer>

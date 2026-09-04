@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import { SITE } from "@/config/site";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 const inter = Inter({
@@ -25,7 +26,6 @@ export const metadata: Metadata = {
     "live website demos",
     "business automation",
     "custom SaaS",
-    "web hosting",
   ],
   alternates: {
     canonical: "/",
@@ -62,6 +62,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en" className={inter.variable}>
       <body className="min-h-screen overflow-x-clip bg-white font-sans text-neutral-900 antialiased">
         {children}
+        <CookieConsent />
       </body>
     </html>
   );

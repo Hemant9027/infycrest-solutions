@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-/** Original crest mark — twin ascending peaks in a rounded tile. */
+/** InfyCrest stacked-layers mark. */
 export function CrestMark({ className }: { className?: string }) {
   return (
     <svg
@@ -10,19 +10,25 @@ export function CrestMark({ className }: { className?: string }) {
     >
       <rect width="32" height="32" rx="8" fill="#0a0a0a" />
       <path
-        d="M8.5 21.5 16 9.5l7.5 12"
+        d="m8 12 8-4 8 4-8 4-8-4Z"
         fill="none"
         stroke="#ffffff"
-        strokeWidth="2.7"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="m8 16 8 4 8-4"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
-        d="M13.3 21.5 16 16.6l2.7 4.9"
+        d="m8 20 8 4 8-4"
         fill="none"
         stroke="#ffffff"
-        strokeOpacity="0.5"
-        strokeWidth="2.2"
+        strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

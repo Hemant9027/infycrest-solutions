@@ -3,7 +3,6 @@ import Hero from "@/components/Hero";
 import FeaturedWork from "@/components/FeaturedWork";
 import TechMarquee from "@/components/TechMarquee";
 import Collection from "@/components/Collection";
-import HostingBand from "@/components/HostingBand";
 import Pricing from "@/components/Pricing";
 import Process from "@/components/Process";
 import FinalCTA from "@/components/FinalCTA";
@@ -18,7 +17,6 @@ export default function HomePage() {
         <FeaturedWork />
         <TechMarquee />
         <Collection />
-        <HostingBand />
         <Pricing />
         <Process />
         <FinalCTA />

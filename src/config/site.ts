@@ -27,10 +27,13 @@ export function whatsappUrl(message: string = SITE.defaultWhatsAppMessage) {
   return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }
 
+export const WA_LAUNCHKIT = whatsappUrl(
+  "Hi InfyCrest Solutions, I'd like to get the LaunchKit website package."
+);
+
 export const NAV_LINKS = [
   { label: "Demos", href: "/#demos" },
   { label: "Products", href: "/#collection" },
-  { label: "Web Hosting", href: "/#hosting" },
   { label: "Categories", href: "/#categories" },
   { label: "Pricing", href: "/#pricing" },
   { label: "Process", href: "/#process" },

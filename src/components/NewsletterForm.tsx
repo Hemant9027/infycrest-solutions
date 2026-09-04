@@ -6,8 +6,13 @@ import { cn } from "@/lib/utils";
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export default function NewsletterForm() {
-  const [email, setEmail] = useState("");
+export default function ContactForm() {
+  const [form, setForm] = useState({
+    name: "",
+    contact: "",
+    businessType: "",
+    requirements: "",
+  });
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
 
@@ -15,18 +20,26 @@ export default function NewsletterForm() {
     event.preventDefault();
     setMessage("");
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+    if (!form.name.trim() || !form.contact.trim()) {
       setStatus("error");
-      setMessage("Please enter a valid email address.");
+      setMessage("Please add your name and an email or WhatsApp number.");
       return;
     }
 
     setStatus("submitting");
     try {
-      const response = await fetch("/api/subscribe", {
+      const response = await fetch("/api/requests", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
+        body: JSON.stringify({
+          name: form.name.trim(),
+          contact: form.contact.trim(),
+          businessType: form.businessType,
+          requirements: form.requirements.trim(),
+          demoSlug: "general-contact",
+          demoName: "General enquiry",
+          customization: "Custom enquiry",
+        }),
       });
       const data = (await response.json().catch(() => ({}))) as {
         message?: string;
@@ -39,9 +52,9 @@ export default function NewsletterForm() {
       }
       setStatus("success");
       setMessage(
-        data.message ?? "You're on the list — thoughtful updates only."
+        data.message ?? "Thanks — we will be in touch within 24 hours.",
       );
-      setEmail("");
+      setForm({ name: "", contact: "", businessType: "", requirements: "" });
     } catch {
       setStatus("error");
       setMessage("Network hiccup — please try again in a moment.");
@@ -49,44 +62,83 @@ export default function NewsletterForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full" noValidate>
-      <div className="flex flex-col gap-3 sm:flex-row">
-        <label htmlFor="newsletter-email" className="sr-only">
-          Email address
+    <form onSubmit={handleSubmit} className="w-full text-left" noValidate>
+      <div className="grid gap-3 sm:grid-cols-2">
+        <label className="sr-only" htmlFor="contact-name">
+          Name
         </label>
         <input
-          id="newsletter-email"
-          type="email"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          placeholder="you@company.com"
-          autoComplete="email"
-          className="w-full flex-1 rounded-full border border-white/15 bg-white/10 px-5 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-neutral-500 focus:border-white/50"
+          id="contact-name"
+          required
+          value={form.name}
+          onChange={(event) => setForm({ ...form, name: event.target.value })}
+          placeholder="Your name"
+          autoComplete="name"
+          className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-neutral-900"
         />
-        <button
-          type="submit"
-          disabled={status === "submitting"}
-          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-neutral-900 transition-colors hover:bg-neutral-200 disabled:opacity-60"
-        >
-          {status === "submitting" ? (
-            <Loader2 className="size-4 animate-spin" strokeWidth={2.4} />
-          ) : (
-            <>
-              Subscribe
-              <ArrowRight className="size-4" strokeWidth={2.4} />
-            </>
-          )}
-        </button>
+        <label className="sr-only" htmlFor="contact-contact">
+          Email or WhatsApp number
+        </label>
+        <input
+          id="contact-contact"
+          required
+          value={form.contact}
+          onChange={(event) =>
+            setForm({ ...form, contact: event.target.value })
+          }
+          placeholder="Email or WhatsApp number"
+          autoComplete="email tel"
+          className="w-full rounded-xl border border-neutral-200 bg-white px-4 py-3.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-neutral-900"
+        />
       </div>
+      <label className="sr-only" htmlFor="contact-business">
+        Business type
+      </label>
+      <input
+        id="contact-business"
+        value={form.businessType}
+        onChange={(event) =>
+          setForm({ ...form, businessType: event.target.value })
+        }
+        placeholder="Business type (optional)"
+        className="mt-3 w-full rounded-xl border border-neutral-200 bg-white px-4 py-3.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-neutral-900"
+      />
+      <label className="sr-only" htmlFor="contact-requirements">
+        Project requirements
+      </label>
+      <textarea
+        id="contact-requirements"
+        rows={3}
+        value={form.requirements}
+        onChange={(event) =>
+          setForm({ ...form, requirements: event.target.value })
+        }
+        placeholder="Tell us briefly what you want to build"
+        className="mt-3 w-full resize-none rounded-xl border border-neutral-200 bg-white px-4 py-3.5 text-sm text-neutral-900 outline-none transition-colors placeholder:text-neutral-400 focus:border-neutral-900"
+      />
+      <button
+        type="submit"
+        disabled={status === "submitting"}
+        className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-full bg-neutral-900 px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-black disabled:opacity-60"
+      >
+        {status === "submitting" ? (
+          <Loader2 className="size-4 animate-spin" strokeWidth={2.4} />
+        ) : (
+          <>
+            Send enquiry <ArrowRight className="size-4" strokeWidth={2.4} />
+          </>
+        )}
+      </button>
       <p
         role={status === "error" ? "alert" : "status"}
         className={cn(
           "mt-3 min-h-5 text-xs transition-colors",
-          status === "error" ? "text-red-400" : "text-neutral-400",
-          status === "success" && "text-emerald-400"
+          status === "error" ? "text-red-600" : "text-neutral-400",
+          status === "success" && "text-emerald-600",
         )}
       >
-        {message || "Launches, ideas and practical notes. One email, occasionally."}
+        {message ||
+          "Tell us what you are building. We usually reply within 24 hours."}
       </p>
     </form>
   );
