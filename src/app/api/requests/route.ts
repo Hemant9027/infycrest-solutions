@@ -1,0 +1,55 @@
+import { NextResponse } from "next/server";
+import { db } from "@/db";
+import { projectRequests } from "@/db/schema";
+
+export const runtime = "nodejs";
+
+interface RequestPayload {
+  name?: unknown;
+  contact?: unknown;
+  businessType?: unknown;
+  requirements?: unknown;
+  demoSlug?: unknown;
+  demoName?: unknown;
+  customization?: unknown;
+}
+
+function asString(value: unknown, max: number) {
+  return typeof value === "string" ? value.trim().slice(0, max) : "";
+}
+
+export async function POST(request: Request) {
+  try {
+    const body = (await request.json().catch(() => null)) as RequestPayload | null;
+
+    const name = asString(body?.name, 160);
+    const contact = asString(body?.contact, 320);
+    const demoSlug = asString(body?.demoSlug, 120);
+    const demoName = asString(body?.demoName, 160);
+
+    if (!name || !contact || !demoSlug) {
+      return NextResponse.json(
+        { error: "Name, contact and selected website are required." },
+        { status: 400 }
+      );
+    }
+
+    await db.insert(projectRequests).values({
+      name,
+      contact,
+      businessType: asString(body?.businessType, 120) || null,
+      requirements: asString(body?.requirements, 2000) || null,
+      demoSlug,
+      demoName: demoName || demoSlug,
+      customization: asString(body?.customization, 160) || null,
+    });
+
+    return NextResponse.json({ ok: true });
+  } catch (error) {
+    console.error("[api/requests] failed:", error);
+    return NextResponse.json(
+      { error: "Could not record the request right now." },
+      { status: 500 }
+    );
+  }
+}

@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme {
+  /* ——— Morris Motel · "clean tropical" palette ——— */
+  --color-sand: #f5efe2; /* page background */
+  --color-cream: #fdfaf1; /* raised surfaces */
+  --color-shell: #e7dcc3; /* hairline borders */
+  --color-ink: #0d2b26; /* deep marine green — text & dark sections */
+  --color-pine: #143d34; /* lifted ink for cards on dark */
+  --color-sea: #0e5c4f; /* brand teal-green */
+  --color-mint: #d9eadf; /* soft green tint */
+  --color-foam: #edf4ec; /* palest green tint */
+  --color-coral: #e4572e; /* primary CTA */
+  --color-coral-deep: #bf421f; /* CTA hover */
+  --color-sun: #f2b23e; /* sunshine accent */
+
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-spin-slower: spin-slower 26s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-late: float 8.5s ease-in-out 1.2s infinite;
+
+  --ease-out-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes spin-slower {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  background-color: var(--color-sand);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-coral);
+  color: var(--color-cream);
+}
+
+/* refined scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--color-sea) 55%, var(--color-sand))
+    transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-sea) 55%, var(--color-sand));
+  border-radius: 999px;
+  border: 2px solid var(--color-sand);
+}
+
+/* accessible focus */
+:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ——— scroll reveal ——— */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s var(--ease-out-soft),
+    transform 0.9s var(--ease-out-soft);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ——— film grain overlay ——— */
+.grain {
+  position: relative;
+}
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+/* ——— editorial helpers ——— */
+.display-tight {
+  letter-spacing: -0.025em;
+}
+.hairline {
+  border-color: color-mix(in srgb, var(--color-ink) 14%, transparent);
+}
+.hairline-light {
+  border-color: color-mix(in srgb, var(--color-cream) 18%, transparent);
+}
+
+/* striped tropical texture for dark sections */
+.stripes-dark {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-cream) 7%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+input[type="date"] {
+  color-scheme: light;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .animate-marquee,
+  .animate-spin-slower,
+  .animate-float,
+  .animate-float-late {
+    animation: none !important;
+  }
+}

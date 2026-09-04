@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #11100f;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: #11100f;
+  color: #f6f0e7;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #8f1d1d;
+  color: #f6f0e7;
+}
+
+/* Custom scrollbar (subtle) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #11100f;
+}
+::-webkit-scrollbar-thumb {
+  background: #34302b;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #8f1d1d;
+}
+
+/* Utility: magazine-style fine gold rule */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 164, 92, 0.55), transparent);
+}
+
+/* Subtle circular motif */
+.circle-motif {
+  border-radius: 9999px;
+  border: 1px solid rgba(201, 164, 92, 0.28);
+}
+
+/* Faint grid texture for decorative panels */
+.ink-grid {
+  background-image:
+    linear-gradient(rgba(201, 164, 92, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 164, 92, 0.06) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+/* Film-grain overlay for cinematic sections */
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: radial-gradient(rgba(246, 240, 231, 0.6) 0.6px, transparent 0.6px);
+  background-size: 3px 3px;
+  mix-blend-mode: overlay;
+}
+
+/* Focus visibility */
+:focus-visible {
+  outline: 2px solid #c9a45c;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Hide scrollbar on horizontal tab rails */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Image treatment used across cards */
+.media-object {
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s ease;
+}
+.group:hover .media-object {
+  transform: scale(1.04);
+}
+
+/* Uppercase tracking utility */
+.eyebrow {
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}

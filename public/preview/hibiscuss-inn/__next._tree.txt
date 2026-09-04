@@ -1,0 +1,5 @@
+:HL["/preview/hibiscuss-inn/_next/static/chunks/122-xop87yr.7.css","style"]
+:HL["/preview/hibiscuss-inn/_next/static/media/03bda585a99c6450-s.p.0zzh68k1~whtc.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/preview/hibiscuss-inn/_next/static/media/1b99372b3eaef0c8-s.p.0gx2haw2tmll8.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/preview/hibiscuss-inn/_next/static/media/3c7c6164b2587822-s.p.0duriy8536ewt.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}},"staleTime":300,"buildId":"vFUySfpBCqsdhiE2qVCUD"}

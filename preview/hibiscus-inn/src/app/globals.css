@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-display: var(--font-fraunces), "Georgia", serif;
+  --font-sans: var(--font-outfit), system-ui, -apple-system, sans-serif;
+
+  /* Sand — warm Caribbean neutrals */
+  --color-sand-50: #fbf7ee;
+  --color-sand-100: #f5eddc;
+  --color-sand-200: #ecdfc4;
+  --color-sand-300: #ddc9a4;
+  --color-sand-400: #c8ad7e;
+
+  /* Sea — deep lagoon teals */
+  --color-sea-50: #eff8f6;
+  --color-sea-100: #d9ede9;
+  --color-sea-200: #b0dad3;
+  --color-sea-300: #79bfb6;
+  --color-sea-400: #41988f;
+  --color-sea-500: #287c75;
+  --color-sea-600: #1c6460;
+  --color-sea-700: #15504d;
+  --color-sea-800: #10403e;
+  --color-sea-900: #0c3231;
+  --color-sea-950: #062220;
+
+  /* Hibiscus — warm island bloom */
+  --color-hibiscus-50: #fdf1f4;
+  --color-hibiscus-100: #fadfe6;
+  --color-hibiscus-200: #f4b9c8;
+  --color-hibiscus-300: #eb8ca7;
+  --color-hibiscus-400: #e06085;
+  --color-hibiscus-500: #d1426b;
+  --color-hibiscus-600: #b73257;
+  --color-hibiscus-700: #952747;
+
+  --color-ink: #25312c;
+
+  /* Motion */
+  --animate-kenburns: kenburns 26s ease-in-out infinite alternate;
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-spin-slow: spin 46s linear infinite;
+  --animate-scroll-cue: scroll-cue 2.2s ease-in-out infinite;
+
+  @keyframes kenburns {
+    from {
+      transform: scale(1) translateY(0);
+    }
+    to {
+      transform: scale(1.14) translateY(-1.5%);
+    }
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(-6deg);
+    }
+    50% {
+      transform: translateY(-14px) rotate(-2deg);
+    }
+  }
+
+  @keyframes scroll-cue {
+    0% {
+      transform: translateY(0);
+      opacity: 0;
+    }
+    25% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(26px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-hibiscus-500);
+  color: var(--color-sand-50);
+}
+
+/* Subtle film grain across the whole page for an organic, sun-faded feel */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Elegant underline for inline links */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1.5px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.link-underline:hover {
+  background-size: 100% 1.5px;
+}
+
+/* Date / select inputs inherit the warm theme */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.55;
+}

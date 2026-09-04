@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+
+  --animate-marquee: marquee 48s linear infinite;
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.7s ease-out both;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Offset anchor jumps so the fixed header never covers section tops. */
+  scroll-padding-top: 92px;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #171717;
+  color: #ffffff;
+}
+
+/* Consistent, accessible focus treatment */
+:focus-visible {
+  outline: 2px solid #171717;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Slim, quiet scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #fafafa;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 999px;
+  border: 2px solid #fafafa;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
+/* Fades the edges of the technology marquee */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+}
+
+/* Quiet dotted texture used behind the hero */
+.hero-dots {
+  background-image: radial-gradient(
+    circle,
+    rgba(23, 23, 23, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 40%,
+    black 30%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(
+    ellipse 70% 60% at 50% 40%,
+    black 30%,
+    transparent 75%
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .animate-marquee {
+    animation: none !important;
+  }
+}
