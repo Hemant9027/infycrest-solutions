@@ -6,7 +6,7 @@ const ACTIVITIES = [
   {
     icon: Fish,
     tag: "Guides arranged",
-    src: "/images/fishing.jpg",
+    src: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?auto=format&fit=crop&w=1600&q=85",
     alt: "Fly fisherman casting on glassy turquoise flats at golden hour",
     title: "Fly-Fishing",
     blurb:
@@ -15,8 +15,8 @@ const ACTIVITIES = [
   {
     icon: Waves,
     tag: "By arrangement",
-    src: "/images/kayak.jpg",
-    alt: "Two kayaks gliding through a clear mangrove creek",
+    src: "https://images.unsplash.com/photo-1564349863905-5e1b8bdf5b8d?auto=format&fit=crop&w=1600&q=85",
+    alt: "Modern kayaks gliding through pristine clear water and natural mangrove channels with white sand bottom",
     title: "Kayaking",
     blurb:
       "Slip into glassy creeks and mangrove channels where the water runs clear over white sand. Kayaking is available by arrangement, right from the property.",
@@ -24,7 +24,7 @@ const ACTIVITIES = [
   {
     icon: Shell,
     tag: "Just offshore",
-    src: "/images/snorkel.jpg",
+    src: "https://images.unsplash.com/photo-1512621776951-a57141f2eebe?auto=format&fit=crop&w=1600&q=85",
     alt: "Snorkeler floating above coral and tropical fish",
     title: "Snorkeling & the Reef",
     blurb:
@@ -52,8 +52,8 @@ export default function Activities() {
           </div>
           <Reveal delay={160}>
             <p className="max-w-md text-[1.02rem] leading-relaxed text-abyss/70">
-              Water sports of every kind belong to this coast. Tell us what
-              you love, and your hosts will arrange the rest.
+              Water sports of every kind belong to this coast. Tell us what you
+              love, and your hosts will arrange the rest.
             </p>
           </Reveal>
         </div>
@@ -79,7 +79,9 @@ export default function Activities() {
                     <span className="flex h-10 w-10 items-center justify-center rounded-full bg-lagoon/10 text-lagoon">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <h3 className="font-display text-2xl font-medium text-abyss">{title}</h3>
+                    <h3 className="font-display text-2xl font-medium text-abyss">
+                      {title}
+                    </h3>
                   </div>
                   <p className="mt-4 flex-1 text-[0.95rem] leading-relaxed text-abyss/65">
                     {blurb}
@@ -93,8 +95,11 @@ export default function Activities() {
         <Reveal delay={140}>
           <div className="mt-12 flex flex-col items-start justify-between gap-6 rounded-[1.75rem] bg-abyss px-8 py-8 text-shell sm:flex-row sm:items-center md:px-12">
             <p className="max-w-xl text-[1.02rem] leading-relaxed text-shell/85">
-              <span className="font-display italic text-aqua">Bonefishing at dawn, a reef before lunch, kayaking at golden hour</span>
-              {" "}— one conversation with your hosts and it’s on the calendar.
+              <span className="font-display italic text-aqua">
+                Bonefishing at dawn, a reef before lunch, kayaking at golden
+                hour
+              </span>{" "}
+              — one conversation with your hosts and it’s on the calendar.
             </p>
             <a
               href="#contact"

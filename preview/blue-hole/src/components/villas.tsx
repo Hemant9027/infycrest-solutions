@@ -1,13 +1,35 @@
 import Image from "next/image";
-import { ArrowUpRight, BedDouble, CookingPot, Flame, Armchair, Refrigerator, ShowerHead, UtensilsCrossed, Wifi } from "lucide-react";
+import {
+  ArrowUpRight,
+  BedDouble,
+  CookingPot,
+  Flame,
+  Armchair,
+  Refrigerator,
+  ShowerHead,
+  UtensilsCrossed,
+  Wifi,
+} from "lucide-react";
 import Reveal from "@/components/reveal";
 
 const AMENITIES = [
   { icon: BedDouble, title: "Up to 2 adults", desc: "or a small family of 4" },
-  { icon: CookingPot, title: "Full kitchen", desc: "fully functioning & ready to cook" },
-  { icon: Refrigerator, title: "Full-size fridge", desc: "room for a week’s catch" },
+  {
+    icon: CookingPot,
+    title: "Full kitchen",
+    desc: "fully functioning & ready to cook",
+  },
+  {
+    icon: Refrigerator,
+    title: "Full-size fridge",
+    desc: "room for a week’s catch",
+  },
   { icon: Flame, title: "Stove", desc: "for island suppers at home" },
-  { icon: UtensilsCrossed, title: "Utensils & dinnerware", desc: "everything provided" },
+  {
+    icon: UtensilsCrossed,
+    title: "Utensils & dinnerware",
+    desc: "everything provided",
+  },
   { icon: Armchair, title: "Dining area", desc: "slow meals, sea breeze" },
   { icon: ShowerHead, title: "Bathroom", desc: "with shower" },
   { icon: Wifi, title: "WiFi", desc: "when you feel like checking in" },
@@ -15,7 +37,10 @@ const AMENITIES = [
 
 export default function Villas() {
   return (
-    <section id="villas" className="relative overflow-hidden bg-abyss py-24 text-shell md:py-36">
+    <section
+      id="villas"
+      className="relative overflow-hidden bg-abyss py-24 text-shell md:py-36"
+    >
       {/* ambient glows */}
       <div className="pointer-events-none absolute -left-40 top-24 h-96 w-96 rounded-full bg-lagoon/15 blur-[120px]" />
       <div className="pointer-events-none absolute -right-40 bottom-24 h-96 w-96 rounded-full bg-coral/10 blur-[120px]" />
@@ -38,8 +63,8 @@ export default function Villas() {
           <Reveal delay={160}>
             <p className="max-w-md text-[1.02rem] leading-relaxed text-shell/70">
               Each villa takes its own shape and personality — simple,
-              comfortable and completely yours. Step off your porch, through
-              the palms, and onto the sand.
+              comfortable and completely yours. Step off your porch, through the
+              palms, and onto the sand.
             </p>
           </Reveal>
         </div>
@@ -49,8 +74,8 @@ export default function Villas() {
           <Reveal className="lg:col-span-7">
             <figure className="group relative aspect-[4/3] overflow-hidden rounded-[2rem] lg:aspect-auto lg:h-full">
               <Image
-                src="/images/villa-exterior.jpg"
-                alt="A uniquely shaped island villa tucked among coconut palms"
+                src="https://images.unsplash.com/photo-1571195226794-5e1a4a52b9b1?auto=format&fit=crop&w=1600&q=85"
+                alt="Uniquely designed luxury beachfront villa architecturally nestled among coconut palms with turquoise ocean view"
                 fill
                 sizes="(min-width: 1024px) 58vw, 100vw"
                 className="object-cover transition-transform duration-[1.8s] ease-out group-hover:scale-105"
@@ -63,8 +88,8 @@ export default function Villas() {
           <Reveal delay={140} className="lg:col-span-5">
             <figure className="group relative aspect-[4/3] overflow-hidden rounded-[2rem] lg:aspect-auto lg:h-full">
               <Image
-                src="/images/villa-interior.jpg"
-                alt="Bright villa kitchen and dining area with views of the sea"
+                src="https://images.unsplash.com/photo-1618883996289-839f8e92f81e?auto=format&fit=crop&w=1600&q=85"
+                alt="Luxurious beachfront villa interior with floor-to-ceiling windows, premium furnishings, and stunning turquoise ocean views"
                 fill
                 sizes="(min-width: 1024px) 42vw, 100vw"
                 className="object-cover transition-transform duration-[1.8s] ease-out group-hover:scale-105"
@@ -85,8 +110,12 @@ export default function Villas() {
                   <Icon className="h-5 w-5" />
                 </span>
                 <div>
-                  <h3 className="text-[0.95rem] font-semibold text-shell">{title}</h3>
-                  <p className="mt-1 text-[0.85rem] leading-snug text-shell/55">{desc}</p>
+                  <h3 className="text-[0.95rem] font-semibold text-shell">
+                    {title}
+                  </h3>
+                  <p className="mt-1 text-[0.85rem] leading-snug text-shell/55">
+                    {desc}
+                  </p>
                 </div>
               </div>
             </Reveal>

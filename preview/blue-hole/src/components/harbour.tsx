@@ -1,6 +1,11 @@
 "use client";
 
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { Anchor, Sailboat, Shell } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
@@ -20,16 +25,24 @@ export function Harbour() {
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], reduce ? ["0%", "0%"] : ["-12%", "12%"]);
+  const y = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduce ? ["0%", "0%"] : ["-12%", "12%"],
+  );
 
   return (
-    <section ref={ref} id="harbour" className="relative scroll-mt-24 overflow-hidden">
+    <section
+      ref={ref}
+      id="harbour"
+      className="relative scroll-mt-24 overflow-hidden"
+    >
       {/* Parallax backdrop */}
       <div className="absolute inset-0">
         <motion.div style={{ y }} className="absolute -inset-y-[14%] inset-x-0">
           <Image
             src={IMG.harbourSail}
-            alt="Sailboats at anchor in the clear turquoise water of Elizabeth Harbour"
+            alt="Beautiful sailboats anchored in the pristine turquoise waters of historic Elizabeth Harbour at sunset"
             fill
             sizes="100vw"
             placeholder="blur"
@@ -53,11 +66,13 @@ export function Harbour() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-6 text-base leading-relaxed text-sand-50/85">
-              Elizabeth Harbour is the deep, protected natural harbour that made George Town —
-              long regarded as one of the great anchorages of the Bahamas, and each spring the
-              racecourse of the National Family Island Regatta. From Marshall&apos;s, it&apos;s
-              simply the view: cruising yachts swinging at anchor, bonefish flats at the edge
-              of the channel, and Stocking Island lying long and green on the horizon.
+              Elizabeth Harbour is the deep, protected natural harbour that made
+              George Town — long regarded as one of the great anchorages of the
+              Bahamas, and each spring the racecourse of the National Family
+              Island Regatta. From Marshall&apos;s, it&apos;s simply the view:
+              cruising yachts swinging at anchor, bonefish flats at the edge of
+              the channel, and Stocking Island lying long and green on the
+              horizon.
             </p>
           </Reveal>
           <Reveal delay={0.24}>
@@ -73,7 +88,10 @@ export function Harbour() {
                   key={chip.label}
                   className="inline-flex items-center gap-2 rounded-full border border-sand-50/25 bg-abyss-950/35 px-4.5 py-2.5 text-[12px] font-semibold tracking-wide text-sand-50 backdrop-blur-md"
                 >
-                  <chip.icon className="size-4 text-lagoon-300" strokeWidth={1.8} />
+                  <chip.icon
+                    className="size-4 text-lagoon-300"
+                    strokeWidth={1.8}
+                  />
                   {chip.label}
                 </span>
               ))}

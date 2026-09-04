@@ -31,7 +31,10 @@ const PILLARS = [
 
 export function GuestExperience() {
   return (
-    <section id="experience" className="relative scroll-mt-24 overflow-hidden bg-abyss-950 py-24 sm:py-32">
+    <section
+      id="experience"
+      className="relative scroll-mt-24 overflow-hidden bg-abyss-950 py-24 sm:py-32"
+    >
       <div className="grain absolute inset-0" />
       <div
         className="pointer-events-none absolute top-0 right-0 h-[36rem] w-[36rem] rounded-full bg-lagoon-500/10 blur-3xl"
@@ -47,14 +50,16 @@ export function GuestExperience() {
             <Reveal delay={0.08}>
               <h2 className="font-display mt-4 max-w-xl text-4xl leading-[1.05] font-medium text-balance text-sand-50 sm:text-5xl lg:text-[3.4rem]">
                 Days shaped by
-                <span className="italic text-lagoon-300"> tide & light</span>, not schedules.
+                <span className="italic text-lagoon-300"> tide & light</span>,
+                not schedules.
               </h2>
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mt-6 max-w-lg text-base leading-relaxed text-sand-50/70">
-                There is no lobby fuss here. You arrive, you exhale, and the island takes over.
-                Breakfast is wherever the breeze leads you; adventures are arranged with a phone
-                call and a smile; evenings end with the harbour turning gold.
+                There is no lobby fuss here. You arrive, you exhale, and the
+                island takes over. Breakfast is wherever the breeze leads you;
+                adventures are arranged with a phone call and a smile; evenings
+                end with the harbour turning gold.
               </p>
             </Reveal>
 
@@ -65,14 +70,22 @@ export function GuestExperience() {
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ duration: 0.8, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{
+                    duration: 0.8,
+                    delay: i * 0.08,
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
                   className="group rounded-3xl border border-sand-50/10 bg-sand-50/[0.04] p-6 backdrop-blur-sm transition-colors duration-300 hover:border-lagoon-400/35 hover:bg-sand-50/[0.07]"
                 >
                   <span className="grid size-11 place-items-center rounded-2xl bg-lagoon-500/15 text-lagoon-300 transition-colors duration-300 group-hover:bg-lagoon-500/25">
                     <pillar.icon className="size-5" strokeWidth={1.7} />
                   </span>
-                  <h3 className="font-display mt-4 text-xl text-sand-50">{pillar.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-sand-50/60">{pillar.copy}</p>
+                  <h3 className="font-display mt-4 text-xl text-sand-50">
+                    {pillar.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-sand-50/60">
+                    {pillar.copy}
+                  </p>
                 </motion.div>
               ))}
             </div>
@@ -84,8 +97,8 @@ export function GuestExperience() {
               <div className="relative overflow-hidden rounded-[2rem] shadow-[0_50px_100px_-40px_rgba(0,0,0,0.8)]">
                 <div className="relative aspect-[4/5] sm:aspect-[5/5]">
                   <Image
-                    src={IMG.duskPier}
-                    alt="A wooden pier over calm water at dusk in the Bahamas"
+                    src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=85"
+                    alt="Serene wooden pier extending over calm turquoise Caribbean waters at magical golden hour dusk"
                     fill
                     sizes="(min-width: 1024px) 40vw, 92vw"
                     placeholder="blur"
@@ -106,8 +119,14 @@ export function GuestExperience() {
                 </h3>
                 <ul className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
                   {AMENITIES.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-sm text-sand-50/80">
-                      <Check className="mt-0.5 size-4 shrink-0 text-lagoon-400" strokeWidth={2.5} />
+                    <li
+                      key={item}
+                      className="flex items-start gap-2.5 text-sm text-sand-50/80"
+                    >
+                      <Check
+                        className="mt-0.5 size-4 shrink-0 text-lagoon-400"
+                        strokeWidth={2.5}
+                      />
                       {item}
                     </li>
                   ))}

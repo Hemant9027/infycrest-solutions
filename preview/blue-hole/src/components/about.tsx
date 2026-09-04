@@ -73,7 +73,7 @@ export function About() {
             <Reveal>
               <FramedImage
                 src={IMG.housePalms}
-                alt="Palm-lined island houses in warm Caribbean light"
+                alt="Luxury beachfront villa elegantly nestled among swaying coconut palms with turquoise ocean in background"
                 className="aspect-[4/3] w-full shadow-[0_40px_80px_-40px_rgba(3,38,46,0.45)]"
                 sizes="(min-width: 1024px) 46vw, 92vw"
               />
@@ -85,7 +85,7 @@ export function About() {
               <div className="rounded-[1.75rem] bg-sand-50 p-2.5 shadow-[0_40px_80px_-35px_rgba(3,38,46,0.55)]">
                 <FramedImage
                   src={IMG.houseTropical}
-                  alt="Tropical island house set in lush greenery"
+                  alt="Serene tropical path through lush coconut palm grove leading to pristine white sand beach and turquoise sea"
                   className="aspect-[3/4] w-full"
                   sizes="(min-width: 1024px) 18vw, 36vw"
                 />

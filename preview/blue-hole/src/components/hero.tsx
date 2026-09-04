@@ -23,7 +23,10 @@ const FACTS = [
 
 export default function Hero() {
   return (
-    <section id="top" className="relative flex min-h-svh flex-col overflow-hidden bg-abyss text-shell">
+    <section
+      id="top"
+      className="relative flex min-h-svh flex-col overflow-hidden bg-abyss text-shell"
+    >
       {/* Backdrop video */}
       <div className="absolute inset-0">
         <video
@@ -32,7 +35,7 @@ export default function Hero() {
           muted
           loop
           playsInline
-          poster="/images/hero.jpg"
+          poster="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=85"
           aria-hidden="true"
         >
           <source
@@ -83,7 +86,10 @@ export default function Hero() {
             Secluded villas, turquoise water and the natural beauty of Andros.
           </motion.p>
 
-          <motion.div variants={item} className="flex flex-wrap items-center gap-3">
+          <motion.div
+            variants={item}
+            className="flex flex-wrap items-center gap-3"
+          >
             <a
               href="#villas"
               className="inline-flex items-center gap-2 rounded-full bg-sand px-7 py-3.5 text-sm font-semibold text-abyss transition-colors duration-300 hover:bg-aqua"
@@ -105,7 +111,10 @@ export default function Hero() {
           className="mt-12 grid grid-cols-1 gap-x-8 gap-y-3 border-t border-shell/15 pt-6 sm:grid-cols-3"
         >
           {FACTS.map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-3 text-sm text-shell/75">
+            <div
+              key={label}
+              className="flex items-center gap-3 text-sm text-shell/75"
+            >
               <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-shell/10">
                 <Icon className="h-4 w-4 text-aqua" />
               </span>

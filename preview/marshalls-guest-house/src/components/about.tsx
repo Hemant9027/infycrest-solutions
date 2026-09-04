@@ -35,13 +35,15 @@ function FramedImage({
   className,
   sizes,
 }: {
-  src: StaticImageData;
+  src: StaticImageData | string;
   alt: string;
   className: string;
   sizes: string;
 }) {
   return (
-    <div className={`group relative overflow-hidden rounded-[1.75rem] ${className}`}>
+    <div
+      className={`group relative overflow-hidden rounded-[1.75rem] ${className}`}
+    >
       <Image
         src={src}
         alt={alt}
@@ -56,7 +58,10 @@ function FramedImage({
 
 export function About() {
   return (
-    <section id="about" className="relative scroll-mt-24 overflow-hidden bg-sand-50 py-24 sm:py-32">
+    <section
+      id="about"
+      className="relative scroll-mt-24 overflow-hidden bg-sand-50 py-24 sm:py-32"
+    >
       <div
         className="pointer-events-none absolute -top-40 -right-40 size-[34rem] rounded-full bg-lagoon-100/60 blur-3xl"
         aria-hidden
@@ -73,7 +78,10 @@ export function About() {
                 sizes="(min-width: 1024px) 46vw, 92vw"
               />
             </Reveal>
-            <Reveal delay={0.15} className="absolute -right-4 -bottom-10 hidden w-2/5 sm:block">
+            <Reveal
+              delay={0.15}
+              className="absolute -right-4 -bottom-10 hidden w-2/5 sm:block"
+            >
               <div className="rounded-[1.75rem] bg-sand-50 p-2.5 shadow-[0_40px_80px_-35px_rgba(3,38,46,0.55)]">
                 <FramedImage
                   src={IMG.houseTropical}
@@ -91,7 +99,9 @@ export function About() {
                 <span className="text-[13px] leading-tight font-semibold">
                   Family-run,
                   <br />
-                  <span className="font-normal text-sand-50/75">hosted by Phillipa Marshall</span>
+                  <span className="font-normal text-sand-50/75">
+                    hosted by Phillipa Marshall
+                  </span>
                 </span>
               </div>
             </Reveal>
@@ -106,21 +116,25 @@ export function About() {
               <h2 className="font-display mt-4 text-4xl leading-[1.05] font-medium text-balance text-ink sm:text-5xl lg:text-[3.4rem]">
                 Island hospitality,
                 <br />
-                the <span className="italic text-lagoon-600">old-school</span> way.
+                the <span className="italic text-lagoon-600">
+                  old-school
+                </span>{" "}
+                way.
               </h2>
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mt-7 text-base leading-relaxed text-ink/75">
-                Marshall&apos;s Guest House sits on Queen&apos;s Highway in George Town, looking
-                out across the turquoise sweep of Elizabeth Harbour. It&apos;s a simple idea,
-                looked after properly: eight guestrooms, kept cool and spotless, wrapped in
-                warm Caribbean architecture — and a welcome that remembers your name by the
+                Marshall&apos;s Guest House sits on Queen&apos;s Highway in
+                George Town, looking out across the turquoise sweep of Elizabeth
+                Harbour. It&apos;s a simple idea, looked after properly: eight
+                guestrooms, kept cool and spotless, wrapped in warm Caribbean
+                architecture — and a welcome that remembers your name by the
                 second morning.
               </p>
               <p className="mt-4 text-base leading-relaxed text-ink/75">
-                Days here run on island time. Coffee on the terrace, a boat out to the cays,
-                dinner within walking distance. When you&apos;re ready for bed, the trade winds
-                do the talking.
+                Days here run on island time. Coffee on the terrace, a boat out
+                to the cays, dinner within walking distance. When you&apos;re
+                ready for bed, the trade winds do the talking.
               </p>
             </Reveal>
 
@@ -132,8 +146,12 @@ export function About() {
                       <fact.icon className="size-5" strokeWidth={1.7} />
                     </span>
                     <div>
-                      <h3 className="text-[15px] font-bold text-ink">{fact.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-ink/65">{fact.copy}</p>
+                      <h3 className="text-[15px] font-bold text-ink">
+                        {fact.title}
+                      </h3>
+                      <p className="mt-1 text-sm leading-relaxed text-ink/65">
+                        {fact.copy}
+                      </p>
                     </div>
                   </div>
                 </Reveal>
@@ -142,7 +160,8 @@ export function About() {
 
             <Reveal delay={0.3}>
               <p className="font-display mt-10 text-xl italic text-abyss-800">
-                — Phillipa Marshall, <span className="text-ink/55 not-italic">your host</span>
+                — Phillipa Marshall,{" "}
+                <span className="text-ink/55 not-italic">your host</span>
               </p>
             </Reveal>
           </div>

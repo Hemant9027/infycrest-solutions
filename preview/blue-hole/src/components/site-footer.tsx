@@ -11,7 +11,7 @@ export function SiteFooter() {
       <div className="relative h-[26rem] overflow-hidden sm:h-[30rem]">
         <Image
           src={IMG.duskPier}
-          alt="Dusk settling over a pier and calm harbour water"
+          alt="Serene wooden pier extending into calm turquoise Caribbean waters with golden dusk light settling over the harbour"
           fill
           sizes="100vw"
           placeholder="blur"
@@ -55,8 +55,8 @@ export function SiteFooter() {
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-sand-50/60">
               A family-run guest house overlooking Elizabeth Harbour — eight
-              air-conditioned, non-smoking guestrooms in the heart of George Town,
-              hosted by {BUSINESS.host}.
+              air-conditioned, non-smoking guestrooms in the heart of George
+              Town, hosted by {BUSINESS.host}.
             </p>
           </div>
 
@@ -76,7 +76,10 @@ export function SiteFooter() {
                 </li>
               ))}
               <li>
-                <a href="#contact" className="text-sm font-semibold text-coral-400 transition-colors hover:text-coral-500">
+                <a
+                  href="#contact"
+                  className="text-sm font-semibold text-coral-400 transition-colors hover:text-coral-500"
+                >
                   Book / Check Availability
                 </a>
               </li>
@@ -106,7 +109,10 @@ export function SiteFooter() {
                 href={BUSINESS.emailHref}
                 className="flex items-center gap-2.5 text-sm font-semibold break-all text-sand-50/80 transition-colors hover:text-sand-50"
               >
-                <Mail className="size-4 shrink-0 text-lagoon-300" strokeWidth={2} />
+                <Mail
+                  className="size-4 shrink-0 text-lagoon-300"
+                  strokeWidth={2}
+                />
                 {BUSINESS.email}
               </a>
             </div>
@@ -115,7 +121,9 @@ export function SiteFooter() {
 
         <div className="border-t border-sand-50/10">
           <div className="mx-auto flex max-w-[88rem] flex-col items-center justify-between gap-3 px-5 py-6 text-[12px] text-sand-50/45 sm:flex-row sm:px-8">
-            <p>© {year} Marshall&apos;s Guest House, George Town, Great Exuma.</p>
+            <p>
+              © {year} Marshall&apos;s Guest House, George Town, Great Exuma.
+            </p>
             <p>Look for the palms along Queen&apos;s Highway.</p>
           </div>
         </div>

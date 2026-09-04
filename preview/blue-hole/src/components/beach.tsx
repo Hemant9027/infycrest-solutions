@@ -5,8 +5,8 @@ export default function Beach() {
   return (
     <section id="beach" className="relative bg-abyss text-shell">
       <ParallaxImage
-        src="/images/beach.jpg"
-        alt="Hammock strung between palms on the secluded private beach"
+        src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=1600&q=85"
+        alt="Relaxing hammock suspended between palm trees on pristine private beach with turquoise Caribbean waters"
         className="h-[82vh] min-h-[34rem]"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-abyss/75 via-abyss/10 to-abyss/45" />
@@ -22,8 +22,8 @@ export default function Beach() {
           </Reveal>
           <Reveal delay={100}>
             <h2 className="mt-6 font-display text-[clamp(2.6rem,6vw,5.5rem)] font-light leading-[1.02] tracking-[-0.01em]">
-              Miles of sand.{" "}
-              <em className="italic text-aqua">No one else</em> on it.
+              Miles of sand. <em className="italic text-aqua">No one else</em>{" "}
+              on it.
             </h2>
           </Reveal>
           <Reveal delay={200}>

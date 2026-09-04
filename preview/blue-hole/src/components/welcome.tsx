@@ -4,10 +4,19 @@ import Reveal from "@/components/reveal";
 import { CONTACT } from "@/lib/site";
 
 const FEATURES = [
-  { icon: Users, text: "Each villa sleeps two adults — or a small family of four" },
-  { icon: CookingPot, text: "Full kitchens made for slow mornings and long stays" },
+  {
+    icon: Users,
+    text: "Each villa sleeps two adults — or a small family of four",
+  },
+  {
+    icon: CookingPot,
+    text: "Full kitchens made for slow mornings and long stays",
+  },
   { icon: Wifi, text: "WiFi throughout, when you feel like checking in" },
-  { icon: Heart, text: "Weddings & special occasions arranged with your hosts" },
+  {
+    icon: Heart,
+    text: "Weddings & special occasions arranged with your hosts",
+  },
 ];
 
 const STATS = [
@@ -19,7 +28,10 @@ const STATS = [
 
 export default function Welcome() {
   return (
-    <section id="welcome" className="relative overflow-hidden bg-shell py-24 md:py-36">
+    <section
+      id="welcome"
+      className="relative overflow-hidden bg-shell py-24 md:py-36"
+    >
       <div className="mx-auto max-w-[90rem] px-5 sm:px-8">
         <div className="grid gap-16 lg:grid-cols-12 lg:gap-10">
           {/* Copy */}
@@ -32,8 +44,8 @@ export default function Welcome() {
             <Reveal delay={80}>
               <h2 className="mt-6 max-w-2xl font-display text-[clamp(2.4rem,4.6vw,4.25rem)] font-medium leading-[1.04] tracking-[-0.01em]">
                 Barefoot days on the{" "}
-                <em className="font-light italic text-lagoon">quiet side</em>{" "}
-                of Andros
+                <em className="font-light italic text-lagoon">quiet side</em> of
+                Andros
               </h2>
             </Reveal>
             <Reveal delay={160}>
@@ -79,8 +91,8 @@ export default function Welcome() {
             <Reveal delay={120} className="relative ml-auto max-w-md">
               <div className="relative aspect-[3/4] overflow-hidden rounded-b-[1.75rem] rounded-t-full border-[10px] border-foam shadow-[0_40px_80px_-30px_rgba(6,38,46,0.35)]">
                 <Image
-                  src="/images/palms.jpg"
-                  alt="Sandy footpath through a coconut palm grove leading to the sea"
+                  src="https://images.unsplash.com/photo-1551632786-1f5b66f6d2f1?auto=format&fit=crop&w=1600&q=85"
+                  alt="Serene sandy footpath winding through lush tropical coconut palm grove leading to pristine turquoise beach"
                   fill
                   sizes="(min-width: 1024px) 38vw, 90vw"
                   className="object-cover transition-transform duration-[1.8s] ease-out hover:scale-105"
@@ -89,9 +101,15 @@ export default function Welcome() {
 
               {/* Rotating badge */}
               <div className="absolute -right-8 top-6 hidden h-28 w-28 animate-spin-slow items-center justify-center rounded-full bg-abyss text-aqua sm:flex md:h-32 md:w-32">
-                <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full">
+                <svg
+                  viewBox="0 0 100 100"
+                  className="absolute inset-0 h-full w-full"
+                >
                   <defs>
-                    <path id="badge-circle" d="M 50,50 m -34,0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0" />
+                    <path
+                      id="badge-circle"
+                      d="M 50,50 m -34,0 a 34,34 0 1,1 68,0 a 34,34 0 1,1 -68,0"
+                    />
                   </defs>
                   <text className="fill-aqua text-[9px] font-semibold uppercase tracking-[0.28em]">
                     <textPath href="#badge-circle">
@@ -108,8 +126,8 @@ export default function Welcome() {
               className="absolute -bottom-8 left-0 hidden w-52 rotate-[-6deg] rounded-2xl border-8 border-white object-cover shadow-xl sm:block md:w-60"
             >
               <Image
-                src="/images/sunset.jpg"
-                alt="Golden sunset over calm water from the beach"
+                src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=1600&q=85"
+                alt="Breathtaking golden sunset reflecting off calm turquoise ocean water viewed from secluded private beach"
                 width={480}
                 height={360}
                 className="w-full rounded-lg object-cover"

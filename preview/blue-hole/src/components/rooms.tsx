@@ -1,6 +1,14 @@
 "use client";
 
-import { ArrowRight, Check, CigaretteOff, ShowerHead, Snowflake, Tv, Wifi } from "lucide-react";
+import {
+  ArrowRight,
+  Check,
+  CigaretteOff,
+  ShowerHead,
+  Snowflake,
+  Tv,
+  Wifi,
+} from "lucide-react";
 import Image from "next/image";
 import { Reveal, SectionHeading } from "@/components/motion-primitives";
 import { IMG, ROOMS } from "@/lib/site";
@@ -15,23 +23,37 @@ const AMENITY_ICONS = new Map<string, typeof Wifi>([
 
 function pickRoom(roomId: string) {
   window.dispatchEvent(new CustomEvent("mgh:select-room", { detail: roomId }));
-  document.getElementById("book")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  document
+    .getElementById("book")
+    ?.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 export function Rooms() {
   return (
-    <section id="rooms" className="relative scroll-mt-24 overflow-hidden bg-lagoon-50 py-24 sm:py-32">
+    <section
+      id="rooms"
+      className="relative scroll-mt-24 overflow-hidden bg-lagoon-50 py-24 sm:py-32"
+    >
       <div
         className="pointer-events-none absolute -bottom-52 -left-52 size-[38rem] rounded-full bg-lagoon-100/70 blur-3xl"
         aria-hidden
       />
       <div className="relative mx-auto max-w-[88rem] px-5 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-8">
-          <SectionHeading eyebrow="Rooms & Comfort" title={<>Simple comforts, <span className="italic text-lagoon-600">done properly</span>.</>} />
+          <SectionHeading
+            eyebrow="Rooms & Comfort"
+            title={
+              <>
+                Simple comforts,{" "}
+                <span className="italic text-lagoon-600">done properly</span>.
+              </>
+            }
+          />
           <Reveal delay={0.2}>
             <p className="max-w-sm text-[15px] leading-relaxed text-ink/65">
-              Choose a one- or two-bedroom guestroom — every room is air-conditioned,
-              non-smoking, and kept with the kind of care only a family gives its own.
+              Choose a one- or two-bedroom guestroom — every room is
+              air-conditioned, non-smoking, and kept with the kind of care only
+              a family gives its own.
             </p>
           </Reveal>
         </div>
@@ -56,10 +78,17 @@ export function Rooms() {
                 </div>
 
                 <div className="p-7 sm:p-9">
-                  <h3 className="font-display text-3xl font-medium text-ink">{room.name}</h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-ink/70">{room.description}</p>
+                  <h3 className="font-display text-3xl font-medium text-ink">
+                    {room.name}
+                  </h3>
+                  <p className="mt-3 text-[15px] leading-relaxed text-ink/70">
+                    {room.description}
+                  </p>
 
-                  <ul className="mt-6 flex flex-wrap gap-2" aria-label="Room amenities">
+                  <ul
+                    className="mt-6 flex flex-wrap gap-2"
+                    aria-label="Room amenities"
+                  >
                     {room.features.map((feature) => {
                       const Icon = AMENITY_ICONS.get(feature) ?? Check;
                       return (
@@ -67,7 +96,10 @@ export function Rooms() {
                           key={feature}
                           className="inline-flex items-center gap-1.5 rounded-full bg-lagoon-50 px-3.5 py-1.5 text-[12px] font-semibold text-abyss-800 ring-1 ring-lagoon-200/70"
                         >
-                          <Icon className="size-3.5 text-lagoon-500" strokeWidth={2.2} />
+                          <Icon
+                            className="size-3.5 text-lagoon-500"
+                            strokeWidth={2.2}
+                          />
                           {feature}
                         </li>
                       );
@@ -96,7 +128,7 @@ export function Rooms() {
             <div className="group relative aspect-[21/9] overflow-hidden rounded-[1.5rem]">
               <Image
                 src={IMG.roomBright}
-                alt="Bright airy guest room with large windows"
+                alt="Bright, luxurious guest bedroom with elegant furnishings and expansive turquoise ocean views"
                 fill
                 sizes="(min-width: 640px) 46vw, 92vw"
                 placeholder="blur"
@@ -109,7 +141,7 @@ export function Rooms() {
             <div className="group relative aspect-[21/9] overflow-hidden rounded-[1.5rem]">
               <Image
                 src={IMG.roomWood}
-                alt="Guest room with warm wood accents and natural light"
+                alt="Luxurious beachfront villa exterior nestled among palm trees with turquoise ocean backdrop"
                 fill
                 sizes="(min-width: 640px) 46vw, 92vw"
                 placeholder="blur"

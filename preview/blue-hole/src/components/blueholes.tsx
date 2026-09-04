@@ -22,19 +22,24 @@ const POINTS = [
 
 export default function BlueHoles() {
   return (
-    <section id="blue-holes" className="relative overflow-hidden bg-foam py-24 md:py-36">
+    <section
+      id="blue-holes"
+      className="relative overflow-hidden bg-foam py-24 md:py-36"
+    >
       <div className="mx-auto max-w-[90rem] px-5 sm:px-8">
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           {/* Image */}
           <Reveal className="relative">
             <ParallaxImage
-              src="/images/blue-hole.jpg"
-              alt="Aerial view of a circular deep blue hole ringed by turquoise shallows"
+              src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?auto=format&fit=crop&w=1600&q=85"
+              alt="Stunning aerial view of a perfect circular deep blue hole surrounded by turquoise and jade-colored shallows"
               className="aspect-[4/5] rounded-[2rem] shadow-[0_50px_90px_-40px_rgba(6,38,46,0.45)] md:aspect-square"
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
             <div className="absolute -bottom-6 -right-4 rounded-2xl bg-abyss px-6 py-4 text-shell shadow-xl sm:right-8">
-              <p className="font-display text-3xl font-light italic text-aqua">Blue holes</p>
+              <p className="font-display text-3xl font-light italic text-aqua">
+                Blue holes
+              </p>
               <p className="mt-1 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-shell/60">
                 across the street
               </p>
@@ -60,8 +65,8 @@ export default function BlueHoles() {
                 windows into the island itself, shifting from pale jade at the
                 rim to impossible sapphire at the center. On South Andros they
                 are simply part of the neighbourhood: one lies directly across
-                the Queen’s Highway from the villas, with more scattered
-                through the forest and creeks beyond.
+                the Queen’s Highway from the villas, with more scattered through
+                the forest and creeks beyond.
               </p>
             </Reveal>
 
@@ -74,7 +79,9 @@ export default function BlueHoles() {
                     </span>
                     <div>
                       <h3 className="font-semibold text-abyss">{title}</h3>
-                      <p className="mt-1 text-[0.92rem] leading-relaxed text-abyss/60">{desc}</p>
+                      <p className="mt-1 text-[0.92rem] leading-relaxed text-abyss/60">
+                        {desc}
+                      </p>
                     </div>
                   </div>
                 </Reveal>

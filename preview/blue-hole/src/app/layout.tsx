@@ -23,14 +23,17 @@ export const metadata: Metadata = {
         ? `https://${process.env.VERCEL_URL}`
         : "http://localhost:3000"),
   ),
-  title: "Blue Hole Villas — Private Island Villas in South Andros, The Bahamas",
+  title:
+    "Blue Hole Villas — Private Island Villas in South Andros, The Bahamas",
   description:
     "Secluded villas on a private beach in Congo Town, South Andros. Turquoise water, blue holes across the street, fly-fishing, kayaking and snorkeling — five minutes from Congo Town Airport.",
   openGraph: {
     title: "Blue Hole Villas — South Andros, The Bahamas",
     description:
       "Your private island escape: secluded villas, turquoise water and the natural beauty of Andros.",
-    images: ["/images/hero.jpg"],
+    images: [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=85",
+    ],
     type: "website",
   },
 };
@@ -38,7 +41,9 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${inter.variable}`}>
-      <body className="bg-shell font-body text-abyss antialiased">{children}</body>
+      <body className="bg-shell font-body text-abyss antialiased">
+        {children}
+      </body>
     </html>
   );
 }
