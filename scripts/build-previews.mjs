@@ -46,18 +46,14 @@ for (const project of projects) {
   console.log(`Building preview: ${project.name}`);
   const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
   
-  // Install dependencies
-  await execFileAsync(npmCommand, ["install", "--no-audit", "--no-fund"], {
-    cwd: projectDir,
+  // Install dependencies using --prefix for reliability
+  await execFileAsync(npmCommand, ["install", `--prefix=${projectDir}`, "--no-audit", "--no-fund"], {
     windowsHide: true,
-    shell: true,
   });
   
-  // Build the project
-  await execFileAsync(npmCommand, ["run", "build"], {
-    cwd: projectDir,
+  // Build the project using --prefix
+  await execFileAsync(npmCommand, ["run", "build", `--prefix=${projectDir}`], {
     windowsHide: true,
-    shell: true,
   });
   
   // Detect output directory and normalize if needed
