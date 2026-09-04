@@ -40,16 +40,77 @@ function resolveOutputDirectory(projectDir) {
 
 // Helper: Normalize Vite HTML to use absolute paths for assets
 async function normalizeViteHtml(outputPath, outputDirectory, outputName) {
-  if (outputDirectory !== "dist") return; // Only for Vite
-  
   const htmlPath = join(outputPath, "index.html");
   if (!existsSync(htmlPath)) return;
   
   let html = await readFile(htmlPath, "utf-8");
   
-  // Replace relative paths with absolute preview paths
-  // Converts ./assets/ to /preview/clay-dental/assets/
-  html = html.replace(/\.\/([^\s"'`]+)/g, `/preview/${outputName}/$1`);
+  if (outputDirectory === "dist") {
+    // Replace relative Vite asset paths with absolute preview paths.
+    html = html.replace(/\.\/([^\s"'`]+)/g, `/preview/${outputName}/$1`);
+  }
+
+  const title = outputName
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+  const price = outputName === "clay-dental" ? "₹999" : "Custom quote";
+  const chrome = `
+    <style>
+      .infycrest-preview-bar {
+        align-items: center;
+        background: #fff;
+        border-bottom: 1px solid #e5e5e5;
+        box-sizing: border-box;
+        color: #171717;
+        display: flex;
+        font-family: Arial, sans-serif;
+        gap: 16px;
+        justify-content: space-between;
+        min-height: 64px;
+        padding: 10px max(20px, calc((100vw - 1200px) / 2));
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 2147483647;
+      }
+      body { padding-top: 64px; }
+      body > header:not(.infycrest-preview-bar), #root header { position: fixed !important; top: 64px !important; z-index: 2147483646 !important; }
+      .infycrest-preview-brand { align-items: center; display: inline-flex; flex-shrink: 0; gap: 9px; text-decoration: none; }
+      .infycrest-preview-mark { background: #0a0a0a; border-radius: 8px; display: grid; height: 32px; place-items: center; width: 32px; }
+      .infycrest-preview-name { color: #171717; font-size: 14px; font-weight: 600; white-space: nowrap; }
+      .infycrest-preview-name span { color: #a3a3a3; font-weight: 500; }
+      .infycrest-preview-title { color: #737373; font-size: 12px; min-width: 0; overflow: hidden; text-align: center; text-overflow: ellipsis; white-space: nowrap; }
+      .infycrest-preview-title strong { color: #404040; font-weight: 600; }
+      .infycrest-preview-links { align-items: center; display: inline-flex; flex-shrink: 0; gap: 16px; }
+      .infycrest-preview-links a { color: #737373; font-size: 12px; text-decoration: none; white-space: nowrap; }
+      .infycrest-preview-links a:hover { color: #171717; }
+      @media (max-width: 640px) {
+        .infycrest-preview-bar { gap: 8px; min-height: 56px; padding: 8px 12px; }
+        body { padding-top: 56px; }
+        body > header:not(.infycrest-preview-bar), #root header { position: fixed !important; top: 56px !important; z-index: 2147483646 !important; }
+        .infycrest-preview-name { font-size: 12px; }
+        .infycrest-preview-title { display: none; }
+        .infycrest-preview-links { gap: 9px; }
+        .infycrest-preview-links a { font-size: 11px; }
+      }
+    </style>
+    <div class="infycrest-preview-bar" role="banner">
+      <a class="infycrest-preview-brand" href="/" aria-label="InfyCrest Solutions home">
+        <span class="infycrest-preview-mark" aria-hidden="true"><svg viewBox="0 0 32 32" width="22" height="22" fill="none"><path d="m5 11 11-5 11 5-11 5L5 11Z" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/><path d="m5 16 11 5 11-5M5 21l11 5 11-5" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="infycrest-preview-name">InfyCrest <span>Solutions</span></span>
+      </a>
+      <p class="infycrest-preview-title">Live preview · <strong>${title} Modern Landing Page - ${price}</strong></p>
+      <nav class="infycrest-preview-links" aria-label="Preview navigation">
+        <a href="/demo/${outputName}">Back to details</a>
+        <a href="/#collection">All products</a>
+      </nav>
+    </div>`;
+  const styleTag = chrome.slice(chrome.indexOf("<style>"), chrome.indexOf("</style>") + "</style>".length);
+  const bodyChrome = chrome.replace(styleTag, "").trim();
+  const reinjectScript = `<script>setTimeout(() => { if (!document.querySelector(".infycrest-preview-bar")) { document.head.insertAdjacentHTML("beforeend", ${JSON.stringify(styleTag)}); document.body.insertAdjacentHTML("afterbegin", ${JSON.stringify(bodyChrome)}); } }, 1200);</script>`;
+  html = html.replace(/<\/head>/i, `${styleTag}</head>`);
+  html = html.replace(/<body([^>]*)>/i, `<body$1>${bodyChrome}`);
+  html = html.replace(/<\/body>/i, `${reinjectScript}</body>`);
   
   await writeFile(htmlPath, html, "utf-8");
 }
@@ -70,6 +131,7 @@ for (const project of projects) {
     await spawnAsync(npmCommand, ["install", "--include=dev", "--no-audit", "--no-fund"], {
       cwd: projectDir,
       stdio: "pipe",
+      shell: process.platform === "win32",
     });
   } catch (error) {
     console.error(`Failed to install dependencies for ${project.name}:`, error.message);
@@ -81,6 +143,7 @@ for (const project of projects) {
     await spawnAsync(npmCommand, ["run", "build"], {
       cwd: projectDir,
       stdio: "pipe",
+      shell: process.platform === "win32",
     });
   } catch (error) {
     console.error(`Failed to build ${project.name}:`, error.message);

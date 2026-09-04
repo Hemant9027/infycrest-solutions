@@ -45,6 +45,25 @@ export async function POST(request: Request) {
       customization: asString(body?.customization, 160) || null,
     });
 
+    try {
+      const { mongoDb } = await import("@/lib/mongodb");
+      await mongoDb.collection("admin_requests").insertOne({
+        name,
+        contact,
+        businessType: asString(body?.businessType, 120),
+        requirements: asString(body?.requirements, 2000),
+        demoSlug,
+        demoName: demoName || demoSlug,
+        customization: asString(body?.customization, 160),
+        status: "New",
+        notes: "",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
+    } catch (mirrorError) {
+      console.error("[api/requests] admin mirror failed:", mirrorError);
+    }
+
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("[api/requests] failed:", error);

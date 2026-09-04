@@ -24,6 +24,17 @@ export async function POST(request: Request) {
 
     await db.insert(subscribers).values({ email }).onConflictDoNothing();
 
+    try {
+      const { mongoDb } = await import("@/lib/mongodb");
+      await mongoDb.collection("admin_subscribers").updateOne(
+        { email },
+        { $setOnInsert: { email, createdAt: new Date() } },
+        { upsert: true },
+      );
+    } catch (mirrorError) {
+      console.error("[api/subscribe] admin mirror failed:", mirrorError);
+    }
+
     return NextResponse.json({
       ok: true,
       message: "You're on the list — thoughtful updates only.",

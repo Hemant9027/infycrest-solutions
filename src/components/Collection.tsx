@@ -1,8 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Eye, Search, SearchX } from "lucide-react";
-import { DEMO_CATEGORIES, DEMOS, type Demo } from "@/data/demos";
+import type { Demo } from "@/data/demos";
 import Reveal, { Eyebrow } from "@/components/Reveal";
 import ProductDetailsModal from "@/components/ProductDetailsModal";
 import SelectDemoButton from "@/components/SelectDemoButton";
@@ -77,20 +77,32 @@ function TemplateCard({
 
 export default function Collection() {
   const [query, setQuery] = useState("");
-  const [category, setCategory] =
-    useState<(typeof DEMO_CATEGORIES)[number]>("All");
+  const [category, setCategory] = useState("All");
+  const [projects, setProjects] = useState<Demo[]>([]);
   const [selected, setSelected] = useState<Demo | null>(null);
   const [requestDemo, setRequestDemo] = useState<Demo | null>(null);
 
+  useEffect(() => {
+    fetch("/api/projects")
+      .then((response) => (response.ok ? response.json() : []))
+      .then((data: Demo[]) => setProjects(data))
+      .catch(() => setProjects([]));
+  }, []);
+
+  const categories = [
+    "All",
+    ...Array.from(new Set(projects.map((demo) => demo.category))),
+  ];
+
   const filtered = useMemo(() => {
     const normalized = query.trim().toLowerCase();
-    return DEMOS.filter((demo) => {
+    return projects.filter((demo) => {
       const matchesCategory = category === "All" || demo.category === category;
       const haystack =
         `${demo.name} ${demo.category} ${demo.tagline}`.toLowerCase();
       return matchesCategory && (!normalized || haystack.includes(normalized));
     });
-  }, [category, query]);
+  }, [category, projects, query]);
 
   return (
     <section id="categories" className="scroll-mt-28 py-20 sm:py-28">
@@ -113,7 +125,7 @@ export default function Collection() {
         <Reveal delay={100}>
           <div className="mt-12 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
             <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1">
-              {DEMO_CATEGORIES.map((item) => (
+              {categories.map((item) => (
                 <button
                   type="button"
                   key={item}

@@ -9,6 +9,7 @@ import BrowserFrame from "@/components/BrowserFrame";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SelectDemoButton from "@/components/SelectDemoButton";
+import Logo from "@/components/Logo";
 
 interface DemoPageProps {
   params: Promise<{ slug: string }>;
@@ -53,7 +54,41 @@ export default async function DemoPage({ params }: DemoPageProps) {
   return (
     <>
       <Navbar />
-      <main className="mx-auto max-w-[1200px] px-5 pb-20 pt-24 sm:px-8 sm:pb-28 sm:pt-32">
+      <div className="border-b border-neutral-200 bg-white pt-16 sm:pt-[72px]">
+        <div className="mx-auto flex min-h-16 max-w-[1200px] items-center justify-between gap-4 px-5 py-3 sm:px-8">
+          <Link
+            href="/"
+            aria-label="InfyCrest Solutions home"
+            className="shrink-0"
+          >
+            <Logo />
+          </Link>
+          <div className="min-w-0 text-center">
+            <p className="truncate font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
+              Live preview · {demo.name} website · {demo.priceLabel}
+            </p>
+          </div>
+          <div className="flex shrink-0 items-center gap-3 text-xs font-medium text-neutral-500">
+            <Link
+              href="#details"
+              className="hidden transition-colors hover:text-neutral-900 sm:inline"
+            >
+              Back to details
+            </Link>
+            <Link
+              href="/#collection"
+              className="transition-colors hover:text-neutral-900"
+            >
+              <span className="hidden sm:inline">All products</span>
+              <span className="sm:hidden">Products</span>
+            </Link>
+          </div>
+        </div>
+      </div>
+      <main
+        id="details"
+        className="mx-auto max-w-[1200px] px-5 pb-20 pt-10 sm:px-8 sm:pb-28 sm:pt-14"
+      >
         <Link
           href="/#collection"
           className="inline-flex items-center gap-2 rounded-full text-sm font-medium text-neutral-400 transition-colors hover:text-neutral-900"
