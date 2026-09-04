@@ -1,10 +1,29 @@
 import { cp, mkdir, readdir, rm, readFile, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
-import { execFile } from "node:child_process";
-import { promisify } from "node:util";
+import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 
-const execFileAsync = promisify(execFile);
+// Helper: Promisify spawn
+function spawnAsync(command, args, options = {}) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, options);
+    let stdout = "";
+    let stderr = "";
+    
+    if (child.stdout) child.stdout.on("data", (data) => { stdout += data; });
+    if (child.stderr) child.stderr.on("data", (data) => { stderr += data; });
+    
+    child.on("close", (code) => {
+      if (code === 0) {
+        resolve({ stdout, stderr });
+      } else {
+        reject(new Error(`Command failed with code ${code}: ${stderr || stdout}`));
+      }
+    });
+    
+    child.on("error", reject);
+  });
+}
 const root = resolve(import.meta.dirname, "..");
 const previewsRoot = join(root, "preview");
 const publicRoot = join(root, "public", "preview");
@@ -46,15 +65,27 @@ for (const project of projects) {
   console.log(`Building preview: ${project.name}`);
   const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
   
-  // Install dependencies using --prefix for reliability
-  await execFileAsync(npmCommand, ["install", `--prefix=${projectDir}`, "--no-audit", "--no-fund"], {
-    windowsHide: true,
-  });
+  // Install dependencies with proper cwd
+  try {
+    await spawnAsync(npmCommand, ["install", "--no-audit", "--no-fund"], {
+      cwd: projectDir,
+      stdio: "pipe",
+    });
+  } catch (error) {
+    console.error(`Failed to install dependencies for ${project.name}:`, error.message);
+    throw error;
+  }
   
-  // Build the project using --prefix
-  await execFileAsync(npmCommand, ["run", "build", `--prefix=${projectDir}`], {
-    windowsHide: true,
-  });
+  // Build the project with proper cwd
+  try {
+    await spawnAsync(npmCommand, ["run", "build"], {
+      cwd: projectDir,
+      stdio: "pipe",
+    });
+  } catch (error) {
+    console.error(`Failed to build ${project.name}:`, error.message);
+    throw error;
+  }
   
   // Detect output directory and normalize if needed
   const outputDirectory = resolveOutputDirectory(projectDir);
