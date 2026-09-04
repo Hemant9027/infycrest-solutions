@@ -124,6 +124,14 @@ let skippedCount = 0;
 
 for (const project of projects) {
   const projectDir = join(previewsRoot, project.name);
+  const publicPath = join(publicRoot, project.name);
+
+  if (existsSync(join(publicPath, "index.html"))) {
+    console.log(`Using existing preview: ${project.name}`);
+    builtCount += 1;
+    continue;
+  }
+
   console.log(`Building preview: ${project.name}`);
   const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
   
@@ -156,7 +164,6 @@ for (const project of projects) {
   // Detect output directory and normalize if needed
   const outputDirectory = resolveOutputDirectory(projectDir);
   const outputPath = join(projectDir, outputDirectory);
-  const publicPath = join(publicRoot, project.name);
 
   if (!existsSync(outputPath)) {
     console.error(`Skipping ${project.name}: no ${outputDirectory} export directory was produced.`);
