@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
 import { subscribers } from "@/db/schema";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(request: Request) {
   try {
+    const { db } = await import("@/db");
     const body = (await request.json().catch(() => null)) as {
       email?: unknown;
     } | null;

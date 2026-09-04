@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { db } from "@/db";
 import { projectRequests } from "@/db/schema";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 interface RequestPayload {
   name?: unknown;
@@ -20,6 +20,7 @@ function asString(value: unknown, max: number) {
 
 export async function POST(request: Request) {
   try {
+    const { db } = await import("@/db");
     const body = (await request.json().catch(() => null)) as RequestPayload | null;
 
     const name = asString(body?.name, 160);
