@@ -1,0 +1,125 @@
+@import "tailwindcss";
+
+@theme {
+  /* ——— Nathan's Lodge palette: shell, deep water, brass, driftwood ——— */
+  --color-shell: #f5f0e4;
+  --color-paper: #faf6ea;
+  --color-ink: #142b27;
+  --color-deep: #0d2b2a;
+  --color-pine: #17423c;
+  --color-moss: #48695f;
+  --color-sage: #9fb5a8;
+  --color-seafoam: #c2e2d4;
+  --color-sand: #e9dfcc;
+  --color-dune: #d7c7ab;
+  --color-brass: #b08c4f;
+  --color-drift: #8a7962;
+
+  --font-display: var(--font-fraunces), "Georgia", serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --animate-marquee: marquee 42s linear infinite;
+  --animate-rise: rise 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-drift: drift 7s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(46px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes drift {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(10px);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-shell);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-brass);
+  color: var(--color-paper);
+}
+
+/* Refined scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-shell);
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-pine) 55%, var(--color-shell));
+  border-radius: 8px;
+  border: 2px solid var(--color-shell);
+}
+
+/* Date inputs keep the light palette */
+input[type="date"] {
+  color-scheme: light;
+}
+
+/* Underline link that draws itself */
+.link-draw {
+  position: relative;
+}
+.link-draw::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-draw:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Editorial image frames */
+.frame-hairline {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-ink) 12%, transparent),
+    0 30px 60px -30px rgb(13 43 42 / 0.35);
+}
+.frame-hairline-light {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--color-seafoam) 22%, transparent),
+    0 30px 60px -30px rgb(0 0 0 / 0.5);
+}
+
+/* Vertical writing for editorial side-notes */
+.writing-vertical {
+  writing-mode: vertical-rl;
+}

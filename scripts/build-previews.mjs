@@ -73,7 +73,7 @@ async function normalizeViteHtml(outputPath, outputDirectory, outputName) {
         inset: 0 0 auto;
         z-index: 2147483647;
       }
-      body { padding-top: 64px; }
+      body { padding-top: 64px !important; scroll-padding-top: 64px; }
       body > header:not(.infycrest-preview-bar), #root header { position: fixed !important; top: 64px !important; z-index: 2147483646 !important; }
       .infycrest-preview-brand { align-items: center; display: inline-flex; flex-shrink: 0; gap: 9px; text-decoration: none; }
       .infycrest-preview-mark { background: #0a0a0a; border-radius: 8px; display: grid; height: 32px; place-items: center; width: 32px; }
@@ -86,7 +86,7 @@ async function normalizeViteHtml(outputPath, outputDirectory, outputName) {
       .infycrest-preview-links a:hover { color: #171717; }
       @media (max-width: 640px) {
         .infycrest-preview-bar { gap: 8px; min-height: 56px; padding: 8px 12px; }
-        body { padding-top: 56px; }
+        body { padding-top: 56px !important; scroll-padding-top: 56px; }
         body > header:not(.infycrest-preview-bar), #root header { position: fixed !important; top: 56px !important; z-index: 2147483646 !important; }
         .infycrest-preview-name { font-size: 12px; }
         .infycrest-preview-title { display: none; }
@@ -115,11 +115,12 @@ async function normalizeViteHtml(outputPath, outputDirectory, outputName) {
   await writeFile(htmlPath, html, "utf-8");
 }
 
-await rm(publicRoot, { recursive: true, force: true });
 await mkdir(publicRoot, { recursive: true });
 
 const entries = await readdir(previewsRoot, { withFileTypes: true });
 const projects = entries.filter((entry) => entry.isDirectory());
+let builtCount = 0;
+let skippedCount = 0;
 
 for (const project of projects) {
   const projectDir = join(previewsRoot, project.name);
@@ -135,7 +136,8 @@ for (const project of projects) {
     });
   } catch (error) {
     console.error(`Failed to install dependencies for ${project.name}:`, error.message);
-    throw error;
+    skippedCount += 1;
+    continue;
   }
   
   // Build the project with proper cwd
@@ -147,19 +149,27 @@ for (const project of projects) {
     });
   } catch (error) {
     console.error(`Failed to build ${project.name}:`, error.message);
-    throw error;
+    skippedCount += 1;
+    continue;
   }
   
   // Detect output directory and normalize if needed
   const outputDirectory = resolveOutputDirectory(projectDir);
   const outputPath = join(projectDir, outputDirectory);
   const publicPath = join(publicRoot, project.name);
+
+  if (!existsSync(outputPath)) {
+    console.error(`Skipping ${project.name}: no ${outputDirectory} export directory was produced.`);
+    skippedCount += 1;
+    continue;
+  }
   
   // Normalize Vite HTML before copying
   await normalizeViteHtml(outputPath, outputDirectory, project.name);
   
   // Copy to public
   await cp(outputPath, publicPath, { recursive: true });
+  builtCount += 1;
 }
 
-console.log(`Built ${projects.length} portfolio preview(s).`);
+console.log(`Built ${builtCount} portfolio preview(s); skipped ${skippedCount}.`);

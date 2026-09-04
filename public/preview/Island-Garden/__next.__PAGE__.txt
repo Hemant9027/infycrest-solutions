@@ -1,0 +1,6 @@
+1:"$Sreact.fragment"
+3:I[26010,["/preview/Island-Garden/_next/static/chunks/12ojn~4l7-fm_.js","/preview/Island-Garden/_next/static/chunks/16oxdoihn6jrp.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","c",{"children":["$L2",null,["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"CDNLT6GQ5KxLZfJceWmRz"}
+5:null
+2:E{"digest":"NEXT_REDIRECT;replace;/demo/island-garden;307;"}

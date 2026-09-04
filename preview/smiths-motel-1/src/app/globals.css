@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+@theme {
+  /* ——— Modern Caribbean palette ——— */
+  --color-sand: #faf6ec;
+  --color-cream: #f3ecdc;
+  --color-parchment: #fffdf6;
+  --color-line: #e6dcc5;
+
+  --color-ink: #10312c;
+  --color-ink-2: #26473f;
+  --color-ink-3: #52706a;
+
+  --color-sea: #0e7c71;
+  --color-sea-deep: #0a564f;
+  --color-sea-dusk: #072f2c;
+  --color-sea-soft: #ddefeb;
+
+  --color-coral: #e8794f;
+  --color-coral-deep: #cf5c33;
+  --color-coral-soft: #fbe8dd;
+
+  --color-sun: #f4b23e;
+  --color-sun-soft: #fcedd2;
+
+  --font-display: var(--font-fraunces), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-soft: 0 30px 70px -30px rgba(16, 49, 44, 0.35);
+  --shadow-card: 0 14px 40px -18px rgba(16, 49, 44, 0.22);
+  --shadow-lift: 0 22px 55px -20px rgba(16, 49, 44, 0.3);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-sand);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+::selection {
+  background: var(--color-coral);
+  color: #fff;
+}
+
+/* Subtle film grain for tactility */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ——— Scroll reveal ——— */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.reveal-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ——— Hero image slow drift ——— */
+@keyframes kenburns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.12) translateY(-1.5%);
+  }
+}
+.kenburns {
+  animation: kenburns 22s ease-in-out infinite alternate;
+}
+
+/* ——— Marquee band ——— */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 30s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track,
+  .kenburns {
+    animation: none;
+  }
+}
+
+/* ——— Ambient floats ——— */
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+.floaty {
+  animation: floaty 7s ease-in-out infinite;
+}
+
+@keyframes sunspin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.sunspin {
+  animation: sunspin 60s linear infinite;
+}
+
+/* ——— Link underline flourish ——— */
+.u-link {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s ease;
+}
+.u-link:hover {
+  background-size: 100% 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-cream);
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-sea) 70%, var(--color-sand));
+  border-radius: 8px;
+}
+
+/* Date input icon tint on dark panels */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}

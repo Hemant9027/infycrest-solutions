@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[96440,["/preview/Nathans-Lodge/_next/static/chunks/05imoad_i_506.js"],"ViewportBoundary"]
+3:I[96440,["/preview/Nathans-Lodge/_next/static/chunks/05imoad_i_506.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Nathan's Lodge — South Andros, The Bahamas"}],["$","meta","1",{"name":"description","content":"A peaceful South Andros lodge for travelers seeking an authentic island escape. Slow island days, beautiful beaches and unforgettable Andros experiences."}],["$","meta","2",{"name":"keywords","content":"South Andros,Bahamas lodge,fishing lodge,bonefishing,island escape,Nathan's Lodge"}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"zD6jiHL0u4nQnKx3BH8Ud"}

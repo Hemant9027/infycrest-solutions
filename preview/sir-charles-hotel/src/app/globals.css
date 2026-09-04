@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-fraunces), "Georgia", serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+
+  --color-ivory: #f7f2e8;
+  --color-cream: #efe8d8;
+  --color-sand: #e3d6bf;
+  --color-ink: #0f1f1b;
+  --color-palm: #1d392f;
+  --color-moss: #2e4c40;
+  --color-sea: #2f6e67;
+  --color-aqua: #8fbcae;
+  --color-gold: #b78a4b;
+  --color-goldlight: #d4ab6e;
+  --color-coral: #d0785a;
+
+  --shadow-soft: 0 24px 60px -24px rgb(15 31 27 / 0.28);
+  --shadow-card: 0 10px 40px -12px rgb(15 31 27 / 0.22);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ivory);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-moss);
+  border-radius: 8px;
+  border: 2px solid var(--color-ivory);
+}
+
+/* ---------- grain overlay ---------- */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+}
+
+/* ---------- reveal on scroll ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-clip {
+  clip-path: inset(6% 4% 6% 4% round 20px);
+  transform: scale(1.04);
+  transition:
+    clip-path 1.3s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-clip.is-in {
+  clip-path: inset(0% 0% 0% 0% round 0px);
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal-clip {
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ---------- marquee ---------- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-marquee {
+  animation: marquee 38s linear infinite;
+}
+.marquee-paused:hover .animate-marquee {
+  animation-play-state: paused;
+}
+
+/* ---------- slow ken burns for hero ---------- */
+@keyframes kenburns {
+  from {
+    transform: scale(1.02);
+  }
+  to {
+    transform: scale(1.14);
+  }
+}
+.animate-kenburns {
+  animation: kenburns 26s ease-in-out infinite alternate;
+}
+
+/* ---------- entrance animations ---------- */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.anim-rise {
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.anim-fade {
+  animation: fade 0.45s ease both;
+}
+
+/* ---------- floating scroll cue line ---------- */
+@keyframes cue {
+  0% {
+    transform: translateY(-110%);
+  }
+  55% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(110%);
+  }
+}
+.animate-cue {
+  animation: cue 2.2s cubic-bezier(0.77, 0, 0.18, 1) infinite;
+}
+
+/* ---------- image hover zoom ---------- */
+.img-zoom {
+  transition: transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .img-zoom {
+  transform: scale(1.07);
+}
+
+/* ---------- underline link ---------- */
+.link-line {
+  position: relative;
+}
+.link-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-line:hover::after,
+.group:hover .link-line::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ---------- form fields ---------- */
+.field {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgb(15 31 27 / 0.16);
+  background: #fff;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  color: var(--color-ink);
+  outline: none;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+.field::placeholder {
+  color: rgb(15 31 27 / 0.38);
+}
+.field:focus {
+  border-color: var(--color-sea);
+  box-shadow: 0 0 0 3px rgb(47 110 103 / 0.15);
+}
+
+input[type="date"].field {
+  min-height: 49px;
+}

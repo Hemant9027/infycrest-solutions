@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[22479,["/preview/smiths-motel-1/_next/static/chunks/0rw3bdics1-un.js","/preview/smiths-motel-1/_next/static/chunks/05kpm85zt_inp.js"],"default"]
+3:I[36976,["/preview/smiths-motel-1/_next/static/chunks/0rw3bdics1-un.js","/preview/smiths-motel-1/_next/static/chunks/05kpm85zt_inp.js"],"default"]
+4:[]
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"ofkeNZm71wkp8XGDKus-r"}

@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+@theme {
+  /* ——— Typography ——— */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, "Segoe UI", sans-serif;
+
+  /* ——— Deep sea / ink ——— */
+  --color-abyss-950: #03262e;
+  --color-abyss-900: #06333e;
+  --color-abyss-800: #0a4957;
+  --color-abyss-700: #0e5d6e;
+  --color-abyss-600: #157184;
+
+  /* ——— Exuma lagoon turquoise ——— */
+  --color-lagoon-600: #0d8ba1;
+  --color-lagoon-500: #0fa4bc;
+  --color-lagoon-400: #31c0d5;
+  --color-lagoon-300: #76d9e6;
+  --color-lagoon-200: #bfeef4;
+  --color-lagoon-100: #e4f7f9;
+  --color-lagoon-50: #f2fbfc;
+
+  /* ——— Warm sand & coconut ——— */
+  --color-sand-50: #fdfaf3;
+  --color-sand-100: #f9f3e6;
+  --color-sand-200: #f0e6ce;
+  --color-sand-300: #e4d3b0;
+  --color-sand-400: #d2ba8b;
+
+  /* ——— Conch-shell coral ——— */
+  --color-coral-600: #c85a34;
+  --color-coral-500: #e2744d;
+  --color-coral-400: #ef9272;
+  --color-coral-100: #fdeee6;
+
+  --color-ink: #0b2e37;
+
+  /* ——— Motion ——— */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 46s linear infinite;
+  --animate-kenburns: kenburns 26s var(--ease-out-soft) both;
+  --animate-floaty: floaty 2.6s ease-in-out infinite;
+  --animate-spin-slow: spin 14s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes kenburns {
+    from {
+      transform: scale(1.14);
+    }
+    to {
+      transform: scale(1.02);
+    }
+  }
+  @keyframes floaty {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(7px);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-sand-50);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-lagoon-400);
+  color: var(--color-abyss-950);
+}
+
+/* Refined scrollbar */
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-sand-100);
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-abyss-800) 70%, transparent);
+  border-radius: 8px;
+  border: 3px solid var(--color-sand-100);
+}
+
+@layer utilities {
+  /* Film-grain overlay for photographic richness */
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.55;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E");
+    background-size: 180px 180px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+  }
+
+  /* Date input styling */
+  input[type="date"] {
+    color-scheme: light;
+  }
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.55;
+    cursor: pointer;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-kenburns,
+  .animate-marquee,
+  .animate-floaty {
+    animation: none !important;
+  }
+}

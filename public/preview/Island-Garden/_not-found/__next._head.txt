@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[26010,["/preview/Island-Garden/_next/static/chunks/12ojn~4l7-fm_.js","/preview/Island-Garden/_next/static/chunks/16oxdoihn6jrp.js"],"ViewportBoundary"]
+3:I[26010,["/preview/Island-Garden/_next/static/chunks/12ojn~4l7-fm_.js","/preview/Island-Garden/_next/static/chunks/16oxdoihn6jrp.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","h",{"children":[["$","meta",null,{"name":"robots","content":"noindex"}],["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"InfyCrest Solutions — Website Demos"}],["$","meta","1",{"name":"description","content":"Demo websites built by InfyCrest Solutions."}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"CDNLT6GQ5KxLZfJceWmRz"}

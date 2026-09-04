@@ -2,4 +2,4 @@
 2:I[79557,["/preview/hibicuss-inn/_next/static/chunks/163pe4k-u0j7p.js"],"default"]
 3:I[25807,["/preview/hibicuss-inn/_next/static/chunks/163pe4k-u0j7p.js"],"default"]
 4:[]
-0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"whBwfPjEhzs_eNBtDqJef"}
+0:{"rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"isPartial":false,"staleTime":300,"varyParams":"$W4","buildId":"9ITMXlwBYZugvHSk3iNzu"}

@@ -1,0 +1,158 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Ocean-to-sand palette */
+  --color-abyss: #06262e;
+  --color-deep: #0a3540;
+  --color-pool: #11454e;
+  --color-lagoon: #149e93;
+  --color-aqua: #7fd8cc;
+  --color-foam: #eaf5f1;
+  --color-sand: #f3ecdc;
+  --color-shell: #faf6ec;
+  --color-coral: #e58e63;
+
+  --animate-marquee: marquee 46s linear infinite;
+  --animate-kenburns: kenburns 26s ease-in-out infinite alternate;
+  --animate-float: float 6.5s ease-in-out infinite;
+  --animate-spin-slow: spin-slow 28s linear infinite;
+  --animate-pulse-ring: pulse-ring 2.6s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  --animate-drop: drop 2.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes kenburns {
+    from { transform: scale(1) translateY(0); }
+    to { transform: scale(1.14) translateY(-1.5%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(1); opacity: 0.75; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+  @keyframes drop {
+    0% { transform: translateY(-100%); }
+    55% { transform: translateY(100%); }
+    100% { transform: translateY(100%); }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-lagoon);
+  color: #fff;
+}
+
+/* Slim, ocean-tinted scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-shell);
+}
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-lagoon) 70%, var(--color-abyss));
+  border-radius: 9999px;
+  border: 2px solid var(--color-shell);
+}
+
+/* Subtle film grain over everything */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* Kicker / eyebrow label */
+@utility kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Scroll reveal — driven by the Reveal component */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Underline sweep for inline links */
+@utility link-sweep {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-sweep:hover {
+  background-size: 100% 1px;
+}
+
+/* Soft focus ring for form fields */
+.field {
+  width: 100%;
+  border-radius: 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--color-abyss) 14%, transparent);
+  background: #fff;
+  padding: 0.8rem 1rem;
+  font-size: 0.925rem;
+  color: var(--color-abyss);
+  outline: none;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.field::placeholder {
+  color: color-mix(in srgb, var(--color-abyss) 38%, transparent);
+}
+.field:focus {
+  border-color: var(--color-lagoon);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-lagoon) 18%, transparent);
+}
