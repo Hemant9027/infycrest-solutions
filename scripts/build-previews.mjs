@@ -65,9 +65,9 @@ for (const project of projects) {
   console.log(`Building preview: ${project.name}`);
   const npmCommand = process.platform === "win32" ? "npm.cmd" : "npm";
   
-  // Install dependencies with proper cwd
+  // Install dependencies with proper cwd (include dev dependencies)
   try {
-    await spawnAsync(npmCommand, ["install", "--no-audit", "--no-fund"], {
+    await spawnAsync(npmCommand, ["install", "--include=dev", "--no-audit", "--no-fund"], {
       cwd: projectDir,
       stdio: "pipe",
     });
