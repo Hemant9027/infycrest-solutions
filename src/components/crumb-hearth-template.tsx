@@ -28,9 +28,12 @@ import {
   Clock3,
   Croissant,
   Flame,
+  Mail,
+  MapPin,
   Menu as MenuIcon,
   Minus,
   Plus,
+  Phone,
   ShoppingBag,
   Wheat,
   X,
@@ -326,8 +329,22 @@ export function tomorrowISO(): string {
 
 export const EASE = [0.22, 1, 0.36, 1];
 
+function BrandMark({ brandName }: { brandName: string }) {
+  const [first, second] = brandName.split("&").map((part) => part.trim());
+  return (
+    <>
+      {first}
+      {second && (
+        <>
+          <em className="not-italic text-[#ba7650]">&amp;</em> {second}
+        </>
+      )}
+    </>
+  );
+}
+
 export function useInView<T extends HTMLElement = HTMLDivElement>(
-  options: IntersectionObserverInit = {
+  options: IntersectionObserverInit & { once?: boolean } = {
     threshold: 0.1,
     rootMargin: "-10% 0px -10% 0px",
   },
@@ -508,9 +525,7 @@ export function SiteHeader({ customer }: { customer: NewCustomer }) {
             href="#top"
             className="font-serif text-xl tracking-tight md:text-2xl"
           >
-            {brandName.split("&")[0]}{" "}
-            <em className="not-italic text-[#ba7650]">&amp;</em>{" "}
-            {brandName.split("&")[1] || ""}
+            <BrandMark brandName={brandName} />
           </a>
           <nav className="hidden items-center gap-9 text-[11px] font-bold uppercase tracking-[0.24em] lg:flex">
             {NAV_LINKS.map((link) => (
@@ -557,9 +572,7 @@ export function SiteHeader({ customer }: { customer: NewCustomer }) {
           >
             <div className="flex h-16 items-center justify-between px-5 md:h-20">
               <span className="font-serif text-xl tracking-tight">
-                {brandName.split("&")[0]}{" "}
-                <em className="not-italic text-[#f0c39f]">&amp;</em>{" "}
-                {brandName.split("&")[1] || ""}
+                <BrandMark brandName={brandName} />
               </span>
               <button
                 type="button"
@@ -888,8 +901,8 @@ export function Story({ customer }: { customer: NewCustomer }) {
             </p>
             <p className="mt-6 text-lg leading-relaxed text-[#402c23]/70">
               The flour is stone-milled an hour away, the butter is cultured,
-              and the jam is whatever the market had too much of. If we can't
-              name the farm, it doesn't go in the dough.
+              and the jam is whatever the market had too much of. If we can&apos;t
+              name the farm, it doesn&apos;t go in the dough.
             </p>
             <p className="mt-10 flex items-center gap-4">
               <span className="font-serif text-3xl italic text-[#402c23]">
@@ -1019,7 +1032,7 @@ export function MenuSection({ bakes }: { bakes: Bake[] }) {
           </div>
           <Reveal delay={0.2} className="max-w-sm">
             <p className="text-base leading-relaxed text-[#fbf2e7]/55">
-              The menu bends with the market and the miller — this is today's
+              The menu bends with the market and the miller — this is today&apos;s
               lineup, priced like we want you back tomorrow.
             </p>
           </Reveal>
@@ -1257,9 +1270,9 @@ export function OrderSection({ bakes }: { bakes: Bake[] }) {
           </h2>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-[#402c23]/60">
-              Order by 6 p.m. and we'll bake it overnight. Swing by in the
-              morning — it'll be boxed, tied with string, and still thinking
-              it's dawn.
+              Order by 6 p.m. and we&apos;ll bake it overnight. Swing by in the
+              morning — it&apos;ll be boxed, tied with string, and still thinking
+              it&apos;s dawn.
             </p>
           </Reveal>
         </div>
@@ -1345,7 +1358,7 @@ export function OrderSection({ bakes }: { bakes: Bake[] }) {
                     See you at <em className="text-[#f0c39f]">the hearth.</em>
                   </h3>
                   <p className="mt-4 text-sm leading-relaxed text-[#fbf2e7]/60">
-                    Your order is in the book. We'll bake it overnight and have
+                    Your order is in the book. We&apos;ll bake it overnight and have
                     it waiting — just show this code at the counter:
                   </p>
                   <p className="mt-6 inline-flex rounded-2xl border border-[#f0c39f]/30 bg-[#fbf2e7]/[0.07] px-6 py-4 font-mono text-2xl font-bold tracking-[0.3em] text-[#f0c39f]">
@@ -1596,7 +1609,7 @@ export function Visit({ customer }: { customer: NewCustomer }) {
             <SectionLabel index="04">Come by</SectionLabel>
           </Reveal>
           <h2 className="mt-9 font-serif text-[clamp(2.6rem,5vw,4.75rem)] font-light leading-[0.98]">
-            <RevealLine delay={0.05}>There's always</RevealLine>
+            <RevealLine delay={0.05}>There&apos;s always</RevealLine>
             <RevealLine delay={0.15}>
               <em className="text-[#ba7650]">room at the hearth.</em>
             </RevealLine>
@@ -1604,7 +1617,7 @@ export function Visit({ customer }: { customer: NewCustomer }) {
           <Reveal delay={0.2}>
             <p className="mt-7 max-w-lg text-lg leading-relaxed text-[#402c23]/65">
               Come for a slow coffee and something warm, or just to watch the
-              loaves come out. If we're still floury, the first cup is on us.
+              loaves come out. If we&apos;re still floury, the first cup is on us.
             </p>
           </Reveal>
           <Reveal delay={0.25}>
@@ -1701,7 +1714,7 @@ export function Visit({ customer }: { customer: NewCustomer }) {
               className="absolute -bottom-6 left-6 max-w-[250px] rounded-2xl bg-[#fbf2e7] p-6 shadow-[0_20px_50px_rgba(41,26,18,0.3)] ring-1 ring-[#402c23]/10 sm:left-10"
             >
               <p className="font-serif text-xl italic leading-snug text-[#402c23]">
-                Monday we rest — the dough doesn't.
+                Monday we rest — the dough doesn&apos;t.
               </p>
               <p className="mt-2 text-[10px] font-bold uppercase tracking-[0.2em] text-[#402c23]/50">
                 See you Tuesday, 7:00 sharp
@@ -1716,8 +1729,6 @@ export function Visit({ customer }: { customer: NewCustomer }) {
 
 export function SiteFooter({ customer }: { customer: NewCustomer }) {
   const brandName = text(customer.businessName, "Crumb & Hearth");
-  const firstWord = brandName.split("&")[0] || "Crumb ";
-  const secondWord = brandName.split("&")[1] || " Hearth";
 
   return (
     <footer className="relative overflow-hidden bg-[#291a12] text-[#fbf2e7]">
@@ -1725,8 +1736,7 @@ export function SiteFooter({ customer }: { customer: NewCustomer }) {
         <div className="grid gap-14 pb-24 md:grid-cols-[1.5fr_1fr_1fr]">
           <div>
             <p className="font-serif text-3xl tracking-tight">
-              {firstWord} <em className="not-italic text-[#f0c39f]">&amp;</em>{" "}
-              {secondWord}
+              <BrandMark brandName={brandName} />
             </p>
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-[#fbf2e7]/50">
               An artisan bakery on Fournier Lane. Naturally leavened,
@@ -1778,7 +1788,7 @@ export function SiteFooter({ customer }: { customer: NewCustomer }) {
         aria-hidden
         className="text-outline select-none whitespace-nowrap text-center font-serif text-[clamp(4rem,15.5vw,14rem)] font-light leading-[0.85] tracking-tight"
       >
-        {firstWord} <em className="italic">&amp;</em> {secondWord}
+        <BrandMark brandName={brandName} />
       </div>
       <div className="border-t border-[#fbf2e7]/10">
         <div className="mx-auto flex max-w-[92rem] flex-wrap items-center justify-between gap-4 px-6 py-6 text-[10px] font-bold uppercase tracking-[0.2em] text-[#fbf2e7]/40 lg:px-12">
