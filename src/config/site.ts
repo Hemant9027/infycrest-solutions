@@ -33,15 +33,15 @@ export const WA_LAUNCHKIT = whatsappUrl(
 
 export const NAV_LINKS = [
   { label: "Demos", href: "/#demos" },
-  { label: "Products", href: "/#collection" },
-  { label: "Categories", href: "/#categories" },
+  { label: "Products", href: "/#products" },
+  { label: "Categories", href: "/#products" },
   { label: "Pricing", href: "/#pricing" },
   { label: "Process", href: "/#process" },
 ] as const;
 
 export const QUICK_LINKS = [
   { label: "Demos", href: "/#demos" },
-  { label: "Products", href: "/#collection" },
+  { label: "Products", href: "/#products" },
   { label: "Pricing", href: "/#pricing" },
   { label: "Process", href: "/#process" },
   { label: "Contact", href: "/#contact" },
@@ -62,7 +62,7 @@ export const SOCIAL_LINKS: ExternalLink[] = [
 
 /** Resource links — real URLs to be added when available. */
 export const RESOURCE_LINKS: ExternalLink[] = [
-  { label: "Check our work", url: "/#collection" },
+  { label: "Check our work", url: "/#products" },
   {
     label: "Check our WhatsApp Bot",
     url: whatsappUrl("Hi InfyCrest Solutions, I'd like to try your WhatsApp bot."),

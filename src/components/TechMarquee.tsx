@@ -99,14 +99,17 @@ function Row({
   items: Technology[];
   reverse?: boolean;
 }) {
-  const doubled = [...items, ...items];
   return (
     <div className="mask-fade-x flex overflow-hidden">
       <div
-        className={`flex w-max py-1 ${reverse ? "animate-marquee-reverse" : "animate-marquee"} group-hover:[animation-play-state:paused]`}
+        className={`flex w-max shrink-0 py-1 ${reverse ? "animate-marquee-reverse" : "animate-marquee"} group-hover:[animation-play-state:paused]`}
       >
-        {doubled.map((tech, i) => (
-          <Pill key={`${tech.name}-${i}`} tech={tech} />
+        {[0, 1].map((copy) => (
+          <div key={copy} className="flex shrink-0">
+            {items.map((tech) => (
+              <Pill key={`${copy}-${tech.name}`} tech={tech} />
+            ))}
+          </div>
         ))}
       </div>
     </div>

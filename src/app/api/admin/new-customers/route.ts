@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { currentAdmin } from "@/lib/admin/auth";
 import { ensureNewCustomerIndexes, type NewCustomer } from "@/lib/new-customers";
 import { mongoDb } from "@/lib/mongodb";
+import { PUBLISH_TEMPLATE_OPTIONS, type PublishTemplateKey } from "@/lib/product-template-types";
 
 function cleanSlug(value: unknown) {
   return typeof value === "string"
@@ -23,9 +24,12 @@ export async function GET() {
 
 export async function POST(request: Request) {
   if (!(await currentAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  const body = (await request.json().catch(() => null)) as { businessName?: unknown; slug?: unknown } | null;
+  const body = (await request.json().catch(() => null)) as { businessName?: unknown; slug?: unknown; category?: unknown; templateKey?: unknown } | null;
   const businessName = stringValue(body?.businessName, "").slice(0, 100);
   const slug = cleanSlug(body?.slug);
+  const selectedTemplate = PUBLISH_TEMPLATE_OPTIONS.find((item) => item.key === body?.templateKey);
+  const category = selectedTemplate?.category ?? stringValue(body?.category, "Hotel & Homestays").slice(0, 80);
+  const templateKey: PublishTemplateKey = selectedTemplate?.key ?? "island-villa";
   if (!businessName || !slug) return NextResponse.json({ error: "Business name and slug are required." }, { status: 400 });
 
   const now = new Date().toISOString();
@@ -33,6 +37,8 @@ export async function POST(request: Request) {
     id: crypto.randomUUID(),
     slug,
     businessName,
+    category,
+    templateKey,
     logo: "",
     theme: { accent: "#f59e0b" },
     hero: { eyebrow: "Built for your next chapter", title: "A more thoughtful way to move forward", description: "Clear thinking, considered details and an experience built around what matters most.", image: "", primaryCta: "Get in touch", secondaryCta: "Explore" },

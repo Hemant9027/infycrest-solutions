@@ -1,7 +1,19 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import { Download, LogOut, Save, Trash2, Upload } from "lucide-react";
+import {
+  ArrowUpRight,
+  Download,
+  LogOut,
+  Pencil,
+  Save,
+  Trash2,
+  Upload,
+} from "lucide-react";
+import {
+  PUBLISH_TEMPLATE_OPTIONS,
+  type PublishTemplateKey,
+} from "@/lib/product-template-types";
 
 type Project = {
   id: string;
@@ -16,10 +28,33 @@ type Project = {
   technologies: string[];
   includes: string[];
 };
+type ProductTemplate = {
+  id: string;
+  name: string;
+  slug: string;
+  category: string;
+  businessType: string;
+  shortDescription: string;
+  description: string;
+  features: string[];
+  thumbnail: string;
+  tags: string[];
+  technologies: string[];
+  price?: string;
+  visible: boolean;
+  featured: boolean;
+  hasLivePreview: boolean;
+  previewUrl: string;
+  templateKey: string;
+  displayOrder: number;
+  ctaText: string;
+};
 type Customer = {
   id: string;
   businessName: string;
   slug: string;
+  category: string;
+  templateKey: PublishTemplateKey | "villa" | "restaurant";
   status: string;
   createdAt: string;
 };
@@ -45,6 +80,7 @@ type Tab =
   | "overview"
   | "requests"
   | "projects"
+  | "products"
   | "customers"
   | "pricing"
   | "settings"
@@ -62,13 +98,47 @@ const initialProject = {
   technologies: "Next.js, React, Tailwind CSS",
   includes: "Responsive design\nContact flow",
 };
-const initialCustomer = { businessName: "", slug: "" };
+type CustomerDraft = {
+  businessName: string;
+  slug: string;
+  category: string;
+  templateKey: PublishTemplateKey;
+  status: "draft" | "published";
+};
+const initialCustomer: CustomerDraft = {
+  businessName: "",
+  slug: "",
+  category: "Hotel & Homestays",
+  templateKey: "island-villa",
+  status: "published",
+};
+const initialProduct = {
+  name: "",
+  slug: "",
+  category: "Healthcare & Wellness",
+  businessType: "",
+  shortDescription: "",
+  description: "",
+  features: "",
+  thumbnail: "",
+  tags: "",
+  technologies: "Next.js, React, Tailwind CSS",
+  price: "",
+  visible: true,
+  featured: false,
+  hasLivePreview: false,
+  previewUrl: "",
+  templateKey: "",
+  displayOrder: 99,
+  ctaText: "Let's Build This",
+};
 
 export default function AdminPage() {
   const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
   const [login, setLogin] = useState({ username: "admin", password: "" });
   const [tab, setTab] = useState<Tab>("overview");
   const [projects, setProjects] = useState<Project[]>([]);
+  const [products, setProducts] = useState<ProductTemplate[]>([]);
   const [customers, setCustomers] = useState<Customer[]>([]);
   const [requests, setRequests] = useState<Request[]>([]);
   const [counts, setCounts] = useState({
@@ -87,6 +157,12 @@ export default function AdminPage() {
   });
   const [message, setMessage] = useState("");
   const [customer, setCustomer] = useState(initialCustomer);
+  const [editingCustomerId, setEditingCustomerId] = useState<string | null>(
+    null,
+  );
+  const [product, setProduct] = useState(initialProduct);
+  const [productImage, setProductImage] = useState("");
+  const [editingProductId, setEditingProductId] = useState<string | null>(null);
 
   async function load() {
     const auth = await fetch("/api/admin/me");
@@ -99,6 +175,7 @@ export default function AdminPage() {
       [
         "overview",
         "projects",
+        "product-templates",
         "requests",
         "pricing",
         "settings",
@@ -109,10 +186,11 @@ export default function AdminPage() {
     );
     setCounts(results[0].counts);
     setProjects(results[1]);
-    setRequests(results[2]);
-    setPlans(results[3]);
-    setSettings(results[4]);
-    setCustomers(results[5]);
+    setProducts(results[2]);
+    setRequests(results[3]);
+    setPlans(results[4]);
+    setSettings(results[5]);
+    setCustomers(results[6]);
   }
   useEffect(() => {
     void load();
@@ -165,21 +243,77 @@ export default function AdminPage() {
       await load();
     }
   }
-  async function saveCustomer(event: FormEvent) {
+  async function saveProduct(event: FormEvent) {
     event.preventDefault();
-    const response = await fetch("/api/admin/new-customers", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(customer),
-    });
+    const response = await fetch(
+      editingProductId
+        ? `/api/admin/product-templates/${editingProductId}`
+        : "/api/admin/product-templates",
+      {
+        method: editingProductId ? "PATCH" : "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...product,
+          thumbnail: productImage || product.thumbnail,
+          features: product.features.split("\n"),
+          tags: product.tags.split(","),
+          technologies: product.technologies.split(","),
+          gallery: [productImage || product.thumbnail],
+        }),
+      },
+    );
     const data = await response.json();
     setMessage(
       response.ok
-        ? `Published /preview/${customer.slug}.`
+        ? "Product template saved."
+        : (data.error ?? "Could not save product template."),
+    );
+    if (response.ok) {
+      setProduct(initialProduct);
+      setProductImage("");
+      setEditingProductId(null);
+      const refreshed = await fetch("/api/admin/product-templates");
+      if (refreshed.ok) setProducts(await refreshed.json());
+    }
+  }
+  async function saveCustomer(event: FormEvent) {
+    event.preventDefault();
+    const response = await fetch(
+      editingCustomerId
+        ? `/api/admin/new-customers/${editingCustomerId}`
+        : "/api/admin/new-customers",
+      {
+        method: editingCustomerId ? "PATCH" : "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(customer),
+      },
+    );
+    const data = await response.json();
+    setMessage(
+      response.ok
+        ? editingCustomerId
+          ? "Customer website updated."
+          : `Published /preview/${customer.slug}.`
         : data.error || "Could not publish customer.",
     );
     if (response.ok) {
       setCustomer(initialCustomer);
+      setEditingCustomerId(null);
+      const refreshed = await fetch("/api/admin/new-customers");
+      if (refreshed.ok) setCustomers(await refreshed.json());
+    }
+  }
+  async function deleteCustomer(id: string) {
+    if (!window.confirm("Delete this customer website?")) return;
+    const response = await fetch(`/api/admin/new-customers/${id}`, {
+      method: "DELETE",
+    });
+    setMessage(
+      response.ok
+        ? "Customer website deleted."
+        : "Could not delete customer website.",
+    );
+    if (response.ok) {
       const refreshed = await fetch("/api/admin/new-customers");
       if (refreshed.ok) setCustomers(await refreshed.json());
     }
@@ -187,6 +321,20 @@ export default function AdminPage() {
   async function deleteProject(id: string) {
     await fetch(`/api/admin/projects/${id}`, { method: "DELETE" });
     await load();
+  }
+  async function deleteProduct(id: string) {
+    await fetch(`/api/admin/product-templates/${id}`, { method: "DELETE" });
+    const refreshed = await fetch("/api/admin/product-templates");
+    if (refreshed.ok) setProducts(await refreshed.json());
+  }
+  async function toggleProduct(id: string, values: Partial<ProductTemplate>) {
+    await fetch(`/api/admin/product-templates/${id}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+    const refreshed = await fetch("/api/admin/product-templates");
+    if (refreshed.ok) setProducts(await refreshed.json());
   }
   async function updateRequest(item: Request) {
     await fetch("/api/admin/requests", {
@@ -299,6 +447,7 @@ export default function AdminPage() {
     ["overview", "Overview"],
     ["requests", "Enquiries"],
     ["projects", "Collection"],
+    ["products", "Products"],
     ["customers", "Customers"],
     ["pricing", "Pricing"],
     ["settings", "Site settings"],
@@ -566,6 +715,232 @@ export default function AdminPage() {
             </section>
           </div>
         )}
+        {tab === "products" && (
+          <div className="mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
+            <section className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
+                Website templates
+              </p>
+              <h2 className="mt-2 text-xl font-semibold">
+                Add product template
+              </h2>
+              <form
+                onSubmit={saveProduct}
+                className="mt-6 grid gap-3 sm:grid-cols-2"
+              >
+                {(
+                  [
+                    "name",
+                    "slug",
+                    "businessType",
+                    "templateKey",
+                    "price",
+                    "previewUrl",
+                    "ctaText",
+                    "displayOrder",
+                  ] as const
+                ).map((key) => (
+                  <input
+                    key={key}
+                    required={
+                      key === "name" || key === "slug" || key === "businessType"
+                    }
+                    className={`${field} ${key === "previewUrl" ? "sm:col-span-2" : ""}`}
+                    value={String(product[key])}
+                    onChange={(event) =>
+                      setProduct({
+                        ...product,
+                        [key]:
+                          key === "displayOrder"
+                            ? Number(event.target.value)
+                            : event.target.value,
+                      })
+                    }
+                    placeholder={
+                      key === "displayOrder"
+                        ? "Display order"
+                        : key.replace(/([A-Z])/g, " $1")
+                    }
+                  />
+                ))}
+                <select
+                  className={field}
+                  value={product.category}
+                  onChange={(event) =>
+                    setProduct({ ...product, category: event.target.value })
+                  }
+                >
+                  <option>Healthcare &amp; Wellness</option>
+                  <option>Food &amp; Beverage</option>
+                  <option>Business &amp; Tech</option>
+                  <option>Fitness &amp; Creative</option>
+                  <option>Real Estate &amp; Hospitality</option>
+                </select>
+                <input
+                  className={field}
+                  value={product.tags}
+                  onChange={(event) =>
+                    setProduct({ ...product, tags: event.target.value })
+                  }
+                  placeholder="Tags, comma separated"
+                />
+                <textarea
+                  required
+                  className={`${field} min-h-20 sm:col-span-2`}
+                  value={product.shortDescription}
+                  onChange={(event) =>
+                    setProduct({
+                      ...product,
+                      shortDescription: event.target.value,
+                    })
+                  }
+                  placeholder="Short description"
+                />
+                <textarea
+                  className={`${field} min-h-24 sm:col-span-2`}
+                  value={product.description}
+                  onChange={(event) =>
+                    setProduct({ ...product, description: event.target.value })
+                  }
+                  placeholder="Full description"
+                />
+                <textarea
+                  className={`${field} min-h-20 sm:col-span-2`}
+                  value={product.features}
+                  onChange={(event) =>
+                    setProduct({ ...product, features: event.target.value })
+                  }
+                  placeholder="Features, one per line"
+                />
+                <input
+                  className={`${field} sm:col-span-2`}
+                  value={product.technologies}
+                  onChange={(event) =>
+                    setProduct({ ...product, technologies: event.target.value })
+                  }
+                  placeholder="Technologies, comma separated"
+                />
+                <input
+                  required
+                  className={`${field} sm:col-span-2`}
+                  value={productImage}
+                  onChange={(event) => setProductImage(event.target.value)}
+                  placeholder="Thumbnail URL, e.g. /dental-clinic/1.jpg"
+                />
+                <label className="flex items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={product.visible}
+                    onChange={(event) =>
+                      setProduct({ ...product, visible: event.target.checked })
+                    }
+                  />{" "}
+                  Visible publicly
+                </label>
+                <label className="flex items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={product.featured}
+                    onChange={(event) =>
+                      setProduct({ ...product, featured: event.target.checked })
+                    }
+                  />{" "}
+                  Featured
+                </label>
+                <label className="flex items-center gap-2 text-sm">
+                  <input
+                    type="checkbox"
+                    checked={product.hasLivePreview}
+                    onChange={(event) =>
+                      setProduct({
+                        ...product,
+                        hasLivePreview: event.target.checked,
+                      })
+                    }
+                  />{" "}
+                  Live preview available
+                </label>
+                <button className="h-12 rounded-full bg-neutral-900 text-sm font-semibold text-white sm:col-span-2">
+                  Save product template
+                </button>
+              </form>
+            </section>
+            <section className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
+                Independent catalog
+              </p>
+              <div className="mt-5 space-y-3">
+                {products.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center gap-3 rounded-2xl border border-neutral-100 p-3"
+                  >
+                    <img
+                      src={item.thumbnail}
+                      alt=""
+                      className="size-14 rounded-xl object-cover"
+                    />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-semibold">
+                        {item.name}
+                      </p>
+                      <p className="text-xs text-neutral-400">
+                        {item.category} · {item.visible ? "Visible" : "Hidden"}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        toggleProduct(item.id, { visible: !item.visible })
+                      }
+                      className="rounded-full border border-neutral-200 px-3 py-1.5 text-xs font-semibold"
+                    >
+                      {item.visible ? "Hide" : "Show"}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setEditingProductId(item.id);
+                        setProduct({
+                          name: item.name,
+                          slug: item.slug,
+                          category: item.category,
+                          businessType: item.businessType,
+                          shortDescription: item.shortDescription,
+                          description: item.description,
+                          features: item.features.join("\n"),
+                          thumbnail: item.thumbnail,
+                          tags: item.tags.join(", "),
+                          technologies: item.technologies.join(", "),
+                          price: item.price ?? "",
+                          visible: item.visible,
+                          featured: item.featured,
+                          hasLivePreview: item.hasLivePreview,
+                          previewUrl: item.previewUrl,
+                          templateKey: item.templateKey,
+                          displayOrder: item.displayOrder,
+                          ctaText: item.ctaText,
+                        });
+                        setProductImage(item.thumbnail);
+                      }}
+                      className="rounded-full border border-neutral-200 px-3 py-1.5 text-xs font-semibold"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => deleteProduct(item.id)}
+                      aria-label={`Delete ${item.name}`}
+                      className="grid size-9 place-items-center rounded-full text-neutral-400 hover:bg-red-50 hover:text-red-600"
+                    >
+                      <Trash2 className="size-4" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </div>
+        )}
         {tab === "customers" && (
           <div className="mt-8 grid gap-8 lg:grid-cols-[0.8fr,1.2fr]">
             <section className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8">
@@ -573,7 +948,9 @@ export default function AdminPage() {
                 Customer preview
               </p>
               <h2 className="mt-2 text-xl font-semibold">
-                Publish a customer website
+                {editingCustomerId
+                  ? "Edit customer website"
+                  : "Publish a customer website"}
               </h2>
               <form onSubmit={saveCustomer} className="mt-6 space-y-3">
                 <input
@@ -597,32 +974,165 @@ export default function AdminPage() {
                   }
                   placeholder="Slug, e.g. nova-dental"
                 />
+                <select
+                  className={field}
+                  value={customer.category}
+                  onChange={(event) => {
+                    const category = event.target.value;
+                    const firstTemplate = PUBLISH_TEMPLATE_OPTIONS.find(
+                      (item) => item.category === category,
+                    );
+                    setCustomer({
+                      ...customer,
+                      category,
+                      templateKey: firstTemplate?.key ?? customer.templateKey,
+                    });
+                  }}
+                >
+                  <option>Hotel &amp; Homestays</option>
+                  <option>Food &amp; Beverage</option>
+                  <option>Healthcare &amp; Wellness</option>
+                  <option>Business &amp; Tech</option>
+                  <option>Fitness &amp; Creative</option>
+                  <option>Real Estate &amp; Hospitality</option>
+                </select>
+                <select
+                  className={field}
+                  value={customer.templateKey}
+                  onChange={(event) =>
+                    setCustomer({
+                      ...customer,
+                      templateKey: event.target.value as PublishTemplateKey,
+                      category:
+                        PUBLISH_TEMPLATE_OPTIONS.find(
+                          (item) => item.key === event.target.value,
+                        )?.category ?? customer.category,
+                    })
+                  }
+                >
+                  {PUBLISH_TEMPLATE_OPTIONS.filter(
+                    (item) => item.category === customer.category,
+                  ).map((item) => (
+                    <option key={item.key} value={item.key}>
+                      {item.label} · {item.businessType}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  className={field}
+                  value={customer.status}
+                  onChange={(event) =>
+                    setCustomer({
+                      ...customer,
+                      status: event.target.value as "draft" | "published",
+                    })
+                  }
+                >
+                  <option value="published">Published</option>
+                  <option value="draft">Draft / hidden</option>
+                </select>
                 <button className="h-12 w-full rounded-full bg-neutral-900 text-sm font-semibold text-white">
-                  Publish customer
+                  {editingCustomerId ? "Save changes" : "Publish customer"}
                 </button>
+                {editingCustomerId && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setCustomer(initialCustomer);
+                      setEditingCustomerId(null);
+                    }}
+                    className="h-10 w-full text-sm text-neutral-500"
+                  >
+                    Cancel editing
+                  </button>
+                )}
               </form>
             </section>
             <section className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8">
-              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
-                Published customers
-              </p>
+              <div className="flex items-end justify-between gap-4 border-b border-neutral-100 pb-5">
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
+                    Customer websites
+                  </p>
+                  <h2 className="mt-2 text-xl font-semibold">
+                    Published customers
+                  </h2>
+                </div>
+                <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-500">
+                  {customers.length} total
+                </span>
+              </div>
               <div className="mt-5 space-y-3">
-                {customers.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex items-center justify-between rounded-2xl border border-neutral-100 p-4"
-                  >
-                    <div>
-                      <p className="font-semibold">{item.businessName}</p>
-                      <p className="text-sm text-neutral-500">
-                        /preview/{item.slug}
-                      </p>
+                {customers.map((item) => {
+                  const template = PUBLISH_TEMPLATE_OPTIONS.find(
+                    (option) => option.key === item.templateKey,
+                  );
+                  const isPublished = item.status !== "draft";
+                  return (
+                    <div
+                      key={item.id}
+                      className="grid gap-4 rounded-2xl border border-neutral-200 p-4 transition-colors hover:border-neutral-300 hover:bg-neutral-50/70 sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:items-center"
+                    >
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-2">
+                          <p className="truncate font-semibold text-neutral-900">
+                            {item.businessName}
+                          </p>
+                          <span
+                            className={`rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] ${isPublished ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}
+                          >
+                            {isPublished ? "Published" : "Draft"}
+                          </span>
+                        </div>
+                        <p className="mt-1 truncate text-sm text-neutral-500">
+                          /preview/{item.slug}
+                        </p>
+                        <p className="mt-2 text-xs text-neutral-400">
+                          {template?.label ?? item.templateKey} ·{" "}
+                          {item.category}
+                        </p>
+                      </div>
+                      <div className="flex flex-wrap items-center gap-2 sm:justify-end">
+                        {isPublished && (
+                          <a
+                            href={`/preview/${item.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex h-9 items-center gap-1.5 rounded-full border border-neutral-200 px-3 text-xs font-semibold text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900"
+                          >
+                            Preview <ArrowUpRight className="size-3.5" />
+                          </a>
+                        )}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setEditingCustomerId(item.id);
+                            setCustomer({
+                              businessName: item.businessName,
+                              slug: item.slug,
+                              category: item.category,
+                              templateKey:
+                                item.templateKey as PublishTemplateKey,
+                              status:
+                                item.status === "draft" ? "draft" : "published",
+                            });
+                          }}
+                          className="inline-flex h-9 items-center gap-1.5 rounded-full border border-neutral-200 px-3 text-xs font-semibold text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900"
+                        >
+                          <Pencil className="size-3.5" /> Edit
+                        </button>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => deleteCustomer(item.id)}
+                        aria-label={`Delete ${item.businessName}`}
+                        className="grid size-9 place-self-start rounded-full text-neutral-400 transition-colors hover:bg-red-50 hover:text-red-600 sm:place-self-center"
+                      >
+                        <Trash2 className="size-4" />
+                      </button>
                     </div>
-                    <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs text-emerald-700">
-                      {item.status}
-                    </span>
-                  </div>
-                ))}
+                  );
+                })}
                 {!customers.length && (
                   <p className="text-sm text-neutral-500">
                     No new customers published yet.

@@ -1,9 +1,14 @@
 import { mongoDb } from "@/lib/mongodb";
+import type { PublishTemplateKey } from "@/lib/product-template-types";
+
+export type CustomerTemplateKey = PublishTemplateKey | "villa" | "restaurant";
 
 export type NewCustomer = {
   id: string;
   slug: string;
   businessName: string;
+  category: string;
+  templateKey: CustomerTemplateKey;
   logo: string;
   theme: Record<string, string>;
   hero: { eyebrow: string; title: string; description: string; image: string; primaryCta: string; secondaryCta: string };
@@ -25,7 +30,7 @@ export type NewCustomer = {
 
 export async function getPublishedCustomer(slug: string): Promise<NewCustomer | null> {
   const customer = await mongoDb.collection<NewCustomer>("new_customers").findOne({
-    slug,
+    slug: slug.trim().toLowerCase(),
     status: "published",
   });
   if (!customer) return null;

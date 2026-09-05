@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ArrowLeft, ArrowUpRight, Check, MessageCircle } from "lucide-react";
 import { DEMOS, getDemoBySlug } from "@/data/demos";
 import { whatsappUrl } from "@/config/site";
@@ -10,13 +10,55 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SelectDemoButton from "@/components/SelectDemoButton";
 import Logo from "@/components/Logo";
+import RestaurantTemplate from "@/components/restaurant-template";
+import ProductWebsiteTemplate from "@/components/product-website-template";
+import type { ComponentType, ReactNode } from "react";
+import {
+  ALL_WEBSITE_TEMPLATE_SLUGS,
+  PRODUCT_TEMPLATE_SLUGS,
+} from "@/lib/product-template-types";
+import SmilecareDentalTemplate from "@/components/smilecare-dental-template";
+import MedoraHealthTemplate from "@/components/medora-health-template";
+import VelouraStudioTemplate from "@/components/veloura-studio-template";
+import { getPublishedCustomer } from "@/lib/new-customers";
+import AureliaDiningTemplate from "@/components/aurelia-dining-template";
+import AfterglowBarTemplate from "@/components/afterglow-bar-template";
+import CrumbHearthTemplate from "@/components/crumb-hearth-template";
+import DashbiteTemplate from "@/components/dashbite-template";
+import RoastRitualTemplate from "@/components/roast-ritual-template";
+import NorthlineTemplate from "@/components/northline-template";
+import ScaleflowTemplate from "@/components/scaleflow-template";
+import LaunchlabTemplate from "@/components/launchlab-template";
+import ForgeAthleticsTemplate from "@/components/forge-athletics-template";
+import FrameSoulTemplate from "@/components/frame-soul-template";
+import IslandVillaTemplate from "@/components/island-villa-template";
+import DemoAgencyShell from "@/components/DemoAgencyShell";
+
+const productTemplateComponents: Record<string, ComponentType> = {
+  "smilecare-dental": SmilecareDentalTemplate,
+  "medora-health": MedoraHealthTemplate,
+  "veloura-studio": VelouraStudioTemplate,
+  "aurelia-dining": AureliaDiningTemplate,
+  "afterglow-bar": AfterglowBarTemplate,
+  "crumb-hearth": CrumbHearthTemplate,
+  dashbite: DashbiteTemplate,
+  "roast-ritual": RoastRitualTemplate,
+  northline: NorthlineTemplate,
+  scaleflow: ScaleflowTemplate,
+  launchlab: LaunchlabTemplate,
+  "forge-athletics": ForgeAthleticsTemplate,
+  "frame-soul": FrameSoulTemplate,
+  "island-villa": IslandVillaTemplate,
+};
 
 interface DemoPageProps {
   params: Promise<{ slug: string }>;
 }
 
 export function generateStaticParams() {
-  return DEMOS.map((demo) => ({ slug: demo.slug }));
+  return Array.from(
+    new Set([...DEMOS.map((demo) => demo.slug), ...ALL_WEBSITE_TEMPLATE_SLUGS]),
+  ).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -24,7 +66,11 @@ export async function generateMetadata({
 }: DemoPageProps): Promise<Metadata> {
   const { slug } = await params;
   const demo = getDemoBySlug(slug);
-  if (!demo) return {};
+  if (!demo) {
+    return ALL_WEBSITE_TEMPLATE_SLUGS.includes(slug)
+      ? { title: `${slug} — Live Website Demo` }
+      : {};
+  }
   return {
     title: `${demo.name} — Live Website Demo`,
     description: demo.description,
@@ -40,7 +86,24 @@ export async function generateMetadata({
 export default async function DemoPage({ params }: DemoPageProps) {
   const { slug } = await params;
   const demo = getDemoBySlug(slug);
-  if (!demo) notFound();
+  const renderTemplate = (template: ReactNode) => (
+    <DemoAgencyShell>{template}</DemoAgencyShell>
+  );
+  if (!demo) {
+    const ProductTemplate = productTemplateComponents[slug];
+    if (ProductTemplate) return renderTemplate(<ProductTemplate />);
+    if (ALL_WEBSITE_TEMPLATE_SLUGS.includes(slug))
+      return renderTemplate(<ProductWebsiteTemplate slug={slug} />);
+    const customer = await getPublishedCustomer(slug);
+    if (customer) redirect(`/preview/${customer.slug}`);
+    notFound();
+  }
+
+  const ProductTemplate = productTemplateComponents[slug];
+  if (ProductTemplate) return renderTemplate(<ProductTemplate />);
+  if (slug === "restaurant") return renderTemplate(<AureliaDiningTemplate />);
+  if (ALL_WEBSITE_TEMPLATE_SLUGS.includes(slug))
+    return renderTemplate(<ProductWebsiteTemplate slug={slug} />);
 
   const related = [
     ...DEMOS.filter(

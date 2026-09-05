@@ -38,7 +38,7 @@ export default function Navbar() {
           "fixed inset-x-0 top-0 z-50 transition-all duration-300",
           scrolled
             ? "border-b border-neutral-200/80 bg-white/85 shadow-[0_1px_2px_rgba(0,0,0,0.03)] backdrop-blur-xl"
-            : "border-b border-transparent bg-white"
+            : "border-b border-transparent bg-white",
         )}
       >
         <div className="mx-auto flex h-16 max-w-[1200px] items-center justify-between px-5 sm:h-[72px] sm:px-8">
@@ -51,7 +51,10 @@ export default function Navbar() {
             <Logo />
           </Link>
 
-          <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+          <nav
+            aria-label="Primary"
+            className="hidden items-center gap-1 lg:flex"
+          >
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
@@ -95,21 +98,22 @@ export default function Navbar() {
         aria-hidden={!open}
         className={cn(
           "fixed inset-0 z-40 flex flex-col bg-white pt-24 transition-all duration-300 ease-out lg:hidden",
-          open ? "visible opacity-100" : "invisible opacity-0"
+          open ? "visible opacity-100" : "invisible opacity-0",
         )}
       >
-        <nav
-          aria-label="Mobile"
-          className="flex-1 overflow-y-auto px-6 pb-6"
-        >
+        <nav aria-label="Mobile" className="flex-1 overflow-y-auto px-6 pb-6">
           <ul className="divide-y divide-neutral-100">
             {NAV_LINKS.map((link, index) => (
               <li
                 key={link.label}
-                style={{ transitionDelay: open ? `${60 + index * 45}ms` : "0ms" }}
+                style={{
+                  transitionDelay: open ? `${60 + index * 45}ms` : "0ms",
+                }}
                 className={cn(
                   "transition-all duration-500 ease-out",
-                  open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+                  open
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-4 opacity-0",
                 )}
               >
                 <Link
@@ -130,10 +134,12 @@ export default function Navbar() {
           </ul>
 
           <div
-            style={{ transitionDelay: open ? `${60 + NAV_LINKS.length * 45}ms` : "0ms" }}
+            style={{
+              transitionDelay: open ? `${60 + NAV_LINKS.length * 45}ms` : "0ms",
+            }}
             className={cn(
               "mt-8 space-y-3 transition-all duration-500 ease-out",
-              open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"
+              open ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0",
             )}
           >
             <Link

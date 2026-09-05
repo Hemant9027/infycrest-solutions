@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import FeaturedWork from "@/components/FeaturedWork";
 import TechMarquee from "@/components/TechMarquee";
-import Collection from "@/components/Collection";
+import Products from "@/components/Products";
 import Pricing from "@/components/Pricing";
 import Process from "@/components/Process";
 import FinalCTA from "@/components/FinalCTA";
@@ -16,7 +16,7 @@ export default function HomePage() {
         <Hero />
         <FeaturedWork />
         <TechMarquee />
-        <Collection />
+        <Products />
         <Pricing />
         <Process />
         <FinalCTA />
