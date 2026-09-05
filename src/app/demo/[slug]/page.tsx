@@ -29,15 +29,17 @@ import RoastRitualTemplate from "@/components/roast-ritual-template";
 import NorthlineTemplate from "@/components/northline-template";
 import ScaleflowTemplate from "@/components/scaleflow-template";
 import LaunchlabTemplate from "@/components/launchlab-template";
-import ForgeAthleticsTemplate from "@/components/forge-athletics-template";
+import { ForgeAthleticsTemplate } from "@/components/forge-athletics-template";
 import FrameSoulTemplate from "@/components/frame-soul-template";
 import IslandVillaTemplate from "@/components/island-villa-template";
 import DemoAgencyShell from "@/components/DemoAgencyShell";
 
 const productTemplateComponents: Record<string, ComponentType> = {
   "smilecare-dental": SmilecareDentalTemplate,
+  "dental-clinic": SmilecareDentalTemplate,
   "medora-health": MedoraHealthTemplate,
   "veloura-studio": VelouraStudioTemplate,
+  salon: VelouraStudioTemplate,
   "aurelia-dining": AureliaDiningTemplate,
   "afterglow-bar": AfterglowBarTemplate,
   "crumb-hearth": CrumbHearthTemplate,
@@ -47,6 +49,7 @@ const productTemplateComponents: Record<string, ComponentType> = {
   scaleflow: ScaleflowTemplate,
   launchlab: LaunchlabTemplate,
   "forge-athletics": ForgeAthleticsTemplate,
+  gym: ForgeAthleticsTemplate,
   "frame-soul": FrameSoulTemplate,
   "island-villa": IslandVillaTemplate,
 };

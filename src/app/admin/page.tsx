@@ -374,6 +374,7 @@ export default function AdminPage() {
         ? "Password updated."
         : (data.error ?? "Could not update password."),
     );
+    if (response.ok) setLoggedIn(false);
   }
   function exportRequests() {
     const csv = [

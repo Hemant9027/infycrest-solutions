@@ -42,6 +42,7 @@ function readConsent(): StoredConsent | null {
         }
       : null;
   } catch {
+    localStorage.removeItem(CONSENT_KEY);
     return null;
   }
 }

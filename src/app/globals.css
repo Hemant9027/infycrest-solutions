@@ -209,12 +209,16 @@ body {
 .demo-agency-header {
   position: fixed;
   inset: 0 0 auto;
-  z-index: 70;
+  z-index: 9999;
   border-bottom: 1px solid rgb(229 229 229 / 0.9);
   background: rgb(255 255 255 / 0.92);
   backdrop-filter: blur(18px);
 }
 
-.demo-template-shell header.fixed {
-  top: 4rem;
+/* Push any template's own fixed/sticky header below the agency bar. */
+.demo-template-shell header.fixed,
+.demo-template-shell header[class*="fixed"],
+.demo-template-shell header[style*="position: fixed"],
+.demo-template-shell header[style*="position:fixed"] {
+  top: 4rem !important;
 }

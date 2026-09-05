@@ -48,7 +48,8 @@ export async function ensureAdminProfile() {
 
 export async function authenticateAdmin(username: string, password: string) {
   const profile = await ensureAdminProfile();
-  if (!profile || profile.username !== username || !(await bcrypt.compare(password, profile.passwordHash))) return false;
+  const normalizedUsername = username.trim().toLowerCase();
+  if (!profile || profile.username.toLowerCase() !== normalizedUsername || !(await bcrypt.compare(password, profile.passwordHash))) return false;
   return true;
 }
 

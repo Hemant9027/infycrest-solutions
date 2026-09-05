@@ -598,7 +598,6 @@ export function Hero({ customer }: { customer: NewCustomer }) {
               alt="Bar atmosphere"
               fill
               priority={idx === 0}
-              unoptimized
               sizes="100vw"
               className="object-cover"
             />
@@ -791,7 +790,6 @@ export function Ticker({ items }: { items: string[] }) {
 }
 
 export function Story({ customer }: { customer: NewCustomer }) {
-  const parallaxRef = useParallax(0.07);
   const roomImage = localPubImg(customer.gallery?.[2]?.image, 3);
   const detailImage = pubImg(12);
 
@@ -858,15 +856,11 @@ export function Story({ customer }: { customer: NewCustomer }) {
             <div className="relative w-[84%]">
               <div className="absolute -left-4 -top-4 h-full w-full border border-[var(--brand-accent)]/25" />
               <div className="relative aspect-[4/5] overflow-hidden bg-[#201a1c]">
-                <div
-                  ref={parallaxRef}
-                  className="absolute -bottom-14 -top-14 left-0 right-0"
-                >
+                <div className="absolute -bottom-14 -top-14 left-0 right-0">
                   <Image
                     src={roomImage}
                     alt="Inside the bar"
                     fill
-                    unoptimized
                     sizes="(min-width: 1024px) 46vw, 90vw"
                     className="object-cover"
                   />
@@ -889,7 +883,6 @@ export function Story({ customer }: { customer: NewCustomer }) {
                 src={detailImage}
                 alt="A candlelit table at last call"
                 fill
-                unoptimized
                 sizes="(min-width: 1024px) 30vw, 60vw"
                 className="object-cover transition-transform duration-[1400ms] ease-out hover:scale-108"
               />
@@ -1088,7 +1081,6 @@ export function DrinksMenu({ customer }: { customer: NewCustomer }) {
               src={previewSrc(hover)}
               alt={items[hover]?.title ?? "Cocktail preview"}
               fill
-              unoptimized
               sizes="228px"
               className="object-cover"
             />
@@ -1214,7 +1206,6 @@ export function Gallery({ customer }: { customer: NewCustomer }) {
                   src={frame.src}
                   alt={frame.caption}
                   fill
-                  unoptimized
                   sizes="(min-width: 768px) 33vw, 50vw"
                   className="object-cover opacity-75 saturate-[0.85] transition-all duration-[1200ms] ease-out group-hover:scale-110 group-hover:opacity-100 group-hover:saturate-100"
                 />
@@ -1284,7 +1275,6 @@ export function Gallery({ customer }: { customer: NewCustomer }) {
                 src={frames[openIdx].src}
                 alt={frames[openIdx].caption}
                 fill
-                unoptimized
                 sizes="90vw"
                 className="object-contain"
               />
