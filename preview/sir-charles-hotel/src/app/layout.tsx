@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/villa/14.jpg",
+        url: "/images/villa-14.jpg",
         width: 1600,
         height: 900,
         alt: "Turquoise shoreline and palms of Nassau, The Bahamas",

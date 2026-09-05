@@ -13,7 +13,7 @@ const SHOTS = [
     caption: "Fresh & simple",
   },
   {
-    src: "/villa/16.jpg",
+    src: "/images/villa-16.jpg",
     alt: "Twilight over a beach pier in Nassau, The Bahamas",
     caption: "Nassau afterglow",
   },
@@ -23,7 +23,7 @@ const SHOTS = [
     caption: "Doorway days",
   },
   {
-    src: "/villa/17.jpg",
+    src: "/images/villa-17.jpg",
     alt: "A conch shell on weathered wooden planks",
     caption: "The mighty conch",
   },
@@ -33,7 +33,7 @@ const SHOTS = [
     caption: "Slow mornings",
   },
   {
-    src: "/villa/18.jpg",
+    src: "/images/villa-18.jpg",
     alt: "Aerial view of turquoise Caribbean water",
     caption: "Our kind of blue",
   },

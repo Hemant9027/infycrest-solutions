@@ -74,7 +74,7 @@ export default function Villas() {
           <Reveal className="lg:col-span-7">
             <figure className="group relative aspect-[4/3] overflow-hidden rounded-[2rem] lg:aspect-auto lg:h-full">
               <Image
-                src="/villa/2.jpg"
+                src="/images/villa-2.jpg"
                 alt="Uniquely designed luxury beachfront villa architecturally nestled among coconut palms with turquoise ocean view"
                 fill
                 sizes="(min-width: 1024px) 58vw, 100vw"
@@ -88,7 +88,7 @@ export default function Villas() {
           <Reveal delay={140} className="lg:col-span-5">
             <figure className="group relative aspect-[4/3] overflow-hidden rounded-[2rem] lg:aspect-auto lg:h-full">
               <Image
-                src="/villa/5.jpg"
+                src="/images/villa-5.jpg"
                 alt="Luxurious beachfront villa interior with floor-to-ceiling windows, premium furnishings, and stunning turquoise ocean views"
                 fill
                 sizes="(min-width: 1024px) 42vw, 100vw"

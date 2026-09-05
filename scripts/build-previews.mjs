@@ -55,7 +55,7 @@ async function normalizeViteHtml(outputPath, outputDirectory, outputName) {
     .split("-")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(" ");
-  const price = outputName === "clay-dental" ? "₹999" : "Custom quote";
+  const price = outputName === "clay-dental" ? "₹999" : "Website Concepts";
   const chrome = `
     <style>
       .infycrest-preview-bar {

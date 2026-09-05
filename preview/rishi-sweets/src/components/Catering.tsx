@@ -100,7 +100,7 @@ export default function Catering() {
             <Reveal delay={0.3}>
               <div className="group relative mt-9 overflow-hidden rounded-[1.8rem] depth-shadow">
                 <img
-                  src="/restaurant/8.jpg"
+                  src="/images/restaurant-8.jpg"
                   alt="Catering service at a celebration"
                   loading="lazy"
                   decoding="async"

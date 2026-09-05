@@ -1,24 +1,18 @@
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
+import { MongoClient } from "mongodb";
 
-const databaseUrl = process.env.DATABASE_URL;
+const uri = process.env.MONGODB_URI ?? "mongodb://127.0.0.1:27017";
 
-if (!databaseUrl) {
-  throw new Error("DATABASE_URL is required");
-}
+const globalForMongo = globalThis as typeof globalThis & { __gagaMongoClient?: MongoClient };
+const client = globalForMongo.__gagaMongoClient ?? new MongoClient(uri);
+if (process.env.NODE_ENV !== "production") globalForMongo.__gagaMongoClient = client;
 
-const globalForDb = globalThis as typeof globalThis & {
-  __arenaNextJsPostgresqlPool?: Pool;
+export const mongoDb = client.db(process.env.MONGODB_DB ?? "infycrest");
+export const db = {
+  insert(table: { collection: string }) {
+    return {
+      values(values: Record<string, unknown>) {
+        return mongoDb.collection(table.collection).insertOne({ ...values, createdAt: values.createdAt ?? new Date() });
+      },
+    };
+  },
 };
-
-export const pool =
-  globalForDb.__arenaNextJsPostgresqlPool ??
-  new Pool({
-    connectionString: databaseUrl,
-  });
-
-if (process.env.NODE_ENV !== "production") {
-  globalForDb.__arenaNextJsPostgresqlPool = pool;
-}
-
-export const db = drizzle(pool);

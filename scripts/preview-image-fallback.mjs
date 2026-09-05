@@ -4,16 +4,16 @@ import { join } from "node:path";
 const imageFallbackScript = String.raw`<script>
 (() => {
   const imageSources = {
-    dalMakhni: ["/restaurant/1.jpg", "/restaurant/2.jpg"],
-    indianFood: ["/restaurant/3.jpg", "/restaurant/4.jpg", "/restaurant/5.jpg"],
-    food: ["/restaurant/6.jpg", "/restaurant/7.jpg", "/restaurant/8.jpg"],
-    dental: ["/villa/1.jpg", "/villa/2.jpg"],
-    room: ["/villa/3.jpg", "/villa/4.jpg", "/villa/5.jpg"],
-    beach: ["/villa/6.jpg", "/villa/7.jpg", "/villa/8.jpg"],
-    garden: ["/villa/9.jpg", "/villa/10.jpg", "/villa/11.jpg"],
-    outdoors: ["/villa/12.jpg", "/villa/13.jpg", "/villa/14.jpg"],
-    exterior: ["/villa/15.jpg", "/villa/16.jpg", "/villa/17.jpg"],
-    default: ["/villa/18.jpg", "/villa/19.jpg"]
+    dalMakhni: ["/images/villa-1.jpg", "/images/villa-2.jpg"],
+    indianFood: ["/images/villa-3.jpg", "/images/villa-4.jpg", "/images/villa-5.jpg"],
+    food: ["/images/villa-6.jpg", "/images/villa-7.jpg", "/images/villa-8.jpg"],
+    dental: ["/images/villa-1.jpg", "/images/villa-2.jpg"],
+    room: ["/images/villa-3.jpg", "/images/villa-4.jpg", "/images/villa-5.jpg"],
+    beach: ["/images/villa-6.jpg", "/images/villa-7.jpg", "/images/villa-8.jpg"],
+    garden: ["/images/villa-9.jpg", "/images/villa-10.jpg", "/images/villa-11.jpg"],
+    outdoors: ["/images/villa-12.jpg", "/images/villa-13.jpg", "/images/villa-14.jpg"],
+    exterior: ["/images/villa-15.jpg", "/images/villa-16.jpg", "/images/villa-17.jpg"],
+    default: ["/images/villa-18.jpg", "/images/villa-19.jpg"]
   };
 
   const usedSources = new Set();

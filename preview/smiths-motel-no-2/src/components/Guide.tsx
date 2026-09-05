@@ -16,7 +16,7 @@ const SPOTS = [
     tint: "bg-lagoon-soft text-lagoon-deep",
     title: "The beaches",
     text: "Powder-soft sand and water that barely looks real — the reason 'just one more day' exists.",
-    img: "/villa/19.jpg",
+    img: "/images/villa-19.jpg",
     alt: "Aerial view of a tropical beach with vivid turquoise water",
   },
   {
@@ -25,7 +25,7 @@ const SPOTS = [
     tint: "bg-coral-soft text-coral-deep",
     title: "Arawak Cay · the Fish Fry",
     text: "Conch salad made fresh in front of you, music drifting between the stalls. Come hungry, leave happy.",
-    img: "/villa/20.jpg",
+    img: "/images/villa-20.jpg",
     alt: "Orange conch shells on bright Bahamian sand",
   },
   {
@@ -34,7 +34,7 @@ const SPOTS = [
     tint: "bg-sun-soft text-ink",
     title: "Downtown & Bay Street",
     text: "Pastel storefronts, cheerful chaos and the famous Straw Market — bring your bargaining smile.",
-    img: "/villa/21.jpg",
+    img: "/images/villa-21.jpg",
     alt: "A vibrant street of colourful island storefronts",
   },
   {
@@ -43,7 +43,7 @@ const SPOTS = [
     tint: "bg-lagoon-soft text-lagoon-deep",
     title: "Junkanoo",
     text: "The Bahamas' heartbeat — drums, cowbells and dazzling costumes flooding the streets on festival nights.",
-    img: "/villa/22.jpg",
+    img: "/images/villa-22.jpg",
     alt: "A colourful street parade with dancers in carnival costume",
   },
 ];

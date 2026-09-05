@@ -6,7 +6,7 @@ const ACTIVITIES = [
   {
     icon: Fish,
     tag: "Guides arranged",
-    src: "/villa/21.jpg",
+    src: "/images/villa-21.jpg",
     alt: "Fly fisherman casting on glassy turquoise flats at golden hour",
     title: "Fly-Fishing",
     blurb:
@@ -15,7 +15,7 @@ const ACTIVITIES = [
   {
     icon: Waves,
     tag: "By arrangement",
-    src: "/villa/22.jpg",
+    src: "/images/villa-22.jpg",
     alt: "Modern kayaks gliding through pristine clear water and natural mangrove channels with white sand bottom",
     title: "Kayaking",
     blurb:
@@ -24,7 +24,7 @@ const ACTIVITIES = [
   {
     icon: Shell,
     tag: "Just offshore",
-    src: "/villa/23.jpg",
+    src: "/images/villa-23.jpg",
     alt: "Snorkeler floating above coral and tropical fish",
     title: "Snorkeling & the Reef",
     blurb:

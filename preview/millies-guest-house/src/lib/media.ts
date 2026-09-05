@@ -1,8 +1,8 @@
 const px = (id: number, w = 1600) =>
-  `/villa/${(id % 28) + 1}.jpg`;
+  `/images/villa-${(id % 28) + 1}.jpg`;
 
 export const HERO_VIDEO =
-  "/villa/28.jpg";
+  "/images/villa-28.jpg";
 
 export const CONTACT = {
   host: "Judy Russell",

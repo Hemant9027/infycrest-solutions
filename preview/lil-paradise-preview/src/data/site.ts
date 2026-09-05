@@ -7,7 +7,7 @@ export const BUSINESS = {
 };
 
 const px = (id: number, w: number, h: number) =>
-  `/villa/${(id % 28) + 1}.jpg`;
+  `/images/villa-${(id % 28) + 1}.jpg`;
 
 export const IMG = {
   hero: {

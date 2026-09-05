@@ -5,7 +5,7 @@
  */
 
 const px = (id: number, w: number, h?: number): string =>
-  `/villa/${(id % 28) + 1}.jpg`;
+  `/images/villa-${(id % 28) + 1}.jpg`;
 
 export interface Img {
   src: string;

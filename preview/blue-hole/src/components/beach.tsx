@@ -5,7 +5,7 @@ export default function Beach() {
   return (
     <section id="beach" className="relative bg-abyss text-shell">
       <ParallaxImage
-        src="/villa/24.jpg"
+        src="/images/villa-24.jpg"
         alt="Relaxing hammock suspended between palm trees on pristine private beach with turquoise Caribbean waters"
         className="h-[82vh] min-h-[34rem]"
       />

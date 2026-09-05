@@ -35,7 +35,7 @@ export default function Hero() {
           muted
           loop
           playsInline
-          poster="/villa/27.jpg"
+          poster="/images/villa-27.jpg"
           aria-hidden="true"
         ></video>
         <div className="absolute inset-0 bg-gradient-to-t from-abyss via-abyss/25 to-abyss/55" />

@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "Blue Hole Villas — South Andros, The Bahamas",
     description:
       "Your private island escape: secluded villas, turquoise water and the natural beauty of Andros.",
-    images: ["/villa/20.jpg"],
+    images: ["/images/villa-20.jpg"],
     type: "website",
   },
 };

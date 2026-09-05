@@ -53,29 +53,29 @@ export function availabilityMailto(d: InquiryDetails): string {
 
 export const IMAGES = {
   heroMain:
-    "/villa/1.jpg",
+    "/images/villa-1.jpg",
   heroSmall:
-    "/villa/2.jpg",
+    "/images/villa-2.jpg",
   about:
-    "/villa/3.jpg",
+    "/images/villa-3.jpg",
   stay:
-    "/villa/4.jpg",
+    "/images/villa-4.jpg",
   explorePort:
-    "/villa/5.jpg",
+    "/images/villa-5.jpg",
   exploreFishFry:
-    "/villa/6.jpg",
+    "/images/villa-6.jpg",
   exploreBeach:
-    "/villa/7.jpg",
+    "/images/villa-7.jpg",
   galleryAerial:
-    "/villa/8.jpg",
+    "/images/villa-8.jpg",
   galleryIsland:
-    "/villa/9.jpg",
+    "/images/villa-9.jpg",
   galleryLighthouse:
-    "/villa/10.jpg",
+    "/images/villa-10.jpg",
   galleryBeach:
-    "/villa/11.jpg",
+    "/images/villa-11.jpg",
   galleryPalmWall:
-    "/villa/12.jpg",
+    "/images/villa-12.jpg",
   galleryWhiteWall:
-    "/villa/13.jpg",
+    "/images/villa-13.jpg",
 } as const;
