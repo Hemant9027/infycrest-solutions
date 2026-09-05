@@ -16,6 +16,13 @@ type Project = {
   technologies: string[];
   includes: string[];
 };
+type Customer = {
+  id: string;
+  businessName: string;
+  slug: string;
+  status: string;
+  createdAt: string;
+};
 type Request = {
   id: string;
   name: string;
@@ -38,6 +45,7 @@ type Tab =
   | "overview"
   | "requests"
   | "projects"
+  | "customers"
   | "pricing"
   | "settings"
   | "profile";
@@ -54,12 +62,14 @@ const initialProject = {
   technologies: "Next.js, React, Tailwind CSS",
   includes: "Responsive design\nContact flow",
 };
+const initialCustomer = { businessName: "", slug: "" };
 
 export default function AdminPage() {
   const [loggedIn, setLoggedIn] = useState<boolean | null>(null);
   const [login, setLogin] = useState({ username: "admin", password: "" });
   const [tab, setTab] = useState<Tab>("overview");
   const [projects, setProjects] = useState<Project[]>([]);
+  const [customers, setCustomers] = useState<Customer[]>([]);
   const [requests, setRequests] = useState<Request[]>([]);
   const [counts, setCounts] = useState({
     projects: 0,
@@ -76,6 +86,7 @@ export default function AdminPage() {
     newPassword: "",
   });
   const [message, setMessage] = useState("");
+  const [customer, setCustomer] = useState(initialCustomer);
 
   async function load() {
     const auth = await fetch("/api/admin/me");
@@ -85,7 +96,14 @@ export default function AdminPage() {
     }
     setLoggedIn(true);
     const results = await Promise.all(
-      ["overview", "projects", "requests", "pricing", "settings"].map((name) =>
+      [
+        "overview",
+        "projects",
+        "requests",
+        "pricing",
+        "settings",
+        "new-customers",
+      ].map((name) =>
         fetch(`/api/admin/${name}`).then((response) => response.json()),
       ),
     );
@@ -94,6 +112,7 @@ export default function AdminPage() {
     setRequests(results[2]);
     setPlans(results[3]);
     setSettings(results[4]);
+    setCustomers(results[5]);
   }
   useEffect(() => {
     void load();
@@ -144,6 +163,25 @@ export default function AdminPage() {
       setProject(initialProject);
       setImage("");
       await load();
+    }
+  }
+  async function saveCustomer(event: FormEvent) {
+    event.preventDefault();
+    const response = await fetch("/api/admin/new-customers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(customer),
+    });
+    const data = await response.json();
+    setMessage(
+      response.ok
+        ? `Published /preview/${customer.slug}.`
+        : data.error || "Could not publish customer.",
+    );
+    if (response.ok) {
+      setCustomer(initialCustomer);
+      const refreshed = await fetch("/api/admin/new-customers");
+      if (refreshed.ok) setCustomers(await refreshed.json());
     }
   }
   async function deleteProject(id: string) {
@@ -261,6 +299,7 @@ export default function AdminPage() {
     ["overview", "Overview"],
     ["requests", "Enquiries"],
     ["projects", "Collection"],
+    ["customers", "Customers"],
     ["pricing", "Pricing"],
     ["settings", "Site settings"],
     ["profile", "Admin profile"],
@@ -523,6 +562,72 @@ export default function AdminPage() {
                     </button>
                   </div>
                 ))}
+              </div>
+            </section>
+          </div>
+        )}
+        {tab === "customers" && (
+          <div className="mt-8 grid gap-8 lg:grid-cols-[0.8fr,1.2fr]">
+            <section className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
+                Customer preview
+              </p>
+              <h2 className="mt-2 text-xl font-semibold">
+                Publish a customer website
+              </h2>
+              <form onSubmit={saveCustomer} className="mt-6 space-y-3">
+                <input
+                  required
+                  className={field}
+                  value={customer.businessName}
+                  onChange={(event) =>
+                    setCustomer({
+                      ...customer,
+                      businessName: event.target.value,
+                    })
+                  }
+                  placeholder="Business name"
+                />
+                <input
+                  required
+                  className={field}
+                  value={customer.slug}
+                  onChange={(event) =>
+                    setCustomer({ ...customer, slug: event.target.value })
+                  }
+                  placeholder="Slug, e.g. nova-dental"
+                />
+                <button className="h-12 w-full rounded-full bg-neutral-900 text-sm font-semibold text-white">
+                  Publish customer
+                </button>
+              </form>
+            </section>
+            <section className="rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8">
+              <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
+                Published customers
+              </p>
+              <div className="mt-5 space-y-3">
+                {customers.map((item) => (
+                  <div
+                    key={item.id}
+                    className="flex items-center justify-between rounded-2xl border border-neutral-100 p-4"
+                  >
+                    <div>
+                      <p className="font-semibold">{item.businessName}</p>
+                      <p className="text-sm text-neutral-500">
+                        /preview/{item.slug}
+                      </p>
+                    </div>
+                    <span className="rounded-full bg-emerald-50 px-3 py-1 text-xs text-emerald-700">
+                      {item.status}
+                    </span>
+                  </div>
+                ))}
+                {!customers.length && (
+                  <p className="text-sm text-neutral-500">
+                    No new customers published yet.
+                  </p>
+                )}
               </div>
             </section>
           </div>
