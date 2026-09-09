@@ -695,7 +695,7 @@ export function GrainOverlay() {
 /*                              SECTION COMPONENTS                            */
 /* -------------------------------------------------------------------------- */
 
-export function Header({ ready }: { ready: boolean }) {
+export function Header({ ready, businessName = "Frame & Soul" }: { ready: boolean; businessName?: string }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
@@ -738,7 +738,7 @@ export function Header({ ready }: { ready: boolean }) {
             href="#top"
             className="font-serif text-[22px] font-light tracking-[0.14em]"
           >
-            Frame <span className="italic text-[#e2b9a7]">&amp;</span> Soul
+            {businessName}
           </a>
           <nav className="hidden items-center gap-9 md:flex">
             {NAV_LINKS.map((item) => (
@@ -1694,7 +1694,7 @@ export function Contact({ customer }: { customer: NewCustomer }) {
   );
 }
 
-export function Footer() {
+export function Footer({ businessName = "Frame & Soul" }: { businessName?: string }) {
   const [time, setTime] = useState("");
   useEffect(() => {
     const format = () =>
@@ -1733,11 +1733,7 @@ export function Footer() {
               One honest frame at a time
             </p>
             <p className="mt-6 font-serif text-[clamp(3.2rem,12vw,11rem)] font-light leading-[0.85] tracking-[-0.02em]">
-              Frame{" "}
-              <span className="italic text-[#e2b9a7] transition-colors duration-500 group-hover:text-[#f3eee3]">
-                &amp;
-              </span>{" "}
-              Soul
+              {businessName}
               <ArrowUpRight className="ml-3 inline size-[0.35em] text-[#e2b9a7] transition-transform duration-500 group-hover:-translate-y-2 group-hover:translate-x-2" />
             </p>
           </a>
@@ -1791,7 +1787,7 @@ export function Footer() {
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-6 border-t border-[#f3eee3]/10 pt-8 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#f3eee3]/40">
-          <span>© {new Date().getFullYear()} Frame &amp; Soul Studio</span>
+            <span>© {new Date().getFullYear()} {businessName} Studio</span>
           <span className="hidden md:block">
             All photographs shot by the studio
           </span>
@@ -1850,7 +1846,7 @@ export default function PremiumPhotographerTemplate({
 
         <Cursor />
         <GrainOverlay />
-        <Header ready={loaded} />
+        <Header ready={loaded} businessName={customer.businessName} />
 
         <main id="top" className="bg-[#f3eee3] text-[#2e2926]">
           <Hero started={loaded} customer={customer} />
@@ -1862,7 +1858,7 @@ export default function PremiumPhotographerTemplate({
           <Contact customer={customer} />
         </main>
 
-        <Footer />
+        <Footer businessName={customer.businessName} />
       </SmoothScroll>
     </div>
   );
