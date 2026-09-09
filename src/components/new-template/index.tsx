@@ -511,6 +511,7 @@ export function Footer({ customer }: { customer: NewCustomer }) {
         <span>
           © {new Date().getFullYear()} {customer.businessName}
         </span>
+        <span>Designed by Infycrest Solutions</span>
       </div>
     </footer>
   );

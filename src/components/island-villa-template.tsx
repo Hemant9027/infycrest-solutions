@@ -2140,7 +2140,7 @@ export function Footer({ customer }: { customer: NewCustomer }) {
             © {new Date().getFullYear()} {brandName} · A slower kind of luxury
           </p>
           <p className="hidden text-[10px] font-semibold uppercase tracking-[0.26em] text-white/35 lg:block">
-            Engineered by InfyCrest
+            Designed by Infycrest Solutions
           </p>
           <a
             href="#top"

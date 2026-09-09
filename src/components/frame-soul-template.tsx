@@ -1795,6 +1795,7 @@ export function Footer() {
           <span className="hidden md:block">
             All photographs shot by the studio
           </span>
+          <span>Designed by Infycrest Solutions</span>
           <Magnetic strength={0.4}>
             <button
               type="button"

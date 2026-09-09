@@ -2385,6 +2385,9 @@ export function Footer({ businessName = "Forge" }: { businessName?: string }) {
           <p className="hidden text-[10px] font-semibold uppercase tracking-[0.24em] text-[#f3eee3]/40 md:block">
             45.5152° 122.6784°
           </p>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-[#f3eee3]/40">
+            Designed by Infycrest Solutions
+          </p>
           <a
             href="#top"
             aria-label="Back to top"

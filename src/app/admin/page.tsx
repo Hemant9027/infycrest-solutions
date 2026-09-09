@@ -57,6 +57,15 @@ type Customer = {
   templateKey: PublishTemplateKey | "villa" | "restaurant";
   status: string;
   createdAt: string;
+  contact?: {
+    email?: string;
+    phone?: string;
+    address?: string;
+    hours?: string;
+  };
+  hero?: { image?: string };
+  about?: { image?: string };
+  gallery?: Array<{ image: string; alt: string }>;
 };
 type Request = {
   id: string;
@@ -104,6 +113,13 @@ type CustomerDraft = {
   category: string;
   templateKey: PublishTemplateKey;
   status: "draft" | "published";
+  contactEmail: string;
+  contactPhone: string;
+  contactAddress: string;
+  contactHours: string;
+  heroImage: string;
+  aboutImage: string;
+  galleryImages: string[];
 };
 const initialCustomer: CustomerDraft = {
   businessName: "",
@@ -111,6 +127,13 @@ const initialCustomer: CustomerDraft = {
   category: "Hotel & Homestays",
   templateKey: "island-villa",
   status: "published",
+  contactEmail: "",
+  contactPhone: "",
+  contactAddress: "",
+  contactHours: "",
+  heroImage: "",
+  aboutImage: "",
+  galleryImages: [],
 };
 const initialProduct = {
   name: "",
@@ -217,6 +240,29 @@ export default function AdminPage() {
     }
     const reader = new FileReader();
     reader.onload = () => setImage(String(reader.result));
+    reader.readAsDataURL(file);
+  }
+  function readCustomerImage(
+    file: File | undefined,
+    fieldName: "heroImage" | "aboutImage" | "galleryImages",
+  ) {
+    if (!file) return;
+    if (file.size > 3 * 1024 * 1024) {
+      setMessage("Customer images must be smaller than 3 MB each.");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      const value = String(reader.result);
+      setCustomer((current) =>
+        fieldName === "galleryImages"
+          ? {
+              ...current,
+              galleryImages: [...current.galleryImages, value].slice(0, 8),
+            }
+          : { ...current, [fieldName]: value },
+      );
+    };
     reader.readAsDataURL(file);
   }
   async function saveProject(event: FormEvent) {
@@ -1032,6 +1078,120 @@ export default function AdminPage() {
                   <option value="published">Published</option>
                   <option value="draft">Draft / hidden</option>
                 </select>
+                <div className="mt-6 border-t border-neutral-100 pt-5">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
+                    Contact details
+                  </p>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    <input
+                      className={field}
+                      value={customer.contactEmail}
+                      onChange={(event) =>
+                        setCustomer({
+                          ...customer,
+                          contactEmail: event.target.value,
+                        })
+                      }
+                      placeholder="Email"
+                      type="email"
+                    />
+                    <input
+                      className={field}
+                      value={customer.contactPhone}
+                      onChange={(event) =>
+                        setCustomer({
+                          ...customer,
+                          contactPhone: event.target.value,
+                        })
+                      }
+                      placeholder="Phone / WhatsApp"
+                    />
+                    <input
+                      className={field}
+                      value={customer.contactAddress}
+                      onChange={(event) =>
+                        setCustomer({
+                          ...customer,
+                          contactAddress: event.target.value,
+                        })
+                      }
+                      placeholder="Address"
+                    />
+                    <input
+                      className={field}
+                      value={customer.contactHours}
+                      onChange={(event) =>
+                        setCustomer({
+                          ...customer,
+                          contactHours: event.target.value,
+                        })
+                      }
+                      placeholder="Opening hours"
+                    />
+                  </div>
+                </div>
+                <div className="border-t border-neutral-100 pt-5">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-400">
+                    Customer images
+                  </p>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-3">
+                    <label className="cursor-pointer rounded-xl border border-dashed border-neutral-300 p-3 text-center text-xs text-neutral-500 hover:border-neutral-900">
+                      Hero image
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                        className="sr-only"
+                        onChange={(event) =>
+                          readCustomerImage(
+                            event.target.files?.[0],
+                            "heroImage",
+                          )
+                        }
+                      />
+                    </label>
+                    <label className="cursor-pointer rounded-xl border border-dashed border-neutral-300 p-3 text-center text-xs text-neutral-500 hover:border-neutral-900">
+                      About image
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                        className="sr-only"
+                        onChange={(event) =>
+                          readCustomerImage(
+                            event.target.files?.[0],
+                            "aboutImage",
+                          )
+                        }
+                      />
+                    </label>
+                    <label className="cursor-pointer rounded-xl border border-dashed border-neutral-300 p-3 text-center text-xs text-neutral-500 hover:border-neutral-900">
+                      Gallery image
+                      <input
+                        type="file"
+                        accept="image/png,image/jpeg,image/webp"
+                        className="sr-only"
+                        onChange={(event) =>
+                          readCustomerImage(
+                            event.target.files?.[0],
+                            "galleryImages",
+                          )
+                        }
+                      />
+                    </label>
+                  </div>
+                  <p className="mt-2 text-xs text-neutral-400">
+                    Up to 3 MB each. Gallery uploads can be added one at a time.
+                  </p>
+                  {(customer.heroImage ||
+                    customer.aboutImage ||
+                    customer.galleryImages.length > 0) && (
+                    <p className="mt-2 text-xs text-emerald-600">
+                      Images ready:{" "}
+                      {Number(Boolean(customer.heroImage)) +
+                        Number(Boolean(customer.aboutImage)) +
+                        customer.galleryImages.length}
+                    </p>
+                  )}
+                </div>
                 <button className="h-12 w-full rounded-full bg-neutral-900 text-sm font-semibold text-white">
                   {editingCustomerId ? "Save changes" : "Publish customer"}
                 </button>
@@ -1116,6 +1276,14 @@ export default function AdminPage() {
                                 item.templateKey as PublishTemplateKey,
                               status:
                                 item.status === "draft" ? "draft" : "published",
+                              contactEmail: item.contact?.email ?? "",
+                              contactPhone: item.contact?.phone ?? "",
+                              contactAddress: item.contact?.address ?? "",
+                              contactHours: item.contact?.hours ?? "",
+                              heroImage: item.hero?.image ?? "",
+                              aboutImage: item.about?.image ?? "",
+                              galleryImages:
+                                item.gallery?.map((image) => image.image) ?? [],
                             });
                           }}
                           className="inline-flex h-9 items-center gap-1.5 rounded-full border border-neutral-200 px-3 text-xs font-semibold text-neutral-700 transition-colors hover:border-neutral-900 hover:text-neutral-900"

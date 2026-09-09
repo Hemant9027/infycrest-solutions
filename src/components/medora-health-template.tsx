@@ -2213,6 +2213,7 @@ export function Footer({
           <p>
             © {new Date().getFullYear()} {brandName} · Care, connected
           </p>
+          <p>Designed by Infycrest Solutions</p>
           <nav className="flex gap-7">
             <a href="#top" className="transition-colors hover:text-[#bcd5ee]">
               Privacy

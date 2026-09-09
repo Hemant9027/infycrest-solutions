@@ -2329,7 +2329,7 @@ export function Footer({ customer }: { customer?: NewCustomer }) {
           <p>
             © {new Date().getFullYear()} {brandName}. Brewed slowly.
           </p>
-          <p className="hidden md:block">Designed by InfyCrest.</p>
+          <p className="hidden md:block">Designed by Infycrest Solutions</p>
           <Magnetic>
             <a
               href="#top"

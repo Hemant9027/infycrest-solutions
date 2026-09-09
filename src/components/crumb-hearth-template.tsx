@@ -901,8 +901,8 @@ export function Story({ customer }: { customer: NewCustomer }) {
             </p>
             <p className="mt-6 text-lg leading-relaxed text-[#402c23]/70">
               The flour is stone-milled an hour away, the butter is cultured,
-              and the jam is whatever the market had too much of. If we can&apos;t
-              name the farm, it doesn&apos;t go in the dough.
+              and the jam is whatever the market had too much of. If we
+              can&apos;t name the farm, it doesn&apos;t go in the dough.
             </p>
             <p className="mt-10 flex items-center gap-4">
               <span className="font-serif text-3xl italic text-[#402c23]">
@@ -1032,8 +1032,8 @@ export function MenuSection({ bakes }: { bakes: Bake[] }) {
           </div>
           <Reveal delay={0.2} className="max-w-sm">
             <p className="text-base leading-relaxed text-[#fbf2e7]/55">
-              The menu bends with the market and the miller — this is today&apos;s
-              lineup, priced like we want you back tomorrow.
+              The menu bends with the market and the miller — this is
+              today&apos;s lineup, priced like we want you back tomorrow.
             </p>
           </Reveal>
         </div>
@@ -1271,8 +1271,8 @@ export function OrderSection({ bakes }: { bakes: Bake[] }) {
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-[#402c23]/60">
               Order by 6 p.m. and we&apos;ll bake it overnight. Swing by in the
-              morning — it&apos;ll be boxed, tied with string, and still thinking
-              it&apos;s dawn.
+              morning — it&apos;ll be boxed, tied with string, and still
+              thinking it&apos;s dawn.
             </p>
           </Reveal>
         </div>
@@ -1358,8 +1358,8 @@ export function OrderSection({ bakes }: { bakes: Bake[] }) {
                     See you at <em className="text-[#f0c39f]">the hearth.</em>
                   </h3>
                   <p className="mt-4 text-sm leading-relaxed text-[#fbf2e7]/60">
-                    Your order is in the book. We&apos;ll bake it overnight and have
-                    it waiting — just show this code at the counter:
+                    Your order is in the book. We&apos;ll bake it overnight and
+                    have it waiting — just show this code at the counter:
                   </p>
                   <p className="mt-6 inline-flex rounded-2xl border border-[#f0c39f]/30 bg-[#fbf2e7]/[0.07] px-6 py-4 font-mono text-2xl font-bold tracking-[0.3em] text-[#f0c39f]">
                     {confirmation.code}
@@ -1617,7 +1617,8 @@ export function Visit({ customer }: { customer: NewCustomer }) {
           <Reveal delay={0.2}>
             <p className="mt-7 max-w-lg text-lg leading-relaxed text-[#402c23]/65">
               Come for a slow coffee and something warm, or just to watch the
-              loaves come out. If we&apos;re still floury, the first cup is on us.
+              loaves come out. If we&apos;re still floury, the first cup is on
+              us.
             </p>
           </Reveal>
           <Reveal delay={0.25}>
@@ -1798,6 +1799,7 @@ export function SiteFooter({ customer }: { customer: NewCustomer }) {
           <span className="hidden md:inline">
             Baked slowly on Fournier Lane
           </span>
+          <span>Designed by Infycrest Solutions</span>
           <a
             href="#top"
             className="group inline-flex items-center gap-2 transition-colors hover:text-[#f0c39f]"

@@ -1807,7 +1807,7 @@ export function Footer() {
             © {new Date().getFullYear()} {brandName} Studio · All rituals
             reserved
           </p>
-          <p>Designed with patience by InfyCrest</p>
+          <p>Designed by Infycrest Solutions</p>
           <button
             onClick={toTop}
             className="group inline-flex items-center gap-2 rounded-full border border-[#f7efec]/20 px-5 py-3 transition-all duration-500 hover:border-[#b67f79] hover:bg-[#b67f79] hover:text-[#f7efec]"

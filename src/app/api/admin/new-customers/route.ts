@@ -14,6 +14,11 @@ function stringValue(value: unknown, fallback = "") {
   return typeof value === "string" ? value.trim().slice(0, 1200) : fallback;
 }
 
+function imageValue(value: unknown) {
+  if (typeof value !== "string" || value.length > 6_000_000) return "";
+  return /^data:image\/(png|jpeg|webp);base64,/.test(value) ? value : "";
+}
+
 const collection = () => mongoDb.collection<NewCustomer>("new_customers");
 
 export async function GET() {
@@ -24,7 +29,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   if (!(await currentAdmin())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  const body = (await request.json().catch(() => null)) as { businessName?: unknown; slug?: unknown; category?: unknown; templateKey?: unknown } | null;
+  const body = (await request.json().catch(() => null)) as Record<string, unknown> | null;
   const businessName = stringValue(body?.businessName, "").slice(0, 100);
   const slug = cleanSlug(body?.slug);
   const selectedTemplate = PUBLISH_TEMPLATE_OPTIONS.find((item) => item.key === body?.templateKey);
@@ -41,8 +46,8 @@ export async function POST(request: Request) {
     templateKey,
     logo: "",
     theme: { accent: "#f59e0b" },
-    hero: { eyebrow: "Built for your next chapter", title: "A more thoughtful way to move forward", description: "Clear thinking, considered details and an experience built around what matters most.", image: "", primaryCta: "Get in touch", secondaryCta: "Explore" },
-    about: { title: `A better experience for ${businessName}`, body: "Thoughtful service, clear communication and details that make a lasting impression.", image: "" },
+    hero: { eyebrow: "Built for your next chapter", title: "A more thoughtful way to move forward", description: "Clear thinking, considered details and an experience built around what matters most.", image: imageValue(body?.heroImage), primaryCta: "Get in touch", secondaryCta: "Explore" },
+    about: { title: `A better experience for ${businessName}`, body: "Thoughtful service, clear communication and details that make a lasting impression.", image: imageValue(body?.aboutImage) },
     services: [
       { title: "Personal service", description: "Clear, thoughtful support from people who care about the details." },
       { title: "Built around you", description: "A flexible experience shaped around your goals and your audience." },
@@ -56,10 +61,10 @@ export async function POST(request: Request) {
     stats: [{ value: "01", label: "clear direction" }, { value: "24/7", label: "online presence" }, { value: "100%", label: "made for you" }],
     process: [{ step: "01", title: "Listen", description: "We learn what matters most to your business." }, { step: "02", title: "Shape", description: "We turn the vision into a focused customer experience." }, { step: "03", title: "Launch", description: "We make the final details feel effortless." }],
     testimonials: [{ quote: "Professional, thoughtful and easy to work with from day one.", name: "Your next client", role: "A future success story" }],
-    gallery: [],
+    gallery: (Array.isArray(body?.galleryImages) ? body.galleryImages : []).map(imageValue).filter(Boolean).slice(0, 8).map((image) => ({ image, alt: `${businessName} gallery image` })),
     faq: [{ question: "How do we get started?", answer: "Send a message and tell us what you are building. We will take it from there." }],
     CTA: { eyebrow: "Ready when you are", title: "Let's make something people remember", description: "Tell us what you need and we will take it from there.", label: "Get in touch" },
-    contact: { email: "hello@example.com", phone: "", address: "", hours: "By appointment" },
+    contact: { email: stringValue(body?.contactEmail), phone: stringValue(body?.contactPhone), address: stringValue(body?.contactAddress), hours: stringValue(body?.contactHours, "By appointment") },
     SEO: { title: `${businessName} | Official Website`, description: `Discover ${businessName}.`, keywords: [businessName] },
     status: "published",
     createdAt: now,

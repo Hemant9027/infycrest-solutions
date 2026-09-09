@@ -33,8 +33,11 @@ import { ForgeAthleticsTemplate } from "@/components/forge-athletics-template";
 import FrameSoulTemplate from "@/components/frame-soul-template";
 import IslandVillaTemplate from "@/components/island-villa-template";
 import DemoAgencyShell from "@/components/DemoAgencyShell";
+import DaBayAreaBonefishLodgeTemplate from "@/components/Da-Bay-Area-Bonefish-Lodge";
+
 
 const productTemplateComponents: Record<string, ComponentType> = {
+  "Da-Bay-Area-Bonefish-Lodge": DaBayAreaBonefishLodgeTemplate,
   "smilecare-dental": SmilecareDentalTemplate,
   "dental-clinic": SmilecareDentalTemplate,
   "medora-health": MedoraHealthTemplate,
@@ -328,7 +331,7 @@ export default async function DemoPage({ params }: DemoPageProps) {
                 href={item.previewUrl}
                 className="group overflow-hidden rounded-2xl border border-neutral-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_22px_44px_-22px_rgba(0,0,0,0.25)]"
               >
-                <div className="relative aspect-[16/10] overflow-hidden border-b border-neutral-100">
+                <div className="relative aspect-16/10 overflow-hidden border-b border-neutral-100">
                   <Image
                     src={item.thumbnail}
                     alt={`${item.name} website preview`}

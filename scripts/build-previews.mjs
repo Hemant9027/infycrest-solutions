@@ -116,6 +116,25 @@ async function normalizeViteHtml(outputPath, outputDirectory, outputName) {
   await writeFile(htmlPath, injectImageFallback(html), "utf-8");
 }
 
+async function rewriteNestedPreviewAssets(directory, outputName) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  for (const entry of entries) {
+    const filePath = join(directory, entry.name);
+    if (entry.isDirectory()) {
+      await rewriteNestedPreviewAssets(filePath, outputName);
+      continue;
+    }
+    if (!/\.(html|js|css|json|txt)$/.test(entry.name)) continue;
+    const source = await readFile(filePath, "utf-8");
+    const prefix = `/preview/${outputName}`;
+    const rewritten = source.replace(
+      /(?<!\/preview\/blue-hole)\/images\//g,
+      `${prefix}/images/`,
+    );
+    if (rewritten !== source) await writeFile(filePath, rewritten, "utf-8");
+  }
+}
+
 await mkdir(publicRoot, { recursive: true });
 
 const entries = await readdir(previewsRoot, { withFileTypes: true });
@@ -184,6 +203,7 @@ for (const project of projects) {
     const exportedHtml = await readFile(exportedHtmlPath, "utf-8");
     await writeFile(exportedHtmlPath, injectImageFallback(exportedHtml), "utf-8");
   }
+  await rewriteNestedPreviewAssets(publicPath, project.name);
   builtCount += 1;
 }
 

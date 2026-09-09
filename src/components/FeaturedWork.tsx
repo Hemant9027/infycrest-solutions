@@ -193,23 +193,23 @@ export default function FeaturedWork() {
 
               <div className="relative lg:pl-6">
                 <div className="relative rotate-1 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:rotate-0">
-                    <a
-                      href="https://www.momondo.in/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="Visit LaunchKit project"
-                      className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-neutral-950"
-                    >
-                      <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-[0_50px_120px_-40px_rgb(0_0_0/0.8)]">
-                        <Image
-                          src="/Featured-Work-4.png"
-                          alt="LaunchKit responsive website and admin panel shown across multiple devices"
-                          fill
-                          sizes="(max-width: 1024px) 100vw, 42vw"
-                          className="object-contain"
-                        />
-                      </div>
-                    </a>
+                  <a
+                    href="https://www.momondo.in/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Visit LaunchKit project"
+                    className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-neutral-950"
+                  >
+                    <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-[0_50px_120px_-40px_rgb(0_0_0/0.8)]">
+                      <Image
+                        src="/Featured-Work-4.png"
+                        alt="LaunchKit responsive website and admin panel shown across multiple devices"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 42vw"
+                        className="object-contain"
+                      />
+                    </div>
+                  </a>
                   <div className="absolute -left-4 -top-4 flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900/90 px-3.5 py-2 text-[12px] font-medium text-neutral-200 shadow-xl backdrop-blur-md sm:-left-6">
                     <LayoutDashboard className="size-3.5 text-emerald-400" />
                     Admin panel included

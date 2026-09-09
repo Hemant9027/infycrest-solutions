@@ -2272,7 +2272,8 @@ export function Footer({ customer }: { customer: NewCustomer }) {
             © {year} {brandName} — All rights reserved
           </p>
           <p className="font-mono text-[10px] uppercase tracking-[0.22em] text-white/30">
-            Engineered by <span className="text-white/60">InfyCrest</span>
+            Designed by{" "}
+            <span className="text-white/60">Infycrest Solutions</span>
           </p>
           <Magnetic strength={0.35}>
             <a

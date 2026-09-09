@@ -1839,9 +1839,7 @@ export function SiteFooter({ customer }: { customer: NewCustomer }) {
           <p>
             © {new Date().getFullYear()} {brandName} Studio LLC
           </p>
-          <p className="hidden md:block">
-            Independent since 2019 · Designed by InfyCrest
-          </p>
+          <p className="hidden md:block">Designed by Infycrest Solutions</p>
           <a
             href="#top"
             className="group inline-flex items-center gap-3 text-white/60 transition-colors duration-300 hover:text-[#f08b54]"

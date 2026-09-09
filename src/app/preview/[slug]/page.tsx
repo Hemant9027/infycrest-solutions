@@ -47,28 +47,58 @@ import IslandVillaTemplate, {
 import DemoAgencyShell from "@/components/DemoAgencyShell";
 import type { PublishTemplateKey } from "@/lib/product-template-types";
 
+function applyCustomerData<T extends Record<string, any>>(
+  template: T,
+  customer: NewCustomer,
+): T {
+  const merged = {
+    ...template,
+    id: customer.id,
+    slug: customer.slug,
+    businessName: customer.businessName,
+    contact: {
+      ...(template.contact ?? {}),
+      ...(customer.contact?.email ? { email: customer.contact.email } : {}),
+      ...(customer.contact?.phone ? { phone: customer.contact.phone } : {}),
+      ...(customer.contact?.address
+        ? { address: customer.contact.address }
+        : {}),
+      ...(customer.contact?.hours ? { hours: customer.contact.hours } : {}),
+    },
+    hero: {
+      ...(template.hero ?? {}),
+      ...(customer.hero?.image ? { image: customer.hero.image } : {}),
+    },
+    heroImages: customer.hero?.image
+      ? Array.from(
+          { length: Math.max(template.heroImages?.length ?? 1, 1) },
+          () => customer.hero.image,
+        )
+      : template.heroImages,
+    about: {
+      ...(template.about ?? {}),
+      ...(customer.about?.image ? { image: customer.about.image } : {}),
+    },
+    gallery:
+      customer.gallery && customer.gallery.length > 0
+        ? customer.gallery
+        : template.gallery,
+  };
+  return merged as T;
+}
+
 const publishedTemplates: Record<
   PublishTemplateKey,
   (customer: NewCustomer) => ReactNode
 > = {
   "smilecare-dental": (customer) => (
     <SmilecareDentalTemplate
-      customer={{
-        ...demoDentalCustomer,
-        id: customer.id,
-        slug: customer.slug,
-        businessName: customer.businessName,
-      }}
+      customer={applyCustomerData(demoDentalCustomer, customer)}
     />
   ),
   "medora-health": (customer) => (
     <MedoraHealthTemplate
-      customer={{
-        ...demoMedoraCustomer,
-        id: customer.id,
-        slug: customer.slug,
-        businessName: customer.businessName,
-      }}
+      customer={applyCustomerData(demoMedoraCustomer, customer)}
     />
   ),
   "veloura-studio": (customer) => (
@@ -76,69 +106,55 @@ const publishedTemplates: Record<
   ),
   "aurelia-dining": (customer) => (
     <AureliaRestaurantTemplate
-      customer={{
-        ...demoAureliaCustomer,
-        id: customer.id,
-        slug: customer.slug,
-        businessName: customer.businessName,
-      }}
+      customer={applyCustomerData(demoAureliaCustomer, customer)}
     />
   ),
   "afterglow-bar": (customer) => (
     <PremiumBarTemplate
-      customer={{ ...demoBarCustomer, businessName: customer.businessName }}
+      customer={applyCustomerData(demoBarCustomer, customer)}
     />
   ),
   "crumb-hearth": (customer) => (
     <CrumbHearthTemplate
-      customer={{ ...demoBakeryCustomer, businessName: customer.businessName }}
+      customer={applyCustomerData(demoBakeryCustomer, customer)}
     />
   ),
   dashbite: (customer) => (
     <DashbiteTemplate
-      customer={{
-        ...demoDashBiteCustomer,
-        id: customer.id,
-        slug: customer.slug,
-        businessName: customer.businessName,
-        hero: {
-          ...(demoDashBiteCustomer.hero ?? {}),
-          title:
-            demoDashBiteCustomer.hero?.title?.replaceAll(
-              "DashBite",
-              customer.businessName,
-            ) ?? customer.businessName,
+      customer={applyCustomerData(
+        {
+          ...demoDashBiteCustomer,
+          hero: {
+            ...(demoDashBiteCustomer.hero ?? {}),
+            title:
+              demoDashBiteCustomer.hero?.title?.replaceAll(
+                "DashBite",
+                customer.businessName,
+              ) ?? customer.businessName,
+          },
         },
-      }}
+        customer,
+      )}
     />
   ),
   "roast-ritual": (customer) => (
     <RoastRitualTemplate
-      customer={{ ...demoCafeCustomer, businessName: customer.businessName }}
+      customer={applyCustomerData(demoCafeCustomer, customer)}
     />
   ),
   northline: (customer) => (
     <NorthlineTemplate
-      customer={{
-        ...demoNorthlineCustomer,
-        businessName: customer.businessName,
-      }}
+      customer={applyCustomerData(demoNorthlineCustomer, customer)}
     />
   ),
   scaleflow: (customer) => (
     <ScaleflowTemplate
-      customer={{
-        ...demoScaleflowCustomer,
-        businessName: customer.businessName,
-      }}
+      customer={applyCustomerData(demoScaleflowCustomer, customer)}
     />
   ),
   launchlab: (customer) => (
     <LaunchlabTemplate
-      customer={{
-        ...demoLaunchLabCustomer,
-        businessName: customer.businessName,
-      }}
+      customer={applyCustomerData(demoLaunchLabCustomer, customer)}
     />
   ),
   "forge-athletics": (customer) => (
@@ -146,15 +162,12 @@ const publishedTemplates: Record<
   ),
   "frame-soul": (customer) => (
     <FrameSoulTemplate
-      customer={{
-        ...demoFrameSoulCustomer,
-        businessName: customer.businessName,
-      }}
+      customer={applyCustomerData(demoFrameSoulCustomer, customer)}
     />
   ),
   "island-villa": (customer) => (
     <IslandVillaTemplate
-      customer={{ ...demoIslandCustomer, businessName: customer.businessName }}
+      customer={applyCustomerData(demoIslandCustomer, customer)}
     />
   ),
 };

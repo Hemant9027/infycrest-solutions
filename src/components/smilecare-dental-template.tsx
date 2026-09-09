@@ -2122,7 +2122,7 @@ export function SiteFooter({ customer }: { customer: NewCustomer }) {
           <span className="font-serif italic text-[#b6e0d5]/50">
             Modern dentistry · Human care
           </span>
-          <span>Designed for calm</span>
+          <span>Designed by Infycrest Solutions</span>
         </div>
       </div>
     </footer>
