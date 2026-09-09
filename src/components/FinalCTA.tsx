@@ -1,4 +1,4 @@
-import { ArrowUpRight, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import { SITE, whatsappUrl } from "@/config/site";
 import ContactForm from "@/components/NewsletterForm";
 import Reveal from "@/components/Reveal";
@@ -20,12 +20,11 @@ export default function FinalCTA() {
                 Let&apos;s talk / 2026
               </p>
               <h2 className="mt-5 text-[clamp(2.1rem,5.2vw,3.6rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-neutral-900">
-                Let&apos;s create something exceptional.
+                Have a project in mind?
               </h2>
               <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-neutral-500 sm:text-base">
-                Tell us what you are building and we will help shape the right
-                starting point for your website, software, automation or SaaS
-                project.
+                Tell us what you&apos;re building. We&apos;ll recommend the
+                right solution and give you a clear estimate.
               </p>
 
               <div className="mx-auto mt-10 max-w-md">
@@ -46,23 +45,14 @@ export default function FinalCTA() {
 
               <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
                 <a
-                  href={whatsappUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-neutral-900 px-7 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-black"
-                >
-                  Let&apos;s Build Together
-                  <ArrowUpRight className="size-4" strokeWidth={2.4} />
-                </a>
-                <a
                   href={whatsappUrl(
-                    "Hi InfyCrest Solutions, I'd like to discuss a project over WhatsApp.",
+                    "Hi InfyCrest Solutions, I'd like a free consultation about my project.",
                   )}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-200 px-7 py-3.5 text-[15px] font-medium text-neutral-900 transition-colors hover:border-neutral-900"
                 >
-                  Chat on WhatsApp
+                  WhatsApp
                   <ArrowUpRight className="size-4" strokeWidth={2.4} />
                 </a>
                 <a
@@ -70,19 +60,16 @@ export default function FinalCTA() {
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-200 px-7 py-3.5 text-[15px] font-medium text-neutral-900 transition-colors hover:border-neutral-900"
                 >
                   <Phone className="size-4" strokeWidth={2.2} />
-                  {SITE.phoneDisplay}
+                  Call
                 </a>
-              </div>
-
-              <p className="mt-8 text-sm text-neutral-500">
-                Prefer email?{" "}
                 <a
                   href={SITE.emailHref}
-                  className="font-medium text-neutral-700 underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-900 hover:decoration-neutral-900"
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-neutral-200 px-7 py-3.5 text-[15px] font-medium text-neutral-900 transition-colors hover:border-neutral-900"
                 >
-                  {SITE.email}
+                  <Mail className="size-4" strokeWidth={2.2} />
+                  Email
                 </a>
-              </p>
+              </div>
             </div>
           </div>
         </Reveal>

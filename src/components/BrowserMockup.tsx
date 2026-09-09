@@ -4,15 +4,17 @@ function BrowserShell({
   children,
   dark = false,
   className,
+  showAddress = true,
 }: {
   children: React.ReactNode;
   dark?: boolean;
   className?: string;
+  showAddress?: boolean;
 }) {
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-2xl border shadow-[0_24px_60px_-30px_rgba(0,0,0,0.3)]",
+        "h-full w-full overflow-hidden rounded-2xl border shadow-[0_24px_60px_-30px_rgba(0,0,0,0.3)]",
         dark
           ? "border-neutral-800 bg-neutral-950 text-white"
           : "border-neutral-200 bg-white text-neutral-900",
@@ -28,18 +30,19 @@ function BrowserShell({
         <span className="size-2 rounded-full bg-[#f87171]" />
         <span className="size-2 rounded-full bg-[#fbbf24]" />
         <span className="size-2 rounded-full bg-[#4ade80]" />
-        <span
-          className={cn(
-            "ml-2 h-5 flex-1 rounded-full px-4 text-center font-mono text-[8px] leading-5",
-            dark
-              ? "bg-neutral-800 text-neutral-500"
-              : "border border-neutral-200 bg-white text-neutral-400",
-          )}
-        >
-          infycrestsolutions.com/concept
-        </span>
+        {showAddress && (
+          <span
+            aria-hidden="true"
+            className={cn(
+              "ml-2 h-5 flex-1 rounded-full px-4 text-center font-mono text-[8px] leading-5",
+              dark
+                ? "bg-neutral-800 text-neutral-500"
+                : "border border-neutral-200 bg-white text-neutral-400",
+            )}
+          />
+        )}
       </div>
-      <div className="aspect-[3/2] p-5 sm:p-6">{children}</div>
+      <div className="w-full aspect-[3/2] p-5 sm:p-6">{children}</div>
     </div>
   );
 }
@@ -176,5 +179,52 @@ export function MockDashboard({ className }: { className?: string }) {
         </main>
       </div>
     </BrowserShell>
+  );
+}
+
+export function MockCommerce({ className }: { className?: string }) {
+  return (
+    <div className="h-full w-full [perspective:1200px]">
+      <BrowserShell
+        className={cn(
+          "bg-[#f4f1ec] shadow-[0_34px_70px_-34px_rgb(35_31_27/0.4)] [transform:rotateY(-2deg)_rotateX(1deg)]",
+          className,
+        )}
+        showAddress={false}
+      >
+        <div className="flex h-full flex-col bg-[#f4f1ec] px-1 py-1 text-[#282521]">
+          <div className="flex items-center justify-between border-b border-[#282521]/15 pb-3">
+            <span className="h-2 w-16 rounded-full bg-[#282521]" />
+            <div className="flex items-center gap-3">
+              <span className="h-1.5 w-8 rounded-full bg-[#282521]/35" />
+              <span className="h-1.5 w-8 rounded-full bg-[#282521]/35" />
+              <span className="size-4 rounded-full border border-[#282521]/40" />
+            </div>
+          </div>
+          <div className="flex flex-1 flex-col justify-between py-5">
+            <div className="grid grid-cols-[1fr_auto] items-end gap-5">
+              <div className="space-y-2">
+                <span className="block h-3 w-3/4 rounded-full bg-[#282521]" />
+                <span className="block h-2 w-1/2 rounded-full bg-[#282521]/45" />
+              </div>
+              <span className="h-8 w-20 rounded-full border border-[#282521]/35" />
+            </div>
+            <div className="grid grid-cols-3 gap-3">
+              {["bg-[#d9d1c5]", "bg-[#c8c0b4]", "bg-[#ded8cf]"].map((tone) => (
+                <div key={tone} className="space-y-2">
+                  <div className={`aspect-[4/5] rounded-sm ${tone}`} />
+                  <span className="block h-1.5 w-3/4 rounded-full bg-[#282521]/55" />
+                  <span className="block h-1.5 w-1/2 rounded-full bg-[#282521]/25" />
+                </div>
+              ))}
+            </div>
+            <div className="flex items-center justify-between border-t border-[#282521]/15 pt-3">
+              <span className="h-1.5 w-24 rounded-full bg-[#282521]/35" />
+              <span className="h-1.5 w-14 rounded-full bg-[#282521]/55" />
+            </div>
+          </div>
+        </div>
+      </BrowserShell>
+    </div>
   );
 }

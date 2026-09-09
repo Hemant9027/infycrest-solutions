@@ -6,19 +6,29 @@ import {
   ShieldCheck,
   Zap,
 } from "lucide-react";
+import Image from "next/image";
 import Reveal, { Eyebrow } from "./Reveal";
-import {
-  MockDashboard,
-  MockDark,
-  MockEditorial,
-  MockLanding,
-} from "./BrowserMockup";
 import { WA_LAUNCHKIT } from "@/config/site";
 
 const SHOWCASE = [
-  { caption: "Minimal / Corporate", node: <MockLanding className="h-full" /> },
-  { caption: "Editorial / Studio", node: <MockEditorial className="h-full" /> },
-  { caption: "Bold / Dark", node: <MockDark className="h-full" /> },
+  {
+    caption: "Minimal / Corporate",
+    image: "/Featured-Work-1.png",
+    alt: "Responsive real estate website shown across desktop, tablet and mobile screens",
+    href: "https://yatradham.org/",
+  },
+  {
+    caption: "Editorial / Studio",
+    image: "/Featured-Work-2.png",
+    alt: "Responsive real estate website presented in a premium desktop and mobile layout",
+    href: "https://www.villaanguillitta.com/",
+  },
+  {
+    caption: "Bold / Dark",
+    image: "/Featured-Work-3.png",
+    alt: "Responsive real estate website displayed across multiple device mockups",
+    href: "https://islandinternationalrealty.com/",
+  },
 ];
 
 const LAUNCHKIT_POINTS = [
@@ -43,7 +53,6 @@ export default function FeaturedWork() {
   return (
     <section id="demos" className="scroll-mt-28 py-20 sm:py-28">
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
-        {/* Heading row */}
         <div className="grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
           <Reveal>
             <Eyebrow>01 / Featured Work</Eyebrow>
@@ -70,7 +79,6 @@ export default function FeaturedWork() {
           </Reveal>
         </div>
 
-        {/* Preview cards */}
         <div className="mt-14 grid gap-6 sm:mt-16 md:grid-cols-3 md:gap-5 lg:gap-6">
           {SHOWCASE.map((item, i) => (
             <Reveal
@@ -79,7 +87,23 @@ export default function FeaturedWork() {
               className={i === 1 ? "md:translate-y-8" : ""}
             >
               <div className="group transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2">
-                {item.node}
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${item.caption} project`}
+                  className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-4"
+                >
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-100 shadow-[0_24px_60px_-30px_rgb(10_10_10/0.3)]">
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-contain"
+                    />
+                  </div>
+                </a>
                 <div className="mt-4 flex items-center justify-between px-1">
                   <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-neutral-400">
                     {String(i + 1).padStart(2, "0")} — {item.caption}
@@ -91,13 +115,11 @@ export default function FeaturedWork() {
           ))}
         </div>
 
-        {/* LaunchKit spotlight */}
         <Reveal delay={100} className="mt-24 sm:mt-32">
           <div
             id="products"
             className="relative scroll-mt-28 overflow-hidden rounded-[2rem] bg-neutral-950 text-white sm:rounded-[2.5rem]"
           >
-            {/* Texture */}
             <div className="pointer-events-none absolute inset-0">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgb(255_255_255/0.08)_1px,transparent_0)] bg-[size:28px_28px] opacity-60 [mask-image:radial-gradient(80%_80%_at_70%_20%,black,transparent)]" />
               <div className="absolute right-[-120px] top-[-160px] h-[420px] w-[420px] rounded-full bg-[radial-gradient(closest-side,rgb(255_255_255/0.09),transparent)] blur-2xl" />
@@ -107,7 +129,6 @@ export default function FeaturedWork() {
             </div>
 
             <div className="relative grid items-center gap-10 p-8 sm:p-12 lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:p-16">
-              {/* Copy */}
               <div>
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em] text-neutral-300">
@@ -161,7 +182,7 @@ export default function FeaturedWork() {
                     <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                   <a
-                    href="#categories"
+                    href="#products"
                     className="group flex h-12 items-center gap-2 rounded-full border border-white/15 px-7 text-[14.5px] font-semibold text-neutral-200 transition-colors duration-300 hover:border-white/40 hover:text-white"
                   >
                     Browse collection
@@ -170,10 +191,25 @@ export default function FeaturedWork() {
                 </div>
               </div>
 
-              {/* Visual */}
               <div className="relative lg:pl-6">
                 <div className="relative rotate-1 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:rotate-0">
-                  <MockDashboard className="shadow-[0_50px_120px_-40px_rgb(0_0_0/0.8)]" />
+                    <a
+                      href="https://www.momondo.in/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Visit LaunchKit project"
+                      className="block rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-4 focus-visible:ring-offset-neutral-950"
+                    >
+                      <div className="relative aspect-[16/9] overflow-hidden rounded-2xl border border-white/10 bg-neutral-900 shadow-[0_50px_120px_-40px_rgb(0_0_0/0.8)]">
+                        <Image
+                          src="/Featured-Work-4.png"
+                          alt="LaunchKit responsive website and admin panel shown across multiple devices"
+                          fill
+                          sizes="(max-width: 1024px) 100vw, 42vw"
+                          className="object-contain"
+                        />
+                      </div>
+                    </a>
                   <div className="absolute -left-4 -top-4 flex items-center gap-2 rounded-full border border-white/10 bg-neutral-900/90 px-3.5 py-2 text-[12px] font-medium text-neutral-200 shadow-xl backdrop-blur-md sm:-left-6">
                     <LayoutDashboard className="size-3.5 text-emerald-400" />
                     Admin panel included

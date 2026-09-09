@@ -1,32 +1,51 @@
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  Code2,
+  Headphones,
+  Palette,
+  Rocket,
+  Search,
+  TestTube2,
+} from "lucide-react";
 import { whatsappUrl } from "@/config/site";
 import Reveal, { Eyebrow } from "@/components/Reveal";
 
 const PROCESS_STEPS = [
   {
     step: "01",
-    title: "Choose a direction",
-    desc: "Pick a ready-to-launch concept that fits your business.",
+    title: "Discover",
+    desc: "We clarify your goals, audience and the outcome your product needs to create.",
+    icon: Search,
   },
   {
     step: "02",
-    title: "Share your brief",
-    desc: "Tell us about your brand, audience and must-have flows.",
+    title: "Design",
+    desc: "We shape the visual direction, key screens and content structure around your brand.",
+    icon: Palette,
   },
   {
     step: "03",
-    title: "Make it yours",
-    desc: "We tailor the copy, colours, imagery and details to you.",
+    title: "Develop",
+    desc: "We turn the approved direction into a fast, responsive and scalable digital product.",
+    icon: Code2,
   },
   {
     step: "04",
-    title: "Review together",
-    desc: "See the build live and refine it with focused feedback.",
+    title: "Test",
+    desc: "We check the details, flows and performance across devices before launch.",
+    icon: TestTube2,
   },
   {
     step: "05",
-    title: "Launch with confidence",
-    desc: "Go live with a fast, responsive and polished website.",
+    title: "Launch",
+    desc: "We handle the final polish and put your new website or software in front of customers.",
+    icon: Rocket,
+  },
+  {
+    step: "06",
+    title: "Support",
+    desc: "We stay available for improvements, updates and the next stage of growth.",
+    icon: Headphones,
   },
 ];
 
@@ -46,7 +65,7 @@ export default function Process() {
         <div className="grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
           <Reveal>
             <Eyebrow>
-              <span className="text-neutral-400">04 / Process</span>
+              <span className="text-neutral-400">05 / Process</span>
             </Eyebrow>
             <h2 className="mt-5 text-balance text-[clamp(2rem,4.6vw,3.6rem)] font-semibold leading-[1.05] tracking-[-0.035em]">
               From concept to{" "}
@@ -55,8 +74,8 @@ export default function Process() {
           </Reveal>
           <Reveal delay={140}>
             <p className="max-w-md text-[15.5px] leading-relaxed text-neutral-400 lg:ml-auto">
-              A straightforward workflow designed to keep decisions fast and the
-              final product sharp — most concepts go live in days, not months.
+              From the first conversation to ongoing improvements, every stage
+              has a clear goal, a visible outcome and a next step.
             </p>
           </Reveal>
         </div>
@@ -65,16 +84,19 @@ export default function Process() {
           {/* Connector */}
           <div className="absolute left-10 right-10 top-7 hidden border-t border-dashed border-white/15 lg:block" />
 
-          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-6 lg:gap-5">
             {PROCESS_STEPS.map((item, i) => (
               <Reveal key={item.step} delay={i * 120}>
                 <div className="group relative">
                   <div className="relative z-10 flex size-14 items-center justify-center rounded-full border border-white/20 bg-neutral-950 font-mono text-[13px] text-neutral-300 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110 group-hover:border-white group-hover:bg-white group-hover:font-semibold group-hover:text-neutral-950">
                     {item.step}
                   </div>
-                  <h3 className="mt-6 text-[16.5px] font-semibold tracking-tight transition-colors duration-300 group-hover:text-white">
-                    {item.title}
-                  </h3>
+                  <div className="mt-6 flex items-center gap-2 text-neutral-400 transition-colors duration-300 group-hover:text-white">
+                    <item.icon className="size-4" strokeWidth={1.8} />
+                    <h3 className="text-[16.5px] font-semibold tracking-tight">
+                      {item.title}
+                    </h3>
+                  </div>
                   <p className="mt-2.5 text-[13.5px] leading-relaxed text-neutral-500 transition-colors duration-300 group-hover:text-neutral-400">
                     {item.desc}
                   </p>

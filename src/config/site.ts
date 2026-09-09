@@ -7,12 +7,12 @@
 export const SITE = {
   name: "InfyCrest Solutions",
   shortName: "InfyCrest",
-  tagline: "Digital experiences for ambitious businesses.",
+  tagline: "Websites, software and automation for ambitious businesses.",
   year: 2026,
   url: "https://infycrestsolutions.com",
-  title: "InfyCrest Solutions — Websites Designed to Make Your Business Look Exceptional",
+  title: "InfyCrest Solutions | Web Development, Software & Automation",
   description:
-    "Explore ready-to-launch website concepts, live previews, automation solutions and custom digital experiences from InfyCrest Solutions.",
+    "InfyCrest Solutions builds high-performance websites, custom software, SaaS products and business automation for growing businesses across India.",
   email: "hemant@infycrestsolutions.com",
   emailHref: "mailto:hemant@infycrestsolutions.com",
   phoneDisplay: "+91 9027152962",

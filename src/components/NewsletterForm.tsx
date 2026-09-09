@@ -132,7 +132,8 @@ export default function ContactForm() {
             <Loader2 className="size-4 animate-spin" strokeWidth={2.4} />
           ) : (
             <>
-              Send enquiry <ArrowRight className="size-4" strokeWidth={2.4} />
+              Get a Free Consultation{" "}
+              <ArrowRight className="size-4" strokeWidth={2.4} />
             </>
           )}
         </button>

@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import FeaturedWork from "@/components/FeaturedWork";
 import TechMarquee from "@/components/TechMarquee";
 import Products from "@/components/Products";
+import WhyInfyCrest from "@/components/WhyInfyCrest";
 import Pricing from "@/components/Pricing";
 import Process from "@/components/Process";
 import FinalCTA from "@/components/FinalCTA";
@@ -17,6 +18,7 @@ export default function HomePage() {
         <FeaturedWork />
         <TechMarquee />
         <Products />
+        <WhyInfyCrest />
         <Pricing />
         <Process />
         <FinalCTA />

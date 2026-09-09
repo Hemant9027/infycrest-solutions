@@ -9,9 +9,7 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
     <article
       className={cn(
         "relative flex h-full flex-col rounded-3xl border bg-white p-7 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1.5",
-        !plan.inverted
-          ? "border-neutral-900 shadow-[0_24px_60px_-28px_rgb(10_10_10/0.35)] ring-1 ring-neutral-900"
-          : "border-neutral-200 hover:border-neutral-300 hover:shadow-[0_28px_60px_-28px_rgb(10_10_10/0.22)]",
+        "border-neutral-200 hover:border-neutral-300 hover:shadow-[0_28px_60px_-28px_rgb(10_10_10/0.22)]",
       )}
     >
       <h3 className="text-[15px] font-semibold tracking-tight text-neutral-900">
@@ -28,11 +26,7 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
       </p>
 
       <ul className="mt-5 space-y-2.5 border-t border-neutral-100 pt-5">
-        {[
-          "Responsive, launch-ready build",
-          "Custom consultation included",
-          "Clear milestone delivery",
-        ].map((feature) => (
+        {plan.features.map((feature) => (
           <li
             key={feature}
             className="flex items-start gap-2.5 text-[13px] text-neutral-600"
@@ -55,9 +49,7 @@ function PlanCard({ plan }: { plan: PricingPlan }) {
           rel="noreferrer"
           className={cn(
             "group flex h-11.5 items-center justify-center gap-1.5 rounded-full text-[13.5px] font-semibold transition-all duration-300",
-            !plan.inverted
-              ? "bg-neutral-900 text-white hover:bg-neutral-800"
-              : "border border-neutral-300 text-neutral-800 hover:border-neutral-900 hover:bg-neutral-900 hover:text-white",
+            "bg-neutral-900 text-white hover:bg-neutral-800",
           )}
         >
           {plan.cta}
@@ -88,9 +80,12 @@ function CustomCard() {
         </p>
         <ul className="mt-5 space-y-2.5 border-t border-white/10 pt-5">
           {[
-            "Free 30-min scoping call",
-            "Fixed quote in 48 hours",
-            "NDA-friendly process",
+            "Free 30-minute discovery call",
+            "Detailed project scope",
+            "Fixed-price proposal",
+            "NDA available",
+            "Milestone-based payments",
+            "Dedicated project communication",
           ].map((item) => (
             <li
               key={item}
@@ -109,7 +104,7 @@ function CustomCard() {
             className="group flex h-11.5 items-center justify-center gap-1.5 rounded-full bg-white text-[13.5px] font-semibold text-neutral-900 transition-colors duration-300 hover:bg-neutral-200"
           >
             <PhoneCall className="size-4" />
-            Book a free call
+            Book a Free Discovery Call
           </a>
         </div>
         <p className="relative mt-3 text-center text-[11px] text-neutral-500">
@@ -129,35 +124,31 @@ export default function Pricing() {
       <div className="mx-auto w-full max-w-7xl px-5 sm:px-8">
         <div className="grid items-end gap-8 lg:grid-cols-[1.4fr_1fr]">
           <Reveal>
-            <Eyebrow>03 / Pricing</Eyebrow>
+            <Eyebrow>04 / Custom Pricing</Eyebrow>
             <h2 className="mt-5 text-balance text-[clamp(2rem,4.6vw,3.6rem)] font-semibold leading-[1.05] tracking-[-0.035em] text-neutral-900">
-              Simple, transparent{" "}
-              <em className="font-display font-normal italic">pricing.</em>
+              Built around your{" "}
+              <em className="font-display font-normal italic">project.</em>
             </h2>
-          </Reveal>
-          <Reveal delay={140}>
-            <p className="max-w-md text-[15.5px] leading-relaxed text-neutral-500 lg:ml-auto">
-              Start with a proven design and invest more only when your project
-              needs it. Every build ships responsive, fast and launch-ready.
-            </p>
           </Reveal>
         </div>
 
-        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {PRICING_PLANS.filter((plan) => !plan.inverted).map((plan, i) => (
-            <Reveal key={plan.name} delay={(i % 3) * 110}>
-              <PlanCard plan={plan} />
-            </Reveal>
-          ))}
-          <Reveal delay={220}>
+        <div className="mt-14 grid gap-8 lg:grid-cols-[1fr_1fr] lg:items-center">
+          <Reveal>
             <CustomCard />
+          </Reveal>
+          <Reveal delay={140}>
+            <p className="max-w-xl text-xl leading-relaxed text-neutral-600 lg:pl-8">
+              Tell us what you&apos;re building, and we&apos;ll define the right
+              scope, requirements, and approach before providing a clear,
+              tailored proposal.
+            </p>
           </Reveal>
         </div>
 
         <Reveal delay={140}>
           <p className="mt-8 text-center text-[13px] text-neutral-400">
-            All plans include a free consultation · Milestone-based payments ·
-            GST invoice available
+            All projects include an initial consultation, clear milestones,
+            professional communication, and transparent scope.
           </p>
         </Reveal>
       </div>

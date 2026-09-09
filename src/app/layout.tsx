@@ -21,11 +21,11 @@ export const metadata: Metadata = {
   applicationName: SITE.name,
   keywords: [
     "InfyCrest Solutions",
-    "website design",
-    "ready-to-launch websites",
-    "live website demos",
+    "web development",
+    "custom software development",
     "business automation",
-    "custom SaaS",
+    "SaaS development",
+    "software development India",
   ],
   alternates: {
     canonical: "/",
